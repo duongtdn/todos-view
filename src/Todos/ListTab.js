@@ -22,7 +22,14 @@ export default class extends Component {
           <Input type = 'checkbox' />
         </div>
         <div className = 'center'>
+          <div className = 'todos-text'>
             {row}
+          </div>
+          <div className = 'todos-ext'>
+            <span> <Icon icon = 'fa-user' /> owner </span>
+            <span> <Icon icon = 'md-share' /> 2 </span>
+            <span> <Icon icon = 'md-edit' /> edit </span>
+          </div>
         </div>
         <div className = 'right'>
           <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/>

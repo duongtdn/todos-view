@@ -1,0 +1,26 @@
+
+ons-list-item > .left {
+  padding-bottom : 25px;
+}
+
+ons-list-item > .center {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.todos-text {
+  width : 100%;
+}
+
+.todos-ext {
+  margin-top : 4px;
+  width : 100%;
+  opacity: 0.8;
+  line-height: 1.2;
+  font-size: 13px;
+}
+
+.todos-ext span {
+  padding-right : 10px;
+}
