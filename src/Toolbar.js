@@ -12,13 +12,13 @@ export default class extends Component {
       <Toolbar>
         <div className = 'left'>
           <ToolbarButton> 
-            <Icon icon = 'md-menu' />
+            <Icon icon = 'md-menu' /> &nbsp;
           </ToolbarButton>
         </div>
         <div className = 'center'> Todos </div>
         <div className = 'right'>
           <ToolbarButton> 
-            <Icon icon = 'md-plus' /> New 
+            <Icon icon = 'md-plus' /> New
           </ToolbarButton>
         </div>
       </Toolbar>

@@ -1,6 +1,7 @@
 
 ons-list-item > .left {
   padding-bottom : 25px;
+  min-width: 35px;
 }
 
 ons-list-item > .center {
@@ -19,6 +20,7 @@ ons-list-item > .center {
   opacity: 0.8;
   line-height: 1.2;
   font-size: 13px;
+  color : grey;
 }
 
 .todos-ext span {

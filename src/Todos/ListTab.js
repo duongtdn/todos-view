@@ -11,6 +11,7 @@ export default class extends Component {
     this.state = {data : [
       'Complete Todo App',
       'Study Admob',
+      'Design using Onsen UI and build with Cordova',
       'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors'
     ]};
   }
@@ -28,7 +29,7 @@ export default class extends Component {
           <div className = 'todos-ext'>
             <span> <Icon icon = 'fa-user' /> owner </span>
             <span> <Icon icon = 'md-share' /> 2 </span>
-            <span> <Icon icon = 'md-edit' /> edit </span>
+            <span> <Icon icon = 'fa-calendar' /> 30-Nov-2016 </span>
           </div>
         </div>
         <div className = 'right'>

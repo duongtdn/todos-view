@@ -8,7 +8,7 @@
   "scripts": {
     "build": "babel src -d lib",
     "prepublish": "npm run build",
-    "compile": "rm -rf lib && npm run build && browserify lib/ -o bundle.js && echo Compile finished"
+    "compile": "npm run build && browserify lib/ -o bundle.js && echo Compile finished"
   },
   "dependencies": {
     "onsenui": "^2.0.4",
