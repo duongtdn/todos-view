@@ -24,3 +24,12 @@ ons-list-item > .center {
   font-style: italic;
   color : grey;
 }
+
+.todos-action {
+  border-left: solid 4px rgb(0, 150, 136);
+  margin-bottom: 6px;
+}
+
+.hide {
+  display: none;
+}
