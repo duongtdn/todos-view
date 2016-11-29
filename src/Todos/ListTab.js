@@ -1,7 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
-import {Page, ListItem, List, Icon, Input} from 'react-onsenui'
+import {Page, ListItem, List, Icon, Input, Col, Row} from 'react-onsenui'
 
 
 export default class extends Component {
@@ -9,29 +9,32 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {data : [
-      'Complete Todo App',
-      'Study Admob',
-      'Design using Onsen UI and build with Cordova',
-      'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors'
+      {role : 'Collaborator', text : 'Complete Todo App', dueDate : '30-Nov'},
+      {role : 'Owner', text : 'Study Admob', dueDate : '12-Dec'},
+      {role : 'Collaborator', text : 'Design using Onsen UI and build with Cordova', dueDate : ''},
+      {role : 'Owner', text : 'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors', dueDate : '15-Dec'}
     ]};
   }
 
   renderRow(row, index) {
     return (
       <ListItem key = {index} >
-        <div className = 'left'>
+        <div className = 'left'> 
           <Input type = 'checkbox' />
         </div>
+
         <div className = 'center'>
           <div className = 'todos-text'>
-            {row}
+            {row.text}
           </div>
           <div className = 'todos-ext'>
-            <span> <Icon icon = 'fa-user' /> owner </span>
-            <span> <Icon icon = 'md-share' /> 2 </span>
-            <span> <Icon icon = 'fa-calendar' /> 30-Nov-2016 </span>
+            <Row>
+              <Col> {row.role} </Col>
+              <Col style = {{textAlign : 'right'}}> {row.dueDate} </Col>
+            </Row>
           </div>
         </div>
+
         <div className = 'right'>
           <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/>
         </div>

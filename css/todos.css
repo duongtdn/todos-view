@@ -8,6 +8,7 @@ ons-list-item > .center {
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
+  padding-right : 15px;
 }
 
 .todos-text {
@@ -19,10 +20,7 @@ ons-list-item > .center {
   width : 100%;
   opacity: 0.8;
   line-height: 1.2;
-  font-size: 13px;
+  font-size: 12px;
+  font-style: italic;
   color : grey;
-}
-
-.todos-ext span {
-  padding-right : 10px;
 }
