@@ -1,11 +1,10 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { render } from 'react-dom'
 import { Page } from 'react-onsenui'
 
 import Toolbar from './Toolbar'
-import TodosView from './TodosView'
+import TodosView from './Todos/View'
 
 export default class AppView extends Component {
 

@@ -1,9 +1,9 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { render } from 'react-dom'
-
 import {Page, Tabbar, Tab, Icon} from 'react-onsenui';
+
+import ListTab from './ListTab'
 
 class TabView extends Component {
   render() {
@@ -26,7 +26,7 @@ export default class extends Component {
   renderTabs() {
     return [
       {
-        content : <TabView key = 'Listing' title = 'Listing' />,
+        content : <ListTab key = 'Listing' />,
         tab : <Tab key = 'Listing' label = 'List' />
       },
       {
