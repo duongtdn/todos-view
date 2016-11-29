@@ -11,7 +11,7 @@ export default class extends Component {
     this.state = {data : [
       'Complete Todo App',
       'Study Admob',
-      'Find solutions for promoting app across multiple platform'
+      'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors'
     ]};
   }
 
