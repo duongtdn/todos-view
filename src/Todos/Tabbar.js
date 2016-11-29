@@ -26,12 +26,12 @@ export default class extends Component {
   renderTabs() {
     return [
       {
-        content : <ListTab key = 'Listing' />,
-        tab : <Tab key = 'Listing' label = 'List' />
+        content : <ListTab key = 'Pending' />,
+        tab : <Tab key = 'Pending' label = 'Pending' />
       },
       {
-        content : <TabView key = 'Trash' title = 'Trash' />,
-        tab : <Tab key = 'Trash' label = 'Trash' />
+        content : <TabView key = 'Completed' title = 'Completed' />,
+        tab : <Tab key = 'Completed' label = 'Completed' />
       }
     ]
   }
