@@ -4,6 +4,7 @@ import React , { Component } from 'react'
 import { Page } from 'react-onsenui'
 
 import TodosView from './Todos/View'
+import TodoEditorView from './TodoEditor/View'
 
 export default class AppView extends Component {
 
@@ -12,7 +13,7 @@ export default class AppView extends Component {
   render() {
     return (
       <Page >
-        <TodosView platform = {this.props.platform} />
+        <TodoEditorView platform = {this.props.platform} />
       </Page>
     );
   }

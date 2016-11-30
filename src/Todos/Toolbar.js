@@ -3,7 +3,7 @@
 import React , { Component } from 'react'
 import { render } from 'react-dom'
 
-import {Toolbar, ToolbarButton, Icon, Fab} from 'react-onsenui';
+import {Toolbar, ToolbarButton, Icon} from 'react-onsenui';
 
 export default class extends Component {
 
