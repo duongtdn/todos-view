@@ -3,11 +3,15 @@
 import React , { Component } from 'react'
 import { render } from 'react-dom'
 
-import {Toolbar, ToolbarButton, Icon} from 'react-onsenui';
+import ons from 'onsenui'
+import {Toolbar, ToolbarButton, Icon, Fab} from 'react-onsenui';
 
 export default class extends Component {
 
   render() {
+    const newBtn = ons.platform.isAndroid()? 
+      <Fab position = 'bottom right'> + </Fab> : 
+      <ToolbarButton> New <Icon icon = 'md-plus' /> </ToolbarButton>;
     return (
       <Toolbar>
         <div className = 'left'>
@@ -17,9 +21,7 @@ export default class extends Component {
         </div>
         <div className = 'center'> Todos </div>
         <div className = 'right'>
-          <ToolbarButton> 
-            <Icon icon = 'md-plus' /> New
-          </ToolbarButton>
+          {newBtn}
         </div>
       </Toolbar>
     );

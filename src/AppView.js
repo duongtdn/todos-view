@@ -3,20 +3,15 @@
 import React , { Component } from 'react'
 import { Page } from 'react-onsenui'
 
-import Toolbar from './Toolbar'
 import TodosView from './Todos/View'
 
 export default class AppView extends Component {
 
-  renderToolbar() {
-    return (
-      <Toolbar />
-    );
-  }
+  
 
   render() {
     return (
-      <Page renderToolbar = {this.renderToolbar} >
+      <Page >
         <TodosView/>
       </Page>
     );
