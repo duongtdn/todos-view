@@ -3,7 +3,6 @@
 import React , { Component } from 'react'
 import {Page, ListItem, List, Icon, Input, Col, Row, Button} from 'react-onsenui'
 
-
 export default class extends Component {
 
   constructor(props) {
@@ -16,7 +15,10 @@ export default class extends Component {
         {role : 'Owner', text : 'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors', dueDate : '15-Dec'}
       ],
       showEditMenu : [
-        'todos-action hide', 'todos-action hide', 'todos-action hide', 'todos-action hide'
+        `todos-action-${this.props.platform} hide`,
+        `todos-action-${this.props.platform} hide`,
+        `todos-action-${this.props.platform} hide`,
+        `todos-action-${this.props.platform} hide`
       ]
     };
     this.renderRow = this.renderRow.bind(this);
@@ -69,13 +71,13 @@ export default class extends Component {
       if (id === index) {
         if (patt.test(_class)) {
           // this item is currently hidden
-          _class = 'todos-action animation-show-up';
+          _class = `todos-action-${this.props.platform} animation-show-up`;
         } else {
           // this item is show up, hide it
-          _class = 'todos-action animation-hide';
+          _class = `todos-action-${this.props.platform} animation-hide`;
         }
       } else {
-        _class = 'todos-action hide';
+        _class = `todos-action-${this.props.platform} hide`;
       }
       
       return _class;
@@ -84,7 +86,7 @@ export default class extends Component {
 
     setTimeout(() => {
       this._cleanAnimationClass();
-    }, 750);
+    }, 250);
   }
 
   openEditPage(index) {
@@ -101,11 +103,11 @@ export default class extends Component {
     const showEditMenu = this.state.showEditMenu.map( (_class, id) => {
       if (patt1.test(_class)) {
         // this item is currently hidden
-        _class = 'todos-action hide';
+        _class = `todos-action-${this.props.platform} hide`;
       } 
       if (patt2.test(_class)) {
         // this item is show up, hide it
-        _class = 'todos-action';
+        _class = `todos-action-${this.props.platform}`;
       }     
       return _class;
     });

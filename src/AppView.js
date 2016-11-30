@@ -12,7 +12,7 @@ export default class AppView extends Component {
   render() {
     return (
       <Page >
-        <TodosView/>
+        <TodosView platform = {this.props.platform} />
       </Page>
     );
   }

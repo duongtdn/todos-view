@@ -3,7 +3,7 @@
 import React , { Component } from 'react'
 import {Page, Tabbar, Tab, Icon} from 'react-onsenui';
 
-import ListTab from './ListTab'
+import PendingList from './PendingList'
 
 class TabView extends Component {
   render() {
@@ -21,16 +21,17 @@ export default class extends Component {
     super(props);
     this.state = { index : 0 };
     this.onPreChange = this.onPreChange.bind(this);
+    this.renderTabs = this.renderTabs.bind(this);
   }
 
   renderTabs() {
     return [
       {
-        content : <ListTab key = 'Pending' />,
+        content : <PendingList key = 'Pending' platform = {this.props.platform} />,
         tab : <Tab key = 'Pending' label = 'Pending' />
       },
       {
-        content : <TabView key = 'Completed' title = 'Completed' />,
+        content : <TabView key = 'Completed' title = 'Completed' platform = {this.props.platform}/>,
         tab : <Tab key = 'Completed' label = 'Completed' />
       }
     ]
@@ -45,6 +46,7 @@ export default class extends Component {
   render() {
     return (
       <Tabbar
+        position = 'auto'
         index = {this.state.index}
         onPreChange = {this.onPreChange}
         renderTabs = {this.renderTabs} 

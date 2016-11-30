@@ -3,14 +3,13 @@
 import React , { Component } from 'react'
 import { render } from 'react-dom'
 
-import ons from 'onsenui'
 import {Toolbar, ToolbarButton, Icon, Fab} from 'react-onsenui';
 
 export default class extends Component {
 
   render() {
-    const newBtn = ons.platform.isAndroid()? 
-      <Fab position = 'bottom right'> + </Fab> : 
+    const newBtn = this.props.platform === 'android' ? 
+      <span />: 
       <ToolbarButton> New <Icon icon = 'md-plus' /> </ToolbarButton>;
     return (
       <Toolbar>

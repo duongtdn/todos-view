@@ -27,8 +27,13 @@ ons-list-item > .center {
   color : grey;
 }
 
-.todos-action {
+.todos-action-android {
   border-left: solid 4px rgb(0, 150, 136);
+  margin-bottom: 6px;
+}
+
+.todos-action-ios {
+  border-left: solid 2px rgba(38,100,171,0.8);
   margin-bottom: 6px;
 }
 
@@ -44,7 +49,7 @@ ons-list-item > .center {
     max-height: 0;
   }
   100% {
-    max-height: 500px;
+    max-height: 40px;
   }
 }
 
@@ -53,19 +58,19 @@ ons-list-item > .center {
     max-height: 0;
   }
   100% {
-    max-height: 500px;
+    max-height: 40px;
   }
 }
 
 .animation-show-up {
   pointer-events: none;
-  -webkit-animation: show-up .7s ease-in-out forwards;
-          animation: show-up .7s ease-in-out forwards;
+  -webkit-animation: show-up .2s ease-in-out forwards;
+          animation: show-up .2s ease-in-out forwards;
 }
 
 @-webkit-keyframes hide {
   0% {
-    max-height: 500px;
+    max-height: 40px;
   }
   100% {
     max-height: 0;
@@ -74,7 +79,7 @@ ons-list-item > .center {
 
 @keyframes hide {
   0% {
-    max-height: 500px;
+    max-height: 40px;
   }
   100% {
     max-height: 0;
@@ -83,6 +88,6 @@ ons-list-item > .center {
 
 .animation-hide {
   pointer-events: none;
-  -webkit-animation: hide .7s ease-in-out forwards;
-          animation: hide .7s ease-in-out forwards;
+  -webkit-animation: hide .2s ease-in-out forwards;
+          animation: hide .2s ease-in-out forwards;
 }

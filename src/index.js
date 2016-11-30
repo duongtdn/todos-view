@@ -10,4 +10,6 @@ import AppView from './AppView'
 ons.platform.select('android');
 // ons.platform.select('ios');
 
-render(<AppView />, document.getElementById('app-root'));
+const platform = ons.platform.isAndroid()? 'android' : 'ios'; 
+
+render(<AppView platform = {platform} />, document.getElementById('app-root'));
