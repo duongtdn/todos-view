@@ -15,23 +15,25 @@ export default class extends Component {
         {role : 'Collaborator', text : 'Design using Onsen UI and build with Cordova', dueDate : ''},
         {role : 'Owner', text : 'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors', dueDate : '15-Dec'}
       ],
-      showEditMenu : false
+      showEditMenu : [
+        false, false, false, false
+      ]
     };
     this.renderRow = this.renderRow.bind(this);
   }
 
   renderRow(row, index) {
-    const editMenuClass = this.state.showEditMenu ? 'todos-action' : 'todos-action hide';
+    const editMenuClass = this.state.showEditMenu[index] ? 'todos-action' : 'todos-action hide';
     return (
       <ListItem key = {index} >
         <div className = 'left'> 
           <Input type = 'checkbox' />
         </div>
 
-        <div className = 'center'>
+        <div className = 'center' onClick = {() => this.toggleEditMenu(index)}>
           <div className = {editMenuClass}>
-            <Button modifier='quiet'>  Edit <Icon icon = 'md-edit' /> </Button>
-            <Button modifier='quiet'> Share <Icon icon = 'md-share' /> </Button>
+            <Button modifier='quiet' onClick = {this.openEditPage}>  Edit <Icon icon = 'md-edit' /> </Button>
+            <Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>
           </div>
           <div className = 'todos-text'>
             {row.text}
@@ -62,7 +64,24 @@ export default class extends Component {
     );
   }
 
-  toggleEditMenu() {
+  toggleEditMenu(index) {
+    console.log ('toggleEditMenu');
+    const showEditMenu = this.state.showEditMenu.map( (show, id) => {
+      if (id === index) {
+        show = !show;
+      } else {
+        show = false;
+      }
+      return show;
+    });
+    this.setState({showEditMenu});
+  }
 
+  openEditPage(index) {
+    console.log('open edit page');
+  }
+
+  openSharePage(index) {
+    console.log('open share page');
   }
 }
