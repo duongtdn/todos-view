@@ -4,16 +4,7 @@ import React , { Component } from 'react'
 import {Page, Tabbar, Tab, Icon} from 'react-onsenui';
 
 import PendingList from './PendingList'
-
-class TabView extends Component {
-  render() {
-    return (
-      <Page>
-        <p> This is <strong>{this.props.title}</strong> Tab </p>
-      </Page>
-    );
-  }
-}
+import CompletedList from './CompletedList'
 
 export default class extends Component {
 
@@ -31,7 +22,7 @@ export default class extends Component {
         tab : <Tab key = 'Pending' label = 'Pending' />
       },
       {
-        content : <TabView key = 'Completed' title = 'Completed' platform = {this.props.platform}/>,
+        content : <CompletedList key = 'Completed' platform = {this.props.platform}/>,
         tab : <Tab key = 'Completed' label = 'Completed' />
       }
     ]
