@@ -20,7 +20,7 @@ export default class extends Component {
     return (
       <ListItem key = {index} >
         <div className = 'left'> 
-          <Input type = 'checkbox' />
+          <Input type = 'checkbox' checked = {true} />
         </div>
 
         <div className = 'center' onClick = {() => this.toggleInfoMenu(index)}>
