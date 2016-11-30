@@ -16,14 +16,13 @@ export default class extends Component {
         {role : 'Owner', text : 'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors', dueDate : '15-Dec'}
       ],
       showEditMenu : [
-        false, false, false, false
+        'todos-action hide', 'todos-action hide', 'todos-action hide', 'todos-action hide'
       ]
     };
     this.renderRow = this.renderRow.bind(this);
   }
 
   renderRow(row, index) {
-    const editMenuClass = this.state.showEditMenu[index] ? 'todos-action' : 'todos-action hide';
     return (
       <ListItem key = {index} >
         <div className = 'left'> 
@@ -31,7 +30,7 @@ export default class extends Component {
         </div>
 
         <div className = 'center' onClick = {() => this.toggleEditMenu(index)}>
-          <div className = {editMenuClass}>
+          <div className = {this.state.showEditMenu[index]}>
             <Button modifier='quiet' onClick = {this.openEditPage}>  Edit <Icon icon = 'md-edit' /> </Button>
             <Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>
           </div>
@@ -65,16 +64,27 @@ export default class extends Component {
   }
 
   toggleEditMenu(index) {
-    console.log ('toggleEditMenu');
-    const showEditMenu = this.state.showEditMenu.map( (show, id) => {
+    const patt = /\shide/g;
+    const showEditMenu = this.state.showEditMenu.map( (_class, id) => {
       if (id === index) {
-        show = !show;
+        if (patt.test(_class)) {
+          // this item is currently hidden
+          _class = 'todos-action animation-show-up';
+        } else {
+          // this item is show up, hide it
+          _class = 'todos-action animation-hide';
+        }
       } else {
-        show = false;
+        _class = 'todos-action hide';
       }
-      return show;
+      
+      return _class;
     });
     this.setState({showEditMenu});
+
+    setTimeout(() => {
+      this._cleanAnimationClass();
+    }, 750);
   }
 
   openEditPage(index) {
@@ -84,4 +94,22 @@ export default class extends Component {
   openSharePage(index) {
     console.log('open share page');
   }
+
+  _cleanAnimationClass() {
+    const patt1 = /\sanimation-hide/g;
+    const patt2 = /\sanimation-show-up/g;
+    const showEditMenu = this.state.showEditMenu.map( (_class, id) => {
+      if (patt1.test(_class)) {
+        // this item is currently hidden
+        _class = 'todos-action hide';
+      } 
+      if (patt2.test(_class)) {
+        // this item is show up, hide it
+        _class = 'todos-action';
+      }     
+      return _class;
+    });
+    this.setState({showEditMenu});
+  }
+
 }

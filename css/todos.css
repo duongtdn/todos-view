@@ -13,6 +13,8 @@ ons-list-item > .center {
 
 .todos-text {
   width : 100%;
+  z-index: 2;
+  background-color : white;
 }
 
 .todos-ext {
@@ -32,4 +34,55 @@ ons-list-item > .center {
 
 .hide {
   display: none;
+}
+
+/* Animation */
+
+
+@-webkit-keyframes show-up {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 500px;
+  }
+}
+
+@keyframes show-up {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 500px;
+  }
+}
+
+.animation-show-up {
+  pointer-events: none;
+  -webkit-animation: show-up .7s ease-in-out forwards;
+          animation: show-up .7s ease-in-out forwards;
+}
+
+@-webkit-keyframes hide {
+  0% {
+    max-height: 500px;
+  }
+  100% {
+    max-height: 0;
+  }
+}
+
+@keyframes hide {
+  0% {
+    max-height: 500px;
+  }
+  100% {
+    max-height: 0;
+  }
+}
+
+.animation-hide {
+  pointer-events: none;
+  -webkit-animation: hide .7s ease-in-out forwards;
+          animation: hide .7s ease-in-out forwards;
 }
