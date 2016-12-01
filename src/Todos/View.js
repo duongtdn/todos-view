@@ -16,14 +16,14 @@ export default class extends Component {
 
   renderToolbar() {
     return (
-      <Toolbar platform = {this.props.platform} />
+      <Toolbar platform = {this.props.platform} pushPage = {this.props.pushPage} />
     );
   }
 
   renderFixed() {
     if (this.props.platform === 'android') {
       return (
-        <Fab position = 'bottom right'> + </Fab>
+        <Fab position = 'bottom right' onClick = {() => this.props.pushPage('editor', null)} > + </Fab>
       );
     } else {
       return null;
@@ -35,7 +35,7 @@ export default class extends Component {
       <Page renderToolbar = {this.renderToolbar}
             renderFixed = {this.renderFixed}
        >
-        <Tabbar platform = {this.props.platform}/>
+        <Tabbar platform = {this.props.platform} pushPage = {this.props.pushPage} />
       </Page>
     );
   }

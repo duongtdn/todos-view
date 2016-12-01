@@ -18,7 +18,7 @@ export default class extends Component {
   renderTabs() {
     return [
       {
-        content : <PendingList key = 'Pending' platform = {this.props.platform} />,
+        content : <PendingList key = 'Pending' platform = {this.props.platform} pushPage = {this.props.pushPage} />,
         tab : <Tab key = 'Pending' label = 'Pending' />
       },
       {

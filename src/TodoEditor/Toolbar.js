@@ -15,7 +15,7 @@ export default class extends Component {
             Back
           </BackButton  >
         </div>
-        <div className = 'center'> New Todo </div>
+        <div className = 'center'> {this.props.title} </div>
       </Toolbar>
     );
   }

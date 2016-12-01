@@ -1,20 +1,36 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page } from 'react-onsenui'
+import { Navigator } from 'react-onsenui'
 
-import TodosView from './Todos/View'
-import TodoEditorView from './TodoEditor/View'
+import routes from './routes'
+import SceneView from './SceneView'
 
 export default class AppView extends Component {
 
-  
+  constructor(props) {
+    super(props);
+
+    this.renderPage = this.renderPage.bind(this);
+  }
+
+  renderPage(route, navigator) {
+    return (
+      <SceneView key = {route.name}
+        navigator = {navigator} 
+        route = {route} 
+        platform = {this.props.platform}        
+      />
+    );
+  }
 
   render() {
     return (
-      <Page >
-        <TodoEditorView platform = {this.props.platform} />
-      </Page>
+      <Navigator
+        animation = 'slide'
+        renderPage = {this.renderPage}
+        initialRoute = {routes.todos} 
+      />        
     );
   }
 

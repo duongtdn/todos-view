@@ -9,10 +9,26 @@ export default class extends Component {
     super(props);
     this.state = {
       data : [
-        {role : 'Collaborator', text : 'Complete Todo App', dueDate : '30-Nov'},
-        {role : 'Owner', text : 'Study Admob', dueDate : '12-Dec'},
-        {role : 'Collaborator', text : 'Design using Onsen UI and build with Cordova', dueDate : ''},
-        {role : 'Owner', text : 'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors', dueDate : '15-Dec'}
+        {
+          role : 'Collaborator', text : 'Complete Todo App', dueDate : '30-Nov', urgent : true, 
+          share : [
+            {uid : '001', name : 'Alex Nova', relationship : 'Friend'},
+            {uid : '002', name : 'Dylan Riskerman', relationship : 'Friend'},
+            {uid : '003', name : 'Olando White', relationship : 'Friend'},
+          ]
+        },
+        {
+          role : 'Owner', text : 'Study Admob', dueDate : '12-Dec', urgent : false
+        },
+        {
+          role : 'Collaborator', text : 'Design using Onsen UI and build with Cordova', dueDate : '', urgent : true
+        },
+        {
+          role : 'Owner', text : 'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors', dueDate : '15-Dec', urgent : false,
+          share : [
+            {uid : '001', name : 'Alex Nova', relationship : 'Friend'},
+          ]
+        }
       ],
       showEditMenu : [
         `todos-action-${this.props.platform} hide`,
@@ -22,6 +38,7 @@ export default class extends Component {
       ]
     };
     this.renderRow = this.renderRow.bind(this);
+    this.openEditPage = this.openEditPage.bind(this);
   }
 
   renderRow(row, index) {
@@ -33,7 +50,7 @@ export default class extends Component {
 
         <div className = 'center' onClick = {() => this.toggleEditMenu(index)}>
           <div className = {this.state.showEditMenu[index]}>
-            <Button modifier='quiet' onClick = {this.openEditPage}>  Edit <Icon icon = 'md-edit' /> </Button>
+            <Button modifier='quiet' onClick = {() => this.openEditPage(index)}>  Edit <Icon icon = 'md-edit' /> </Button>
             <Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>
           </div>
           <div className = 'todos-text'>
@@ -90,7 +107,7 @@ export default class extends Component {
   }
 
   openEditPage(index) {
-    console.log('open edit page');
+    this.props.pushPage('editor', this.state.data[index]);
   }
 
   openSharePage(index) {

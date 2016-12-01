@@ -10,7 +10,9 @@ export default class extends Component {
   render() {
     const newBtn = this.props.platform === 'android' ? 
       <span />: 
-      <ToolbarButton> New <Icon icon = 'md-plus' /> </ToolbarButton>;
+      <ToolbarButton onClick = {() => this.props.pushPage('editor', null)}> 
+        New <Icon icon = 'md-plus' /> 
+      </ToolbarButton>;
     return (
       <Toolbar>
         <div className = 'left'>

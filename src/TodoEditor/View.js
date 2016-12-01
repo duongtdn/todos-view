@@ -8,13 +8,6 @@ import Toolbar from './Toolbar'
 class CollaboratorList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data : [
-        {uid : '001', name : 'Alex Nova', relationship : 'Friend'},
-        {uid : '002', name : 'Dylan Riskerman', relationship : 'Friend'},
-        {uid : '003', name : 'Olando White', relationship : 'Friend'},
-      ]
-    };
     this.renderRow = this.renderRow.bind(this);
   }
 
@@ -34,7 +27,7 @@ class CollaboratorList extends Component {
 
   render() {
     return (
-      <List dataSource = {this.state.data} 
+      <List dataSource = {this.props.data} 
             renderRow = {this.renderRow}
             modifier = 'noborder'
       />
@@ -48,20 +41,24 @@ class TaskInputs extends Component {
   }
 
   render() {
+    const title = this.props.data ? 'Edit this Todo' : 'Add a new Todo';
+    const text = this.props.data ? this.props.data.text : null;
+    const urgent = this.props.data ? this.props.data.urgent : false;
+    const share = this.props.data ? this.props.data.share : [];
     return (
       <List>
 
-        <ListHeader> Add a new Todo </ListHeader>
+        <ListHeader> {title} </ListHeader>
 
         <ListItem modifier = 'nodivider'>
           <div className = 'center'>
-            <Input className = 'todo-editor-text-input' type = 'text' placeholder = 'I want to...' float />
+            <Input className = 'todo-editor-text-input' type = 'text' placeholder = 'I want to...' value = {text} float />
           </div>
         </ListItem>
 
         <ListItem modifier = 'nodivider'>
           <label className = 'center todo-editor-urgent-label' > Urgent? </label>
-          <label className = 'right' > <Switch /> </label>
+          <label className = 'right' > <Switch checked = {urgent} /> </label>
         </ListItem>
 
         <ListHeader> Collaborate with </ListHeader>
@@ -71,7 +68,7 @@ class TaskInputs extends Component {
             <Button modifier = 'quiet'> Click to pick one... </Button>
           </div>
           <div style = {{width : '100%'}} >
-            <CollaboratorList />
+            <CollaboratorList data = {share} />
           </div>
         </ListItem>
 
@@ -88,19 +85,20 @@ export default class extends Component {
   }
 
   renderToolbar() {
+    const title = this.props.data ? 'Edit Todo' : 'New Todo';
     return (
-      <Toolbar platform = {this.props.platform} />
+      <Toolbar platform = {this.props.platform} title = {title}/>
     );
   }
 
   render() {
+    const btn = this.props.data ? 'Save' : 'Add';
     return (
      <Page renderToolbar = {this.renderToolbar}
-            renderFixed = {this.renderFixed}
        >
-        <TaskInputs />
+        <TaskInputs data = {this.props.data} />
         <div style={{padding: '16px'}}>
-          <Button  modifier = 'large' > Add new Todo </Button>
+          <Button ripple = {true} modifier = 'large' > {btn} </Button>
         </div>
       </Page>
     );
