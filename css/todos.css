@@ -1,4 +1,6 @@
 
+/* TODOS */
+
 ons-list-item > .left {
   padding-bottom : 25px;
   min-width: 35px;
@@ -90,4 +92,29 @@ ons-list-item > .center {
   pointer-events: none;
   -webkit-animation: hide .2s ease-in-out forwards;
           animation: hide .2s ease-in-out forwards;
+}
+
+/* TODO EDITOR */
+
+.todo-editor-text-input {
+  width : 100%
+}
+
+.todo-editor-urgent-label {
+  font-size: 16px;
+}
+
+.todo-editor-collaborate-name {
+  width : 100%;
+  font-size: 16px;
+}
+
+.todo-editor-collaborate-relationship {
+  margin-top : 4px;
+  width : 100%;
+  opacity: 0.8;
+  line-height: 1.2;
+  font-size: 12px;
+  font-style: italic;
+  color : grey;
 }

@@ -16,9 +16,6 @@ export default class extends Component {
           </BackButton  >
         </div>
         <div className = 'center'> New Todo </div>
-        <div className = 'right'>
-          <ToolbarButton> <Icon icon = 'md-save' /> &nbsp; </ToolbarButton>
-        </div>
       </Toolbar>
     );
   }
