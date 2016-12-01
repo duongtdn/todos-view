@@ -34,10 +34,10 @@ export default class AppView extends Component {
     );
   }
 
-  pushPage(name, data) {
+  pushPage(name, data, options) {
     if (routes[name]) {
       routes[name].data = data;
-      this.navigator.pushPage(routes[name]);
+      this.navigator.pushPage(routes[name], options);
     }    
   }
 

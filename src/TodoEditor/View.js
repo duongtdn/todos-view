@@ -41,7 +41,7 @@ class TaskInputs extends Component {
   }
 
   render() {
-    const title = this.props.data ? 'Edit this Todo' : 'Add a new Todo';
+    const title = this.props.data ? 'Modify your Todo' : 'Add a new Todo';
     const text = this.props.data ? this.props.data.text : null;
     const urgent = this.props.data ? this.props.data.urgent : false;
     const share = this.props.data ? this.props.data.share : [];
