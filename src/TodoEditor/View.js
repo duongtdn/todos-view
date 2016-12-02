@@ -65,7 +65,7 @@ class TaskInputs extends Component {
 
         <ListItem modifier = 'nodivider'>
           <div style = {{width : '100%'}}>
-            <Button modifier = 'quiet'> Click to pick one... </Button>
+            <Button modifier = 'quiet' onClick = {() => this.props.pushPage('friends')}> Click to pick one... </Button>
           </div>
           <div style = {{width : '100%'}} >
             <CollaboratorList data = {share} />
@@ -94,9 +94,8 @@ export default class extends Component {
   render() {
     const btn = this.props.data ? 'Save' : 'Add';
     return (
-     <Page renderToolbar = {this.renderToolbar}
-       >
-        <TaskInputs data = {this.props.data} />
+     <Page renderToolbar = {this.renderToolbar} >
+        <TaskInputs data = {this.props.data} pushPage = {this.props.pushPage} />
         <div style={{padding: '16px'}}>
           <Button ripple = {true} modifier = 'large' > {btn} </Button>
         </div>
