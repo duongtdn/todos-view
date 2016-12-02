@@ -17,7 +17,7 @@ export default class extends Component {
       <Toolbar>
         <div className = 'left'>
           <ToolbarButton> 
-            <Icon icon = 'md-menu' /> &nbsp;
+            &nbsp; <Icon icon = 'md-menu' />
           </ToolbarButton>
         </div>
         <div className = 'center'> Todos </div>
