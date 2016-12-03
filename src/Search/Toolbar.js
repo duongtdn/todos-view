@@ -13,9 +13,6 @@ import {Toolbar, ToolbarButton, BackButton, Input, Icon} from 'react-onsenui';
 export default class extends Component {
 
   render() {
-    const doneBtn = this.props.platform === 'android' ? 
-      <ToolbarButton> <Icon icon = 'fa-check' /> &nbsp; </ToolbarButton> :
-      <ToolbarButton> Done </ToolbarButton>;
     return (
       <Toolbar>
         <div className = 'left'>
@@ -25,9 +22,6 @@ export default class extends Component {
         </div>
         <div className = 'center'>  
           {this.props.title}
-        </div>
-        <div className = 'right'>  
-          <ToolbarButton> <Icon icon = 'md-search' size = {26} onClick = {() => this.props.pushPage('search')} /> &nbsp; </ToolbarButton>
         </div>
       </Toolbar>
     );

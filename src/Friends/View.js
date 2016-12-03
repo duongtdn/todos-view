@@ -5,25 +5,6 @@ import { Page, List, ListItem, ListHeader, Input, Button, Icon} from 'react-onse
 
 import Toolbar from './Toolbar'
 
-class Search extends Component {
-
-  render() {
-    return (
-      <List >
-        <ListItem modifier = 'nodivider' >
-          <div className = 'center'>
-            <Input type = 'search' placeholder = 'search by email' />
-            <div className = 'center'>
-              <Button modifier = 'quiet' > or invite join by email </Button>
-            </div>
-          </div>
-        </ListItem>        
-      </List>
-    );
-  }
-
-}
-
 class FriendsList extends Component {
   constructor(props) {
     super(props);
@@ -88,14 +69,13 @@ export default class extends Component {
 
   renderToolbar() {
     return (
-      <Toolbar platform = {this.props.platform} title = 'Collaborators' />
+      <Toolbar platform = {this.props.platform} pushPage = {this.props.pushPage} title = 'Collaborators' />
     );
   }
 
   render() {
     return (
       <Page renderToolbar = {this.renderToolbar} >
-        <Search />
         <FriendsList category = 'Family' data = {this.state.data.family} />
         <FriendsList category = 'Friends' data = {this.state.data.friends} />
       </Page>
