@@ -83,11 +83,11 @@ export default class extends Component {
     return (
       <BottomToolbar>
 
-          <Row>
-            <Col> 
+          <Row style = {{height : '100%'}} >
+            <Col verticalAlign = 'center'> 
               <Button modifier = 'quiet' style = {{textAlign: 'center', width: '100%'}}> Cancel </Button> 
             </Col>
-            <Col> 
+            <Col verticalAlign = 'center'> 
               <Button modifier = 'quiet' style = {{textAlign: 'center', width: '100%'}}> Done </Button> 
             </Col>
           </Row>
