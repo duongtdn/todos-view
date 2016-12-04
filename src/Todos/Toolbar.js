@@ -1,7 +1,6 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { render } from 'react-dom'
 
 import {Toolbar, ToolbarButton, Icon} from 'react-onsenui';
 
@@ -11,7 +10,7 @@ export default class extends Component {
     const newBtn = this.props.platform === 'android' ? 
       <span />: 
       <ToolbarButton onClick = {() => this.props.pushPage('editor', null)}> 
-        New <Icon icon = 'md-plus' /> 
+        New
       </ToolbarButton>;
     return (
       <Toolbar>

@@ -1,7 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page, List, ListItem, ListHeader, Input, Button, Icon} from 'react-onsenui'
+import { Page, List, ListItem, ListHeader, Input, Button, Icon, BottomToolbar, Row, Col } from 'react-onsenui'
 
 import Toolbar from './Toolbar'
 
@@ -60,11 +60,17 @@ export default class extends Component {
           { name : 'Alex Hammer', email : 'alex@vendors.com' },
           { name : 'Olandos White', email : 'olandos@vendors.com' },
           { name : 'Fred Stonebreak', email : 'fred@vendors.com' },
+        ],
+        colleagues : [
+          { name : 'Rolan Skywalker', email : 'rolan@vendors.com' },
+          { name : 'Emily Star', email : 'emily@vendors.com' },
+          { name : 'Bob Ginger', email : 'bob@vendors.com' },
         ]
       }
     }
 
     this.renderToolbar = this.renderToolbar.bind(this);
+    this.renderBottomToolbar = this.renderBottomToolbar.bind(this);
   }
 
   renderToolbar() {
@@ -73,11 +79,31 @@ export default class extends Component {
     );
   }
 
+  renderBottomToolbar() {
+    return (
+      <BottomToolbar>
+
+          <Row>
+            <Col> 
+              <Button modifier = 'quiet' style = {{textAlign: 'center', width: '100%'}}> Cancel </Button> 
+            </Col>
+            <Col> 
+              <Button modifier = 'quiet' style = {{textAlign: 'center', width: '100%'}}> Done </Button> 
+            </Col>
+          </Row>
+
+      </BottomToolbar>
+    );       
+  }
+
   render() {
     return (
-      <Page renderToolbar = {this.renderToolbar} >
+      <Page renderToolbar = {this.renderToolbar}
+            renderBottomToolbar = {this.renderBottomToolbar}
+      >
         <FriendsList category = 'Family' data = {this.state.data.family} />
         <FriendsList category = 'Friends' data = {this.state.data.friends} />
+        <FriendsList category = 'Colleagues' data = {this.state.data.colleagues} />
       </Page>
     );
   }
