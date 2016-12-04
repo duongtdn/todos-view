@@ -13,6 +13,9 @@ import {Toolbar, ToolbarButton, BackButton, Input, Icon} from 'react-onsenui';
 export default class extends Component {
 
   render() {
+    const lbl = this.props.platform === 'android' ? 
+      <Input type = 'search' placeholder = 'search by email' /> :
+      <span> Search </span>;
     return (
       <Toolbar>
         <div className = 'left'>
@@ -21,7 +24,7 @@ export default class extends Component {
           </BackButton>
         </div>
         <div className = 'center'>  
-          {this.props.title}
+          {lbl}
         </div>
       </Toolbar>
     );

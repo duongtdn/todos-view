@@ -121,14 +121,21 @@ ons-list-item > .center {
 
 /* Friend page */
 
-ons-input[type=search] {
+ons-toolbar ons-input[type=search] {
+    margin-top: 16px;
     width: 100%;
-    padding-top: 5px;
-    background-image: url(searchicon.png);
-    background-position: 0px 0px;
-    background-repeat: no-repeat;
+    line-height: 16px;
 }
 
-ons-input[type=search] span {
-    padding-left: 25px;
+ons-toolbar ons-input[type=search] input {
+    color : white;
+    padding-bottom: 2px;
+}
+
+ons-toolbar ons-input[type=search] input:focus {
+    background-image: linear-gradient(white, white), linear-gradient(to top, transparent 1px, #afafaf 1px);
+}
+
+ons-toolbar ons-input[type=search] span {
+    padding-left: 0px;
 }

@@ -27,7 +27,7 @@ export default class extends Component {
           {this.props.title}
         </div>
         <div className = 'right'>  
-          <ToolbarButton> <Icon icon = 'md-search' size = {26} onClick = {() => this.props.pushPage('search')} /> &nbsp; </ToolbarButton>
+          <ToolbarButton> <Icon icon = 'fa-search' size = {26} onClick = {() => this.props.pushPage('search')} /> &nbsp; </ToolbarButton>
         </div>
       </Toolbar>
     );
