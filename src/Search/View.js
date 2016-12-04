@@ -5,7 +5,7 @@ import { Page, List, ListItem, ListHeader, Input, Button, Icon} from 'react-onse
 
 import Toolbar from './Toolbar'
 
-class Search extends Component {
+class SearchIOS extends Component {
 
   render() {
     return (
@@ -35,9 +35,10 @@ export default class extends Component {
   }
 
   render() {
+    const seachBox = this.props.platform === 'android' ? null : <SearchIOS />;
     return (
       <Page renderToolbar = {this.renderToolbar} >
-        <Search />
+        {seachBox}
       </Page>
     );
   }

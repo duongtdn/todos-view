@@ -7,7 +7,7 @@ import ons from 'onsenui'
 
 import AppView from './AppView'
 
-ons.platform.select('android');
+// ons.platform.select('android');
 // ons.platform.select('ios');
 
 const platform = ons.platform.isAndroid()? 'android' : 'ios'; 
