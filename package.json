@@ -1,8 +1,8 @@
 {
-  "name": "todos-data",
+  "name": "todos-view",
   "version": "1.0.0",
   "description": "view of todos app using onsen ui",
-  "main": "lib/index.js",
+  "main": "index.js",
   "author": "duongtdn",
   "license": "MIT",
   "scripts": {
