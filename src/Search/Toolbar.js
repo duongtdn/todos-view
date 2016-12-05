@@ -18,7 +18,7 @@ export default class extends Component {
           </BackButton>
         </div>
         <div className = 'center'>  
-          {lbl}
+          <Input type = 'search' placeholder = 'search by email' />
         </div>
       </Toolbar>
     );

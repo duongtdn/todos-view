@@ -5,21 +5,21 @@ import { Page, List, ListItem, ListHeader, Input, Button, Icon} from 'react-onse
 
 import Toolbar from './Toolbar'
 
-class SearchIOS extends Component {
+// class SearchIOS extends Component {
 
-  render() {
-    return (
-      <List >
-        <ListHeader> Search for a user by email </ListHeader>
-        <ListItem modifier = 'nodivider'>
-          <Icon icon = 'fa-search' style = {{color : 'grey', marginRight : '6px'}} /> 
-          <Input type = 'search' placeholder = 'search by email' /> 
-        </ListItem>        
-      </List>
-    );
-  }
+//   render() {
+//     return (
+//       <List >
+//         <ListHeader> Search for a user by email </ListHeader>
+//         <ListItem modifier = 'nodivider'>
+//           <Icon icon = 'fa-search' style = {{color : 'grey', marginRight : '6px'}} /> 
+//           <Input type = 'search' placeholder = 'search by email' /> 
+//         </ListItem>        
+//       </List>
+//     );
+//   }
 
-}
+// }
 
 export default class extends Component {
   constructor(props) {
@@ -35,10 +35,9 @@ export default class extends Component {
   }
 
   render() {
-    const seachBox = this.props.platform === 'android' ? null : <SearchIOS />;
     return (
       <Page renderToolbar = {this.renderToolbar} >
-        {seachBox}
+       
       </Page>
     );
   }
