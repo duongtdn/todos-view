@@ -124,6 +124,7 @@ ons-list-item > .center {
 
 /* search in put inside navigation bar for default */
 ons-toolbar ons-input[type=search] {
+    vertical-align: top;
     margin-top: 5px;
     border: 1px solid #d3d3d3;
     border-radius: 4px;

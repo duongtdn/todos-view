@@ -8,7 +8,7 @@ import AppView from './AppView'
 
 export default {
 
-  platform : '',
+  platform : null,
   rootEl : 'app-root',
   
   setPlatform (platform) {
@@ -23,6 +23,9 @@ export default {
   },
 
   init() {
+    if (this.platform === null) { 
+      this.platform = ons.platform.isAndroid() ? 'android' : 'ios';
+    }
     document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     return this;    
   },
