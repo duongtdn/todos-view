@@ -15,16 +15,18 @@ class FriendsList extends Component {
   renderRow(row, index) {
     return (
       <ListItem key = {index} modifier = 'nodivider' >
-        <div className = 'left'> 
-          <Input type = 'checkbox' checked = {false} />
-        </div>
-        <div className = 'center'>
-          <div className = 'todo-editor-collaborate-name'> {row.name} </div>
-          <div className = 'todo-editor-collaborate-relationship'> {row.email} </div>
-        </div>
-        <div className = 'right'>
+        <label className = 'left'> 
+          <Input type = 'checkbox' inputId = {`checkbox-${row.id}`} checked = {false} />
+        </label>
+        <label className = 'center' htmlFor = {`checkbox-${row.id}`} >
+          <Col>
+            <Row className = 'todo-editor-collaborate-name'> {row.name} </Row>
+            <Row className = 'todo-editor-collaborate-relationship'> {row.email} </Row>
+          </Col>
+        </label>
+        <label className = 'right'>
           <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/>
-        </div>
+        </label>
       </ListItem>
     );
   }
@@ -53,18 +55,18 @@ export default class extends Component {
     this.state = {
       data : {
         family : [
-          { name : 'Eagle D. Stormrider', email : 'eagle@stormgle.com'},
-          { name : 'Narina D. Iceheart', email : 'narina@stormgle.com'},
+          { id : '001', name : 'Eagle D. Stormrider', email : 'eagle@stormgle.com'},
+          { id : '002', name : 'Narina D. Iceheart', email : 'narina@stormgle.com'},
         ],
         friends : [
-          { name : 'Alex Hammer', email : 'alex@vendors.com' },
-          { name : 'Olandos White', email : 'olandos@vendors.com' },
-          { name : 'Fred Stonebreak', email : 'fred@vendors.com' },
+          { id : '004', name : 'Alex Hammer', email : 'alex@vendors.com' },
+          { id : '006', name : 'Olandos White', email : 'olandos@vendors.com' },
+          { id : '003', name : 'Fred Stonebreak', email : 'fred@vendors.com' },
         ],
         colleagues : [
-          { name : 'Rolan Skywalker', email : 'rolan@vendors.com' },
-          { name : 'Emily Star', email : 'emily@vendors.com' },
-          { name : 'Bob Ginger', email : 'bob@vendors.com' },
+          { id : '007', name : 'Rolan Skywalker', email : 'rolan@vendors.com' },
+          { id : '005', name : 'Emily Star', email : 'emily@vendors.com' },
+          { id : '008', name : 'Bob Ginger', email : 'bob@vendors.com' },
         ]
       }
     }
