@@ -16,9 +16,9 @@ auth.onAuthStateChanged(usr => {
     });
   } else {
     console.log ('no logged user');
+    store.dispatch(user.signIn('duongtdn@stormgle.com', '123456'));
   }
 });
-// store.dispatch(user.signIn('duongtdn@stormgle.com', '123456'));
 
 
 export default class extends Component {
