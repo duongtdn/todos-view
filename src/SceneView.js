@@ -14,6 +14,7 @@ export default class AppView extends Component {
     this.route = null;
 
     this.pushPage = this.pushPage.bind(this);
+    this.popPage = this.popPage.bind(this);
   }
 
   componentWillMount () {
@@ -25,7 +26,8 @@ export default class AppView extends Component {
     const page = React.cloneElement(this.route.view, {      
       platform : this.props.platform,
       data : this.route.data,
-      pushPage : this.pushPage
+      pushPage : this.pushPage,
+      popPage : this.popPage
     });
     return (
       <Page>
@@ -39,6 +41,10 @@ export default class AppView extends Component {
       routes[name].data = data;
       this.navigator.pushPage(routes[name], options);
     }    
+  }
+
+  popPage() {
+    this.navigator.popPage();
   }
 
 }
