@@ -8,28 +8,6 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data : [
-        {
-          role : 'Collaborator', text : 'Complete Todo App', dueDate : '30-Nov', urgent : true, 
-          share : [
-            {uid : '001', name : 'Alex Nova', relationship : 'Friend'},
-            {uid : '002', name : 'Dylan Riskerman', relationship : 'Friend'},
-            {uid : '003', name : 'Olando White', relationship : 'Friend'},
-          ]
-        },
-        {
-          role : 'Owner', text : 'Study Admob', dueDate : '12-Dec', urgent : false
-        },
-        {
-          role : 'Collaborator', text : 'Design using Onsen UI and build with Cordova', dueDate : '', urgent : true
-        },
-        {
-          role : 'Owner', text : 'Find solutions for promoting app across multiple platform including Android, IOS, Web... or even third party vendors', dueDate : '15-Dec', urgent : false,
-          share : [
-            {uid : '001', name : 'Alex Nova', relationship : 'Friend'},
-          ]
-        }
-      ],
       showEditMenu : [
         `todos-action-${this.props.platform} hide`,
         `todos-action-${this.props.platform} hide`,
@@ -42,6 +20,7 @@ export default class extends Component {
   }
 
   renderRow(row, index) {
+    const type = row.share.length > 1 ? 'collaborative' : 'self';
     return (
       <ListItem key = {index} >
         <div className = 'left'> 
@@ -58,7 +37,7 @@ export default class extends Component {
           </div>
           <div className = 'todos-ext'>
             <Row>
-              <Col> {row.role} </Col>
+              <Col> {type} </Col>
               <Col style = {{textAlign : 'right'}}> {row.dueDate} </Col>
             </Row>
           </div>
@@ -75,7 +54,7 @@ export default class extends Component {
     return (
       <Page>
         <List
-          dataSource = {this.state.data}
+          dataSource = {this.props.todos}
           renderRow = {this.renderRow}
         />
       </Page>

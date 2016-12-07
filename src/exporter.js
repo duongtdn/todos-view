@@ -4,7 +4,7 @@ import React , { Component } from 'react'
 import { render } from 'react-dom'
 import ons from 'onsenui'
 
-import AppView from './AppView'
+import App from './App'
 
 export default {
 
@@ -35,7 +35,7 @@ export default {
   },
 
   receivedEvent() {
-    render(<AppView platform = {this.platform} />, document.getElementById(this.rootEl));
+    render(<App platform = {this.platform} />, document.getElementById(this.rootEl));
   }      
 
 }
