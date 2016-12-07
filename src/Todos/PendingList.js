@@ -86,7 +86,7 @@ export default class extends Component {
   }
 
   openEditPage(index) {
-    this.props.pushPage('editor', this.state.data[index], {
+    this.props.pushPage('editor', this.props.todos[index], {
       animation : 'lift'
     });
   }

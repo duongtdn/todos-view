@@ -27,7 +27,7 @@ class CollaboratorList extends Component {
 
   render() {
     return (
-      <List dataSource = {this.props.data} 
+      <List dataSource = {this.props.todos} 
             renderRow = {this.renderRow}
             modifier = 'noborder'
       />
