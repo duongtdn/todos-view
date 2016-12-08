@@ -43,6 +43,11 @@ ons-list-item > .center {
   display: none;
 }
 
+.todos-highlight {
+  background-color: lightyellow;
+  color: rgba(255, 0, 0, 0.7);
+}
+
 /* Animation */
 
 

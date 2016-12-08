@@ -23,8 +23,9 @@ export default class extends Component {
 
   renderRow(row, index) {
     const type = Object.keys(row.share).length > 1 ? 'collaborative' : 'self';
+    const bgHighlight = row.urgent ? 'todos-highlight' : '';
     return (
-      <ListItem key = {index} >
+      <ListItem className = {bgHighlight} key = {index} >
         <div className = 'left'> 
           <Input type = 'checkbox' />
         </div>
@@ -45,7 +46,7 @@ export default class extends Component {
           </div>
         </div>
 
-        <div className = 'right'>
+        <div className = 'right' >
           <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/>
         </div>
       </ListItem>
