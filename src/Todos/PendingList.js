@@ -8,19 +8,21 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showEditMenu : [
-        `todos-action-${this.props.platform} hide`,
-        `todos-action-${this.props.platform} hide`,
-        `todos-action-${this.props.platform} hide`,
-        `todos-action-${this.props.platform} hide`
-      ]
+      showEditMenu : []
     };
     this.renderRow = this.renderRow.bind(this);
     this.openEditPage = this.openEditPage.bind(this);
   }
 
+  componentWillReceiveProps() {  
+    const showEditMenu = this.props.todos.map( () => {
+      return `todos-action-${this.props.platform} hide`;
+    });
+    this.setState({ showEditMenu });
+  }
+
   renderRow(row, index) {
-    const type = row.share.length > 1 ? 'collaborative' : 'self';
+    const type = Object.keys(row.share).length > 1 ? 'collaborative' : 'self';
     return (
       <ListItem key = {index} >
         <div className = 'left'> 

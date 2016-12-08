@@ -19,6 +19,7 @@ class TodoEditor extends Component {
     this.getTodoText = this.getTodoText.bind(this);
     this.getTodoUrgent = this.getTodoUrgent.bind(this);
     this.addTodo = this.addTodo.bind(this);
+    this.saveTodo = this.saveTodo.bind(this);
   }
 
   renderToolbar() {
@@ -38,13 +39,12 @@ class TodoEditor extends Component {
         share   : []
       };
     }
-    console.log (this.todo);
   }
 
   render() {
     const btn = this.todo.id ? 
       <Button ripple = {true} modifier = 'large' 
-              onClick = {() => { this.props.saveTodo(this.todo) }} > 
+              onClick = {this.saveTodo} > 
               Save 
       </Button> : 
       <Button ripple = {true} modifier = 'large' 
@@ -77,6 +77,11 @@ class TodoEditor extends Component {
     this.props.popPage();
   }
 
+  saveTodo() {
+    this.props.editTodo(this.todo);
+    this.props.popPage();
+  }
+
 }
 
 const mapStateToProps = state => {
@@ -87,6 +92,9 @@ const mapDispatchToProps = dispatch => {
   return {
     addTodo(todo) {
       dispatch(todos.add(todo));
+    },
+    editTodo(todo) {
+      dispatch(todos.edit(todo))
     }
   }
 };
