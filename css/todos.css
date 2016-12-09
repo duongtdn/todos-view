@@ -16,7 +16,6 @@ ons-list-item > .center {
 .todos-text {
   width : 100%;
   z-index: 2;
-  background-color : white;
 }
 
 .todos-ext {
