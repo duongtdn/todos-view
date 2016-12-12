@@ -23,12 +23,15 @@ export default class extends Component {
   }
 
   renderRow(row, index) {
-    const type = Object.keys(row.share).length > 1 ? 'collaborative' : 'self';
+    const numberOfShare = Object.keys(row.share).length; 
+    const type = numberOfShare > 1 ? `${numberOfShare} shared` : 'private';
     const bgHighlight = row.urgent ? 'todos-highlight' : '';
+    const isComplete = (row.status === 'completed');
+    const decoText = (row.status === 'completed') ? 'todos-text todos-completed' : 'todos-text'
     return (
       <ListItem className = {bgHighlight} key = {index} >
         <div className = 'left'> 
-          <Input type = 'checkbox' onChange = {() => this.props.completeTodo(row) } />
+          <Input type = 'checkbox'checked = {isComplete} onChange = {() => this.props.completeTodo(row) } />
         </div>
 
         <div className = 'center' onClick = {() => this.toggleEditMenu(index)}>
@@ -36,7 +39,7 @@ export default class extends Component {
             <Button modifier='quiet' onClick = {() => this.openEditPage(index)}>  Edit <Icon icon = 'md-edit' /> </Button>
             <Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>
           </div>
-          <div className = 'todos-text'>
+          <div className = {decoText} >
             {row.text}
           </div>
           <div className = 'todos-ext'>

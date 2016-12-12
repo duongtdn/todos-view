@@ -18,6 +18,16 @@ ons-list-item > .center {
   z-index: 2;
 }
 
+.todos-highlight {
+  background-color: lightyellow;
+  color: rgba(255, 0, 0, 0.7);
+}
+
+.todos-completed {
+  font-style: italic;
+  text-decoration: line-through;
+}
+
 .todos-ext {
   margin-top : 4px;
   width : 100%;
@@ -42,10 +52,6 @@ ons-list-item > .center {
   display: none;
 }
 
-.todos-highlight {
-  background-color: lightyellow;
-  color: rgba(255, 0, 0, 0.7);
-}
 
 /* Animation */
 
