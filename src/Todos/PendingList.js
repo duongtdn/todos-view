@@ -12,6 +12,7 @@ export default class extends Component {
     };
     this.renderRow = this.renderRow.bind(this);
     this.openEditPage = this.openEditPage.bind(this);
+    this.completeTodo = this.completeTodo.bind(this);
   }
 
   componentWillReceiveProps() {  
@@ -27,7 +28,7 @@ export default class extends Component {
     return (
       <ListItem className = {bgHighlight} key = {index} >
         <div className = 'left'> 
-          <Input type = 'checkbox' />
+          <Input type = 'checkbox' onChange = {() => this.props.completeTodo(row) } />
         </div>
 
         <div className = 'center' onClick = {() => this.toggleEditMenu(index)}>
@@ -96,6 +97,13 @@ export default class extends Component {
 
   openSharePage(index) {
     console.log('open share page');
+  }
+
+  completeTodo(todo) {
+    console.log ('props : complete todo');
+    console.log(todo);
+    console.log(this.props);
+    this.props.completeTodo(todo);
   }
 
   _cleanAnimationClass() {

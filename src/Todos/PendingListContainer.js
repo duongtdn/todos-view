@@ -1,6 +1,7 @@
 "use strict"
 
 import { connect } from 'react-redux'
+import { todos } from 'todos-data'
 
 import PendingList from './PendingList'
 
@@ -14,7 +15,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    
+    completeTodo(todo) {
+      console.log('completing a todo');
+      console.log(todo);
+      dispatch(todos.complete(todo));
+    }
   }
 };
 
