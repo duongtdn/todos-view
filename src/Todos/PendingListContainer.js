@@ -8,7 +8,9 @@ import PendingList from './PendingList'
 const mapStateToProps = state => {
   const todos = [];
   for (let todoId in state.todos) {
-    todos.push(state.todos[todoId]);
+    if (state.todos[todoId].status === 'pending') {
+      todos.push(state.todos[todoId]);
+    }    
   }
   return { todos };
 };
@@ -16,8 +18,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     completeTodo(todo) {
-      console.log('completing a todo');
-      console.log(todo);
       dispatch(todos.complete(todo));
     }
   }

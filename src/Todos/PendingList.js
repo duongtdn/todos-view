@@ -33,9 +33,9 @@ export default class extends Component {
     const isComplete = (row.status === 'completed');
     const decoText = (row.status === 'completed') ? 'todos-text todos-completed' : 'todos-text'
     return (
-      <ListItem className = {`${this.state.animation[index]} ${bgHighlight}`} key = {index} >
+      <ListItem className = {`${this.state.animation[index]} ${bgHighlight}`} key = {row.id} >
         <div className = 'left'> 
-          <Input type = 'checkbox'checked = {isComplete} onChange = {() => this.completeTodo(row, index) } />
+          <Input type = 'checkbox'  onChange = {() => this.completeTodo(row, index) } />
         </div>
 
         <div className = 'center' onClick = {() => this.toggleEditMenu(index)}>
