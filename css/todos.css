@@ -1,6 +1,11 @@
 
 /* TODOS */
 
+ons-tabbar .list {
+  background-color: grey;
+  overflow-x: hidden;
+}
+
 ons-list-item > .left {
   padding-bottom : 25px;
   min-width: 35px;
@@ -16,6 +21,7 @@ ons-list-item > .center {
 .todos-text {
   width : 100%;
   z-index: 2;
+  background-color: white;
 }
 
 .todos-highlight {
@@ -23,9 +29,15 @@ ons-list-item > .center {
   color: rgba(255, 0, 0, 0.7);
 }
 
+.todos-highlight .todos-text {
+  width : 100%;
+  z-index: 2;
+  background-color: lightyellow;
+}
+
 .todos-completed {
   font-style: italic;
-  text-decoration: line-through;
+  color: grey;
 }
 
 .todos-ext {
@@ -52,10 +64,13 @@ ons-list-item > .center {
   display: none;
 }
 
+.hide-children * {
+  overflow: hidden;
+}
 
 /* Animation */
 
-
+/* show up todos-menu */
 @-webkit-keyframes show-up {
   0% {
     max-height: 0;
@@ -80,6 +95,7 @@ ons-list-item > .center {
           animation: show-up .2s ease-in-out forwards;
 }
 
+/* hide todos-menu */
 @-webkit-keyframes hide {
   0% {
     max-height: 40px;
@@ -104,6 +120,48 @@ ons-list-item > .center {
           animation: hide .2s ease-in-out forwards;
 }
 
+/* hide completed todos */
+@-webkit-keyframes swipe-right {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    height: 62px;
+  }
+  10% {
+    -webkit-transform: translateX(-3%);
+            transform: translateX(-3%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    height: 0;
+    opacity: 0.3;
+  }
+}
+
+@keyframes swipe-right {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    height: 62px;
+  }
+  10% {
+    -webkit-transform: translateX(-3%);
+            transform: translateX(-3%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    height: 0;
+    opacity: 0.3;
+  }
+}
+
+.animation-swipe-right {
+  pointer-events: none;
+  -webkit-animation: swipe-right .9s ease-in-out forwards;
+          animation: swipe-right .9s ease-in-out forwards;
+}
 /* TODO EDITOR */
 
 .todo-editor-text-input {

@@ -8,6 +8,7 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      animation : [],
       showEditMenu : []
     };
     this.renderRow = this.renderRow.bind(this);
@@ -19,7 +20,10 @@ export default class extends Component {
     const showEditMenu = this.props.todos.map( () => {
       return `todos-action-${this.props.platform} hide`;
     });
-    this.setState({ showEditMenu });
+    const animation = this.props.todos.map( () => {
+      return '';
+    });
+    this.setState({ showEditMenu, animation });
   }
 
   renderRow(row, index) {
@@ -29,9 +33,9 @@ export default class extends Component {
     const isComplete = (row.status === 'completed');
     const decoText = (row.status === 'completed') ? 'todos-text todos-completed' : 'todos-text'
     return (
-      <ListItem className = {bgHighlight} key = {index} >
+      <ListItem className = {`${this.state.animation[index]} ${bgHighlight}`} key = {index} >
         <div className = 'left'> 
-          <Input type = 'checkbox'checked = {isComplete} onChange = {() => this.props.completeTodo(row) } />
+          <Input type = 'checkbox'checked = {isComplete} onChange = {() => this.completeTodo(row, index) } />
         </div>
 
         <div className = 'center' onClick = {() => this.toggleEditMenu(index)}>
@@ -102,11 +106,20 @@ export default class extends Component {
     console.log('open share page');
   }
 
-  completeTodo(todo) {
-    console.log ('props : complete todo');
-    console.log(todo);
-    console.log(this.props);
-    this.props.completeTodo(todo);
+  completeTodo(todo, index) {
+    const animation = this.state.animation.map( (anim, id) => {
+      if (id === index) {
+        return 'animation-swipe-right hide-children';
+      } else {
+        return anim;
+      }
+    });
+    this.setState({ animation });
+
+    setTimeout(() => {
+      this.props.completeTodo(todo);
+    }, 950);
+    
   }
 
   _cleanAnimationClass() {
