@@ -18,7 +18,7 @@ export default class extends Component {
     this.setActiveTask = this.setActiveTask.bind(this);
     this.openEditPage = this.openEditPage.bind(this);
     this.openSharePage = this.openSharePage.bind(this);
-    this.completeTodo = this.completeTodo.bind(this);
+
   }
 
   componentWillReceiveProps(nextProps) {  
@@ -32,11 +32,7 @@ export default class extends Component {
   }
 
   renderRow(row, index) {
-    const numberOfShare = Object.keys(row.share).length; 
-    const type = numberOfShare > 1 ? `${numberOfShare} shared` : 'private';
-    const bgHighlight = row.urgent ? 'todos-highlight' : '';
     const isComplete = (row.status === 'completed');
-    const decoText = (row.status === 'completed') ? 'todos-text todos-completed' : 'todos-text'
     return (
       <Task data = {row} 
             platform = {this.props.platform} 
@@ -45,6 +41,7 @@ export default class extends Component {
             setActive = {this.setActiveTask} 
             openEditPage = {this.openEditPage}
             openSharePage = {this.openSharePage}
+            completeTodo = {this.props.completeTodo}
       />
     );
   }
@@ -77,22 +74,6 @@ export default class extends Component {
 
   openSharePage(data) {
     console.log('open share page');
-  }
-
-  completeTodo(todo, index) {
-    const animation = this.state.animation.map( (anim, id) => {
-      if (id === index) {
-        return 'animation-swipe-right hide-children';
-      } else {
-        return anim;
-      }
-    });
-    this.setState({ animation });
-
-    setTimeout(() => {
-      this.props.completeTodo(todo);
-    }, 950);
-    
   }
 
 }

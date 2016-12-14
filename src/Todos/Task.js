@@ -102,4 +102,14 @@ export default class extends Component {
     this.props.openSharePage(data);
   }
 
+  completeTodo(todo) {
+    
+    this.setState({ animation : 'animation-swipe-right hide-children' });
+
+    setTimeout(() => {
+      this.props.completeTodo(todo);
+    }, 950);
+    
+  }
+
 }
