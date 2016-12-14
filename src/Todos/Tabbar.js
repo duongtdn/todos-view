@@ -4,7 +4,7 @@ import React , { Component } from 'react'
 import {Page, Tabbar, Tab, Icon} from 'react-onsenui';
 
 import PendingTasksContainer from './PendingTasksContainer'
-import CompletedList from './CompletedList'
+import CompletedTasksContainer from './CompletedTasksContainer'
 
 export default class extends Component {
 
@@ -22,7 +22,7 @@ export default class extends Component {
         tab : <Tab key = 'Pending' label = 'Pending' />
       },
       {
-        content : <CompletedList key = 'Completed' platform = {this.props.platform}/>,
+        content : <CompletedTasksContainer key = 'Completed' platform = {this.props.platform}/>,
         tab : <Tab key = 'Completed' label = 'Completed' />
       }
     ]

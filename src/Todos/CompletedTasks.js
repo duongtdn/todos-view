@@ -7,12 +7,7 @@ export default class extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      data : [
-        {role : 'Collaborator', text : 'Setup npm project', completedAt : '30-Nov'},
-        {role : 'Owner', text : 'Init github repo', completedAt : '29-Nov'},        
-      ]
-    };
+    
     this.renderRow = this.renderRow.bind(this);
   }
 
@@ -43,7 +38,7 @@ export default class extends Component {
     return (
       <Page>
         <List
-          dataSource = {this.state.data}
+          dataSource = {this.props.todos}
           renderRow = {this.renderRow}
         />
       </Page>

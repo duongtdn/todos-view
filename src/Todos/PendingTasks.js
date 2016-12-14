@@ -10,8 +10,6 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      animation : [],
-      showEditMenu : [],
       activeTask : {}
     };
     this.renderRow = this.renderRow.bind(this);
@@ -21,18 +19,7 @@ export default class extends Component {
 
   }
 
-  componentWillReceiveProps(nextProps) {  
-    const showEditMenu = this.props.todos.map( () => {
-      return `todos-action-${this.props.platform} hide`;
-    });
-    const animation = this.props.todos.map( () => {
-      return '';
-    });
-    this.setState({ showEditMenu, animation });
-  }
-
   renderRow(row, index) {
-    const isComplete = (row.status === 'completed');
     return (
       <Task data = {row} 
             platform = {this.props.platform} 
