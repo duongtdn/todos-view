@@ -3,7 +3,7 @@
 import { connect } from 'react-redux'
 import { todos } from 'todos-data'
 
-import PendingList from './PendingList'
+import PendingTasks from './PendingTasks'
 
 const mapStateToProps = state => {
   const todos = [];
@@ -26,4 +26,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PendingList)
+)(PendingTasks)

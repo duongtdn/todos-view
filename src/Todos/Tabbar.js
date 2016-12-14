@@ -3,7 +3,7 @@
 import React , { Component } from 'react'
 import {Page, Tabbar, Tab, Icon} from 'react-onsenui';
 
-import PendingListContainer from './PendingListContainer'
+import PendingTasksContainer from './PendingTasksContainer'
 import CompletedList from './CompletedList'
 
 export default class extends Component {
@@ -18,7 +18,7 @@ export default class extends Component {
   renderTabs() {
     return [
       {
-        content : <PendingListContainer key = 'Pending' platform = {this.props.platform} pushPage = {this.props.pushPage} />,
+        content : <PendingTasksContainer key = 'Pending' platform = {this.props.platform} pushPage = {this.props.pushPage} />,
         tab : <Tab key = 'Pending' label = 'Pending' />
       },
       {
