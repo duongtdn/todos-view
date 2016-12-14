@@ -1,7 +1,9 @@
 "use strict"
 
 import React , { Component } from 'react'
-import {Page, ListItem, List, Icon, Input, Col, Row, Button} from 'react-onsenui'
+import {Page, List, Icon, Input, Col, Row, Button} from 'react-onsenui'
+
+import Task from './Task'
 
 export default class extends Component {
 
@@ -9,14 +11,16 @@ export default class extends Component {
     super(props);
     this.state = {
       animation : [],
-      showEditMenu : []
+      showEditMenu : [],
+      activeTask : {}
     };
     this.renderRow = this.renderRow.bind(this);
-    this.openEditPage = this.openEditPage.bind(this);
+    this.setActiveTask = this.setActiveTask.bind(this);
+
     this.completeTodo = this.completeTodo.bind(this);
   }
 
-  componentWillReceiveProps() {  
+  componentWillReceiveProps(nextProps) {  
     const showEditMenu = this.props.todos.map( () => {
       return `todos-action-${this.props.platform} hide`;
     });
@@ -33,31 +37,12 @@ export default class extends Component {
     const isComplete = (row.status === 'completed');
     const decoText = (row.status === 'completed') ? 'todos-text todos-completed' : 'todos-text'
     return (
-      <ListItem className = {`${this.state.animation[index]} ${bgHighlight}`} key = {row.id} >
-        <div className = 'left'> 
-          <Input type = 'checkbox'  onChange = {() => this.completeTodo(row, index) } />
-        </div>
-
-        <div className = 'center' onClick = {() => this.toggleEditMenu(index)}>
-          <div className = {this.state.showEditMenu[index]}>
-            <Button modifier='quiet' onClick = {() => this.openEditPage(index)}>  Edit <Icon icon = 'md-edit' /> </Button>
-            <Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>
-          </div>
-          <div className = {decoText} >
-            {row.text}
-          </div>
-          <div className = 'todos-ext'>
-            <Row>
-              <Col> {type} </Col>
-              <Col style = {{textAlign : 'right'}}> {row.dueDate} </Col>
-            </Row>
-          </div>
-        </div>
-
-        <div className = 'right' >
-          <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/>
-        </div>
-      </ListItem>
+      <Task data = {row} 
+            platform = {this.props.platform} 
+            key = {row.id}
+            active = {this.state.activeTask[row.id]}
+            setActive = {this.setActiveTask} 
+      />
     );
   }
 
@@ -72,28 +57,13 @@ export default class extends Component {
     );
   }
 
-  toggleEditMenu(index) {
-    const patt = /\shide/g;
-    const showEditMenu = this.state.showEditMenu.map( (_class, id) => {
-      if (id === index) {
-        if (patt.test(_class)) {
-          // this item is currently hidden
-          _class = `todos-action-${this.props.platform} animation-show-up`;
-        } else {
-          // this item is show up, hide it
-          _class = `todos-action-${this.props.platform} animation-hide`;
-        }
-      } else {
-        _class = `todos-action-${this.props.platform} hide`;
-      }
-      
-      return _class;
-    });
-    this.setState({showEditMenu});
-
-    setTimeout(() => {
-      this._cleanAnimationClass();
-    }, 250);
+  setActiveTask(id) {
+    const activeTask = {};
+    for (let taskId in this.state.activeTask) {
+      activeTask[taskId] = false;
+    }
+    activeTask[id] = true;    
+    this.setState({ activeTask });
   }
 
   openEditPage(index) {
@@ -120,23 +90,6 @@ export default class extends Component {
       this.props.completeTodo(todo);
     }, 950);
     
-  }
-
-  _cleanAnimationClass() {
-    const patt1 = /\sanimation-hide/g;
-    const patt2 = /\sanimation-show-up/g;
-    const showEditMenu = this.state.showEditMenu.map( (_class, id) => {
-      if (patt1.test(_class)) {
-        // this item is currently hidden
-        _class = `todos-action-${this.props.platform} hide`;
-      } 
-      if (patt2.test(_class)) {
-        // this item is show up, hide it
-        _class = `todos-action-${this.props.platform}`;
-      }     
-      return _class;
-    });
-    this.setState({showEditMenu});
   }
 
 }
