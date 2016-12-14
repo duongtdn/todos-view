@@ -3,6 +3,15 @@
 import React , { Component } from 'react'
 import {Page, ListItem, List, Icon, Input, Col, Row, Button} from 'react-onsenui'
 
+function formatDate(timestamp) {
+  const ts = parseInt(timestamp);
+  const months = ['Jan', ' Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Dec', 'Oct', 'Nov', 'Dec'];
+  const d = new Date(ts);
+  const date = d.getDate();
+  const month = months[d.getMonth()];
+  return `${date} - ${month}`;
+}
+
 export default class extends Component {
 
   constructor(props) {
@@ -23,7 +32,7 @@ export default class extends Component {
             {row.text}
           </div>
           <div className = 'todos-ext'>
-            completed at {row.completedAt}
+            completed at {formatDate(row.completedAt)}
           </div>
         </div>
 
