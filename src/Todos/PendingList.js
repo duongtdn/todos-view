@@ -16,7 +16,8 @@ export default class extends Component {
     };
     this.renderRow = this.renderRow.bind(this);
     this.setActiveTask = this.setActiveTask.bind(this);
-
+    this.openEditPage = this.openEditPage.bind(this);
+    this.openSharePage = this.openSharePage.bind(this);
     this.completeTodo = this.completeTodo.bind(this);
   }
 
@@ -42,6 +43,8 @@ export default class extends Component {
             key = {row.id}
             active = {this.state.activeTask[row.id]}
             setActive = {this.setActiveTask} 
+            openEditPage = {this.openEditPage}
+            openSharePage = {this.openSharePage}
       />
     );
   }
@@ -66,13 +69,13 @@ export default class extends Component {
     this.setState({ activeTask });
   }
 
-  openEditPage(index) {
-    this.props.pushPage('editor', this.props.todos[index], {
+  openEditPage(data) {
+    this.props.pushPage('editor', data, {
       animation : 'lift'
     });
   }
 
-  openSharePage(index) {
+  openSharePage(data) {
     console.log('open share page');
   }
 

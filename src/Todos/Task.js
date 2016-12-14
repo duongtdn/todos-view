@@ -94,4 +94,12 @@ export default class extends Component {
     }         
   }
 
+  openEditPage(data) {
+    this.props.openEditPage(data);
+  }
+
+  openSharePage(data) {
+    this.props.openSharePage(data);
+  }
+
 }
