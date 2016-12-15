@@ -162,6 +162,50 @@ ons-list-item > .center {
   -webkit-animation: swipe-right .9s ease-in-out forwards;
           animation: swipe-right .9s ease-in-out forwards;
 }
+
+/* animation when undo a completed todos */
+@-webkit-keyframes swipe-left {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+     height: 62px;
+  }
+  10% {
+    -webkit-transform: translateX(3%);
+            transform: translateX(3%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    height: 0;
+    opacity: 0.3;
+  }
+}
+
+@keyframes swipe-left {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+     height: 62px;
+  }
+  10% {
+    -webkit-transform: translateX(3%);
+            transform: translateX(3%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    height: 0;
+    opacity: 0.3;
+  }
+}
+
+.animation-swipe-left {
+  pointer-events: none;
+  -webkit-animation: swipe-left .9s ease-in-out forwards;
+          animation: swipe-left .9s ease-in-out forwards;
+}
+
 /* TODO EDITOR */
 
 .todo-editor-text-input {

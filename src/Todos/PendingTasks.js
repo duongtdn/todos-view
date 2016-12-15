@@ -1,7 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
-import {Page, List, Icon, Input, Col, Row, Button} from 'react-onsenui'
+import { Page, List } from 'react-onsenui'
 
 import Task from './Task'
 

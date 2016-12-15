@@ -17,8 +17,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    uncompleteTodo(todo) {
-      dispatch(todos.uncomplete(todo));
+    undoComplete(todo) {
+      dispatch(todos.undoComplete(todo));
     }
   }
 };

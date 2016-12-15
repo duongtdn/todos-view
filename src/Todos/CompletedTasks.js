@@ -1,46 +1,30 @@
 "use strict"
 
 import React , { Component } from 'react'
-import {Page, ListItem, List, Icon, Input, Col, Row, Button} from 'react-onsenui'
+import { Page, List } from 'react-onsenui'
 
-function formatDate(timestamp) {
-  const ts = parseInt(timestamp);
-  const months = ['Jan', ' Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Dec', 'Oct', 'Nov', 'Dec'];
-  const d = new Date(ts);
-  const date = d.getDate();
-  const month = months[d.getMonth()];
-  return `${date} - ${month}`;
-}
+import CompletedTask from './CompletedTask'
 
 export default class extends Component {
 
   constructor(props) {
     super(props);
-    
+    this.state = {
+      animation : ''    
+    }; 
+
     this.renderRow = this.renderRow.bind(this);
   }
 
   renderRow(row, index) {
     return (
-      <ListItem key = {index} >
-        <div className = 'left'> 
-          <Input type = 'checkbox' checked = {true} />
-        </div>
-
-        <div className = 'center' onClick = {() => this.toggleInfoMenu(index)}>
-          <div className = 'todos-text'>
-            {row.text}
-          </div>
-          <div className = 'todos-ext'>
-            completed at {formatDate(row.completedAt)}
-          </div>
-        </div>
-
-        <div className = 'right'>
-          <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/>
-        </div>
-      </ListItem>
-    );
+      <CompletedTask 
+        data = {row} 
+        platform = {this.props.platform} 
+        key = {row.id}
+        undoComplete = {this.props.undoComplete}
+      />
+    );   
   }
 
   render() {
@@ -52,10 +36,6 @@ export default class extends Component {
         />
       </Page>
     );
-  }
-
-  toggleInfoMenu() {
-
   }
 
 }
