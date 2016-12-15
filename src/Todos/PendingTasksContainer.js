@@ -12,6 +12,22 @@ const mapStateToProps = state => {
       todos.push(state.todos[todoId]);
     }    
   }
+  todos.sort( (a, b) => {
+    if (a.urgent && b.urgent) {
+      // both are urgent, sort by createdAt
+      return a.createdAt - b.createdAt;
+    }
+    if (a.urgent) {
+      // only a is urgent
+      return -1;
+    }
+    if (b.urgent) {
+      // only b is urgent
+      return 1;
+    }
+    // none is urgent
+    return a.createdAt - b.createdAt;
+  });
   return { todos };
 };
 
