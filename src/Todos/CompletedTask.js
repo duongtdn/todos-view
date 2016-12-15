@@ -40,7 +40,9 @@ export default class extends Component {
         </div>
 
         <div className = 'right'>
-          <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/>
+          <Button modifier = 'quiet' onClick = {() => this.deleteTodo(data)} > 
+            <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/> 
+          </Button>
         </div>
       </ListItem>
     );
@@ -57,6 +59,16 @@ export default class extends Component {
     setTimeout(() => {
       this.props.undoComplete(todo);
     }, 950);
+
+  }
+
+  deleteTodo(todo) {
+
+    this.setState({ animation : 'animation-remove hide-children' });
+
+     setTimeout(() => {
+      this.props.deleteTodo(todo);
+    }, 750);
 
   }
 

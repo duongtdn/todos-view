@@ -29,6 +29,7 @@ export default class extends Component {
             openEditPage = {this.openEditPage}
             openSharePage = {this.openSharePage}
             completeTodo = {this.props.completeTodo}
+            deleteTodo = {this.props.deleteTodo}
       />
     );
   }

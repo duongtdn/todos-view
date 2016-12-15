@@ -38,7 +38,7 @@ export default class extends Component {
     return (
       <Tabbar
         position = 'auto'
-        animation = 'slide'
+        animation = 'none'
         index = {this.state.index}
         onPreChange = {this.onPreChange}
         renderTabs = {this.renderTabs} 

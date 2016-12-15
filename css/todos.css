@@ -206,6 +206,36 @@ ons-list-item > .center {
           animation: swipe-left .9s ease-in-out forwards;
 }
 
+/* animation when delete a todo */
+
+@-webkit-keyframes remove {
+  0% {
+    opacity: 1;
+    height: 62px;
+  }
+  100% {
+    opacity: 0.1;
+    height: 0;
+  }
+}
+
+@keyframes remove {
+  0% {
+    opacity: 1;
+    height: 62px;
+  }
+  100% {
+    opacity: 0.1;
+    height: 0;
+  }
+}
+
+.animation-remove {
+  pointer-events: none;
+  -webkit-animation: remove .7s ease-in-out forwards;
+          animation: remove .7s ease-in-out forwards;
+}
+
 /* TODO EDITOR */
 
 .todo-editor-text-input {

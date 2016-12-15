@@ -19,6 +19,9 @@ const mapDispatchToProps = dispatch => {
   return {
     undoComplete(todo) {
       dispatch(todos.undoComplete(todo));
+    },
+    deleteTodo(todo) {
+      dispatch(todos.delete(todo));
     }
   }
 };

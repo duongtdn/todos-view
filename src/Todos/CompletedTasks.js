@@ -23,6 +23,7 @@ export default class extends Component {
         platform = {this.props.platform} 
         key = {row.id}
         undoComplete = {this.props.undoComplete}
+        deleteTodo = {this.props.deleteTodo}
       />
     );   
   }
