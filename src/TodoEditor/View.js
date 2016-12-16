@@ -54,6 +54,8 @@ class TodoEditor extends Component {
     return (
      <Page renderToolbar = {this.renderToolbar} >
         <TaskInputs data = {this.todo} 
+                    auth = {this.props.auth}
+                    friends = {this.props.friends}
                     pushPage = {this.props.pushPage} 
                     getTodoText = {this.getTodoText}
                     getTodoUrgent = {this.getTodoUrgent} />
@@ -84,8 +86,13 @@ class TodoEditor extends Component {
 
 }
 
-const mapStateToProps = state => {
-  return { };
+/* Container */
+
+const mapStateToProps = state => {  
+  return { 
+    auth : state.user.auth,
+    friends : state.user.friends 
+  };
 };
 
 const mapDispatchToProps = dispatch => {

@@ -9,13 +9,39 @@ import CollaboratorList from './CollaboratorList'
 export default class TaskInputs extends Component {
   constructor(props) {
     super(props);
+    this.state = { share : [] };
+  }
+
+  componentWillMount() {
+    const share = [];
+    for (let uid in this.props.data.share) {
+      if (uid === this.props.auth.uid) {
+        share.push({ 
+          name : 'Me', 
+          relationship : this.props.data.share[uid]
+        });
+      } else {
+        if (this.props.friends[uid]) {
+          share.push({
+            name : this.props.friends[uid].name,
+            relationship : this.props.friends[uid].relationship
+          });
+        } else {
+          share.push({
+            name : 'Unknown',
+            relationship : 'not connected'
+          });
+        }
+      }
+    }
+    this.setState({ share });
   }
 
   render() {
     const title = this.props.data ? 'Modify your Todo' : 'Add a new Todo';
     const text = this.props.data.text;
     const urgent = this.props.data.urgent;
-    const share = this.props.data.share;
+    const share = this.state.share;
     return (
       <List>
 
@@ -49,7 +75,7 @@ export default class TaskInputs extends Component {
             <Button modifier = 'quiet' 
                     onClick = {() => this.props.pushPage('friends')}
             > 
-              Click to pick one... 
+              <Icon icon = 'fa-user-plus' /> Invite People 
             </Button>
           </div>
           <div style = {{width : '100%'}} >

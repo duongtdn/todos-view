@@ -17,7 +17,9 @@ export default class CollaboratorList extends Component {
           <div className = 'todo-editor-collaborate-relationship'> {row.relationship} </div>
         </div>
         <div className = 'right'>
-          <Button> <Icon icon = 'md-close' size = {24} style={{color: 'grey'}}/> </Button>
+          <Button modifier = 'quiet'> 
+            <Icon icon = 'md-close' size = {24} style={{color: 'grey'}}/> 
+          </Button>
         </div>
       </ListItem>
     );
@@ -25,7 +27,7 @@ export default class CollaboratorList extends Component {
 
   render() {
     return (
-      <List dataSource = {this.props.todos} 
+      <List dataSource = {this.props.data} 
             renderRow = {this.renderRow}
             modifier = 'noborder'
       />
