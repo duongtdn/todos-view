@@ -54,8 +54,9 @@ export default class extends Component {
     this.setState({ activeTask });
   }
 
-  openEditPage(data) {
-    this.props.pushPage('editor', data, {
+  openEditPage(data) {    
+    this.props.updateCurrentTodo(data);
+    this.props.pushPage('editor', null, {
       animation : 'lift'
     });
   }

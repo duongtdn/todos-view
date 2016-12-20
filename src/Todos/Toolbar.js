@@ -9,7 +9,7 @@ export default class extends Component {
   render() {
     const newBtn = this.props.platform === 'android' ? 
       <span />: 
-      <ToolbarButton onClick = {() => this.props.pushPage('editor', null)}> 
+      <ToolbarButton onClick = {this.props.newTodoHandler}> 
         New
       </ToolbarButton>;
     return (

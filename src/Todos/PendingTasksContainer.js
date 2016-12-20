@@ -1,7 +1,7 @@
 "use strict"
 
 import { connect } from 'react-redux'
-import { todos } from 'todos-data'
+import { todos, currentTodo } from 'todos-data'
 
 import PendingTasks from './PendingTasks'
 
@@ -38,6 +38,9 @@ const mapDispatchToProps = dispatch => {
     },
     deleteTodo(todo) {
       dispatch(todos.delete(todo));
+    },
+    updateCurrentTodo(todo) {
+      dispatch(currentTodo.update(todo));
     }
   }
 };

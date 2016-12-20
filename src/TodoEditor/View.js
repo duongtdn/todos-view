@@ -30,8 +30,8 @@ class TodoEditor extends Component {
   }
 
   componentWillMount() {
-    if (this.props.data) {
-      this.todo = this.props.data;
+    if (this.props.currentTodo) {
+      this.todo = this.props.currentTodo;
     } else {
       this.todo = {
         text    : '',
@@ -91,7 +91,8 @@ class TodoEditor extends Component {
 const mapStateToProps = state => {  
   return { 
     auth : state.user.auth,
-    friends : state.user.friends 
+    friends : state.user.friends,
+    currentTodo : state.currentTodo 
   };
 };
 
