@@ -31,7 +31,7 @@ class TodoEditor extends Component {
 
   componentWillMount() {
     if (this.props.currentTodo) {
-      this.todo = this.props.currentTodo;
+      this.todo = {...this.props.currentTodo};
     } else {
       this.todo = {
         text    : '',
