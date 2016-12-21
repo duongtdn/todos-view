@@ -3,6 +3,8 @@
 import React , { Component } from 'react'
 import { Page, List, ListItem, ListHeader, Input, Button, Icon, BottomToolbar, Row, Col } from 'react-onsenui'
 
+import { connect } from 'react-redux'
+
 import Toolbar from './Toolbar'
 
 class FriendsList extends Component {
@@ -12,15 +14,16 @@ class FriendsList extends Component {
     this.renderHeader = this.renderHeader.bind(this);
   }
 
-  renderRow(row, index) {
+  renderRow(row) {
     return (
-      <ListItem key = {index} modifier = 'nodivider' >
+      <ListItem key = {row.id} modifier = 'nodivider' >
         <label className = 'left'> 
           <Input type = 'checkbox' inputId = {`checkbox-${row.id}`} checked = {false} />
         </label>
         <label className = 'center' htmlFor = {`checkbox-${row.id}`} >
           <Col>
             <Row className = 'todo-editor-collaborate-name'> {row.name} </Row>
+            <Row className = 'todo-editor-collaborate-relationship'> {row.relationship} </Row>
             <Row className = 'todo-editor-collaborate-relationship'> {row.email} </Row>
           </Col>
         </label>
@@ -48,31 +51,22 @@ class FriendsList extends Component {
   }
 }
 
-export default class extends Component {
+class FriendsView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      data : {
-        family : [
-          { id : '001', name : 'Eagle D. Stormrider', email : 'eagle@stormgle.com'},
-          { id : '002', name : 'Narina D. Iceheart', email : 'narina@stormgle.com'},
-        ],
-        friends : [
-          { id : '004', name : 'Alex Hammer', email : 'alex@vendors.com' },
-          { id : '006', name : 'Olandos White', email : 'olandos@vendors.com' },
-          { id : '003', name : 'Fred Stonebreak', email : 'fred@vendors.com' },
-        ],
-        colleagues : [
-          { id : '007', name : 'Rolan Skywalker', email : 'rolan@vendors.com' },
-          { id : '005', name : 'Emily Star', email : 'emily@vendors.com' },
-          { id : '008', name : 'Bob Ginger', email : 'bob@vendors.com' },
-        ]
-      }
-    }
+    this.state = {};
 
     this.renderToolbar = this.renderToolbar.bind(this);
     this.renderBottomToolbar = this.renderBottomToolbar.bind(this);
+  }
+
+  componentWillMount() {
+    const friends = [];
+    for ( let uid in this.props.friends) {
+      friends.push(this.props.friends[uid]);
+    }
+    this.setState({ friends });
   }
 
   renderToolbar() {
@@ -103,11 +97,28 @@ export default class extends Component {
       <Page renderToolbar = {this.renderToolbar}
             renderBottomToolbar = {this.renderBottomToolbar}
       >
-        <FriendsList category = 'Family' data = {this.state.data.family} />
-        <FriendsList category = 'Friends' data = {this.state.data.friends} />
-        <FriendsList category = 'Colleagues' data = {this.state.data.colleagues} />
+        <FriendsList category = 'Friends' data = {this.state.friends} />
       </Page>
     );
   }
 
 }
+
+/* Container */
+
+const mapStateToProps = state => {  
+  return { 
+    friends : state.user.friends
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    
+  }
+};
+
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(FriendsView)
