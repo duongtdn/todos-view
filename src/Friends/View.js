@@ -4,21 +4,36 @@ import React , { Component } from 'react'
 import { Page, List, ListItem, ListHeader, Input, Button, Icon, BottomToolbar, Row, Col } from 'react-onsenui'
 
 import { connect } from 'react-redux'
+import { currentTodo } from 'todos-data'
 
 import Toolbar from './Toolbar'
 
 class FriendsList extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      selectedFriends : {}
+    };
+
     this.renderRow = this.renderRow.bind(this);
     this.renderHeader = this.renderHeader.bind(this);
+    this.isSelected = this.isSelected.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({ 
+      selectedFriends : this.props.currentTodo.share
+    });
   }
 
   renderRow(row) {
     return (
       <ListItem key = {row.id} modifier = 'nodivider' >
         <label className = 'left'> 
-          <Input type = 'checkbox' inputId = {`checkbox-${row.id}`} checked = {false} />
+          <Input type = 'checkbox' inputId = {`checkbox-${row.id}`} 
+                 onChange = {evt => this.selectFriend(row.id, evt)}
+                 checked = {this.isSelected(row.id)} />
         </label>
         <label className = 'center' htmlFor = {`checkbox-${row.id}`} >
           <Col>
@@ -49,6 +64,22 @@ class FriendsList extends Component {
       />
     );
   }
+
+  selectFriend(id, evt) {
+    const selectedFriends = {...this.state.selectedFriends};
+    if (evt.target.checked) {
+      selectedFriends[id] = 'invited';
+    } else {
+      selectedFriends[id] = null;
+    }
+    console.log (selectedFriends);
+    this.setState({ selectedFriends });
+  }
+
+  isSelected(id) {
+    return (this.state.selectedFriends[id] && this.state.selectedFriends[id] !== null);
+  }
+
 }
 
 class FriendsView extends Component {
@@ -97,7 +128,9 @@ class FriendsView extends Component {
       <Page renderToolbar = {this.renderToolbar}
             renderBottomToolbar = {this.renderBottomToolbar}
       >
-        <FriendsList category = 'Friends' data = {this.state.friends} />
+        <FriendsList category = 'Friends' 
+                     data = {this.state.friends}
+                     currentTodo = {this.props.data} />
       </Page>
     );
   }
@@ -114,7 +147,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    
+    updateCurrentTodo(todo) {
+      dispatch(currentTodo.update(todo));
+    }
   }
 };
 

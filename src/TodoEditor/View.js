@@ -20,6 +20,7 @@ class TodoEditor extends Component {
     this.getTodoUrgent = this.getTodoUrgent.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.saveTodo = this.saveTodo.bind(this);
+    this.inviteFriends = this.inviteFriends.bind(this);
   }
 
   renderToolbar() {
@@ -36,7 +37,7 @@ class TodoEditor extends Component {
       this.todo = {
         text    : '',
         urgent  : false,
-        share   : []
+        share   : {}
       };
     }
   }
@@ -58,7 +59,9 @@ class TodoEditor extends Component {
                     friends = {this.props.friends}
                     pushPage = {this.props.pushPage} 
                     getTodoText = {this.getTodoText}
-                    getTodoUrgent = {this.getTodoUrgent} />
+                    getTodoUrgent = {this.getTodoUrgent} 
+                    inviteFriends = {this.inviteFriends}
+                    />
         <div style={{padding: '16px'}}>
           {btn}
         </div>
@@ -82,6 +85,10 @@ class TodoEditor extends Component {
   saveTodo() {
     this.props.editTodo(this.todo);
     this.props.popPage();
+  }
+
+  inviteFriends() {
+    this.props.pushPage('friends',this.todo);
   }
 
 }

@@ -68,12 +68,12 @@ export default class TaskInputs extends Component {
           </label>
         </ListItem>
 
-        <ListHeader> Collaborate with </ListHeader>
+        <ListHeader> Collaborate </ListHeader>
 
         <ListItem modifier = 'nodivider'>
           <div style = {{width : '100%'}}>
             <Button modifier = 'quiet' 
-                    onClick = {() => this.props.pushPage('friends')}
+                    onClick = {() => this.props.inviteFriends()}
             > 
               <Icon icon = 'fa-user-plus' /> Invite People 
             </Button>
@@ -86,4 +86,5 @@ export default class TaskInputs extends Component {
       </List>
     );
   }
+
 }
