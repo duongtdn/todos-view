@@ -92,7 +92,15 @@ class TodoEditor extends Component {
   }
 
   addTodo() {
-    this.props.addTodo(this.todo);
+    const todo = {...this.todo};
+    const share = [];
+    for (let uid in this.todo.share) {
+      if (this.todo.share[uid] !== null) {
+        share.push(uid);
+      }
+    }
+    todo.share = share;
+    this.props.addTodo(todo);
     this.props.popPage();
   }
 
