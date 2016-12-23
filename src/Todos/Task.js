@@ -27,9 +27,9 @@ export default class extends Component {
     const data = this.props.data;
     const numberOfShare = Object.keys(data.share).length; 
     const type = numberOfShare > 1 ? `${numberOfShare} shared` : 'private';
-    const bgHighlight = data.urgent ? 'todos-highlight' : '';
+    const urgentStyle = data.urgent ? 'todos-urgent' : '';
     return (
-      <ListItem className = {`${this.state.animation} ${bgHighlight}`} key = {data.id} >
+      <ListItem className = {`${this.state.animation} ${urgentStyle}`} key = {data.id} >
         <div className = 'left'> 
           <Input type = 'checkbox'  onChange = {() => this.completeTodo(data) } />
         </div>

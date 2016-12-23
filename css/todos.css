@@ -24,9 +24,12 @@ ons-list-item > .center {
   background-color: white;
 }
 
+.todos-urgent {
+  color: rgba(255, 0, 0, 0.7);
+}
+
 .todos-highlight {
   background-color: lightyellow;
-  color: rgba(255, 0, 0, 0.7);
 }
 
 .todos-highlight .todos-text {
