@@ -17,7 +17,7 @@ export default class CollaboratorList extends Component {
           <div className = 'todo-editor-collaborate-relationship'> {row.relationship} </div>
         </div>
         <div className = 'right'>
-          <Button modifier = 'quiet'> 
+          <Button modifier = 'quiet' onClick = {() => this.unshare(row.id)} > 
             <Icon icon = 'md-close' size = {24} style={{color: 'grey'}}/> 
           </Button>
         </div>
@@ -32,5 +32,9 @@ export default class CollaboratorList extends Component {
             modifier = 'noborder'
       />
     );
+  }
+
+  unshare(id) {
+    this.props.unshare(id);
   }
 }

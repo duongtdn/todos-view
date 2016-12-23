@@ -25,22 +25,27 @@ export default class TaskInputs extends Component {
   getShareListFromProps(props) {
     const share = [];
     for (let uid in props.data.share) {
-      if (uid === props.auth.uid) {
-        share.push({ 
-          name : 'Me', 
-          relationship : props.data.share[uid]
-        });
-      } else {
-        if (props.friends[uid]) {
-          share.push({
-            name : props.friends[uid].name,
-            relationship : props.friends[uid].relationship
+      if (props.data.share[uid] !== null) {
+        if (uid === props.auth.uid) {
+          share.push({ 
+            id : uid,
+            name : 'Me', 
+            relationship : props.data.share[uid]
           });
         } else {
-          share.push({
-            name : 'Unknown',
-            relationship : 'not connected'
-          });
+          if (props.friends[uid]) {
+            share.push({
+              id : uid,
+              name : props.friends[uid].name,
+              relationship : props.friends[uid].relationship
+            });
+          } else {
+            share.push({
+              id : uid,
+              name : 'Unknown',
+              relationship : 'not connected'
+            });
+          }
         }
       }
     }
@@ -89,7 +94,7 @@ export default class TaskInputs extends Component {
             </Button>
           </div>
           <div style = {{width : '100%'}} >
-            <CollaboratorList data = {share} />
+            <CollaboratorList data = {share} unshare = {this.props.unshare} />
           </div>
         </ListItem>
 

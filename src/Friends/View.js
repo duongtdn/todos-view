@@ -84,9 +84,9 @@ class FriendsView extends Component {
 
   componentWillMount() {
     const friends = [];
-    const selectedFriends = this.props.data.share;
+    const selectedFriends = {...this.props.data.share};
     for ( let uid in this.props.friends) {
-      friends.push(this.props.friends[uid]);
+      friends.push({...this.props.friends[uid]});
     }
     this.setState({ friends, selectedFriends });
   }

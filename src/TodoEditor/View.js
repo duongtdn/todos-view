@@ -4,7 +4,7 @@ import React , { Component } from 'react'
 import { Page, Button, Icon} from 'react-onsenui'
 
 import { connect } from 'react-redux'
-import { todos } from 'todos-data'
+import { todos, currentTodo } from 'todos-data'
 
 import Toolbar from './Toolbar'
 import TaskInputs from './TaskInputs'
@@ -22,6 +22,7 @@ class TodoEditor extends Component {
     this.addTodo = this.addTodo.bind(this);
     this.saveTodo = this.saveTodo.bind(this);
     this.inviteFriends = this.inviteFriends.bind(this);
+    this.unshare = this.unshare.bind(this);
   }
 
   renderToolbar() {
@@ -41,7 +42,10 @@ class TodoEditor extends Component {
 
   getTodoFromProps(props) {
     if (props.currentTodo) {
+      // deep copy currentTodo into internal todo */
+      const share = {...props.currentTodo.share};
       this.todo = {...props.currentTodo};
+      this.todo.share = share;
     } else {
       this.todo = {
         text    : '',
@@ -70,6 +74,7 @@ class TodoEditor extends Component {
                     getTodoText = {this.getTodoText}
                     getTodoUrgent = {this.getTodoUrgent} 
                     inviteFriends = {this.inviteFriends}
+                    unshare = {this.unshare}
                     />
         <div style={{padding: '16px'}}>
           {btn}
@@ -100,6 +105,13 @@ class TodoEditor extends Component {
     this.props.pushPage('friends',this.todo);
   }
 
+  unshare(id) {
+    if (this.todo.share[id]) {
+      this.todo.share[id] = null;
+      this.props.updateCurrentTodo(this.todo);
+    }   
+  }
+
 }
 
 /* Container */
@@ -119,6 +131,9 @@ const mapDispatchToProps = dispatch => {
     },
     editTodo(todo) {
       dispatch(todos.edit(todo))
+    },
+    updateCurrentTodo(todo) {
+      dispatch(currentTodo.update(todo));
     }
   }
 };
