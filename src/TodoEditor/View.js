@@ -16,6 +16,7 @@ class TodoEditor extends Component {
     this.todo = {};
 
     this.renderToolbar = this.renderToolbar.bind(this);
+    this.getTodoFromProps = this.getTodoFromProps.bind(this);
     this.getTodoText = this.getTodoText.bind(this);
     this.getTodoUrgent = this.getTodoUrgent.bind(this);
     this.addTodo = this.addTodo.bind(this);
@@ -31,8 +32,16 @@ class TodoEditor extends Component {
   }
 
   componentWillMount() {
-    if (this.props.currentTodo) {
-      this.todo = {...this.props.currentTodo};
+    this.getTodoFromProps(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.getTodoFromProps(nextProps);
+  }
+
+  getTodoFromProps(props) {
+    if (props.currentTodo) {
+      this.todo = {...props.currentTodo};
     } else {
       this.todo = {
         text    : '',

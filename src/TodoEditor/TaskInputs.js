@@ -10,21 +10,31 @@ export default class TaskInputs extends Component {
   constructor(props) {
     super(props);
     this.state = { share : [] };
+
+    this.getShareListFromProps = this.getShareListFromProps.bind(this);
   }
 
   componentWillMount() {
+    this.getShareListFromProps(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.getShareListFromProps(nextProps);
+  }
+
+  getShareListFromProps(props) {
     const share = [];
-    for (let uid in this.props.data.share) {
-      if (uid === this.props.auth.uid) {
+    for (let uid in props.data.share) {
+      if (uid === props.auth.uid) {
         share.push({ 
           name : 'Me', 
-          relationship : this.props.data.share[uid]
+          relationship : props.data.share[uid]
         });
       } else {
-        if (this.props.friends[uid]) {
+        if (props.friends[uid]) {
           share.push({
-            name : this.props.friends[uid].name,
-            relationship : this.props.friends[uid].relationship
+            name : props.friends[uid].name,
+            relationship : props.friends[uid].relationship
           });
         } else {
           share.push({
