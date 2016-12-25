@@ -1,7 +1,9 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { List, ListItem, ListHeader, Input, Switch, Button, Icon} from 'react-onsenui'
+import { List, ListItem, ListHeader, Switch, Button, Icon} from 'react-onsenui'
+
+import AutofocusInput from '../Components/AutofocusInput'
 
 import CollaboratorList from './CollaboratorList'
 
@@ -64,7 +66,7 @@ export default class TaskInputs extends Component {
 
         <ListItem modifier = 'nodivider'>
           <div className = 'center'>
-            <Input className = 'todo-editor-text-input' type = 'text' 
+            <AutofocusInput className = 'todo-editor-text-input' type = 'text' 
                    placeholder = 'I want to...' 
                    value = {text}
                    onChange = {e => this.props.getTodoText(e.target.value)} 

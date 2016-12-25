@@ -2,13 +2,15 @@
 
 import React , { Component } from 'react'
 
-import {Toolbar, ToolbarButton, BackButton, Input, Icon} from 'react-onsenui';
+import {Toolbar, ToolbarButton, BackButton, Icon} from 'react-onsenui'
+
+import AutofocusInput from '../Components/AutofocusInput'
 
 export default class extends Component {
 
   render() {
     const lbl = this.props.platform === 'android' ? 
-      <Input type = 'search' placeholder = 'search by email' /> :
+      <AutofocusInput type = 'search' placeholder = 'search by email' /> :
       <span> Search </span>;
     return (
       <Toolbar>
@@ -18,7 +20,7 @@ export default class extends Component {
           </BackButton>
         </div>
         <div className = 'center'>  
-          <Input type = 'search' placeholder = 'search by email' />
+          <AutofocusInput type = 'search' placeholder = 'search by email' />
         </div>
       </Toolbar>
     );
