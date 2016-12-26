@@ -23,7 +23,6 @@ export default class extends Component {
         <label className = 'center' htmlFor = {`checkbox-${row.id}`} >
           <Col>
             <Row className = 'todo-editor-collaborate-name'> {row.name} </Row>
-            <Row className = 'todo-editor-collaborate-relationship'> {row.relationship} </Row>
             <Row className = 'todo-editor-collaborate-relationship'> {row.email} </Row>
           </Col>
         </label>
