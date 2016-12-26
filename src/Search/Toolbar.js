@@ -20,7 +20,8 @@ export default class extends Component {
           </BackButton>
         </div>
         <div className = 'center'>  
-          <AutofocusInput type = 'search' placeholder = 'search by email' />
+          <AutofocusInput type = 'search' placeholder = 'search by email' 
+                          onChange = {e => this.props.handleSearchInput(e.target.value)} />
         </div>
       </Toolbar>
     );
