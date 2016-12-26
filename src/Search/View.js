@@ -8,23 +8,6 @@ import { connect } from 'react-redux'
 import Toolbar from './Toolbar'
 import FriendsList from '../Friends/FriendsList'
 
-class ResultList extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  render() {
-    return (
-      <List dataSource = {this.props.data} 
-            renderRow = {this.renderRow}
-            renderHeader = {this.renderHeader}
-            modifier = 'noborder'
-      />
-    );
-  }
-}
-
 class SearchView extends Component {
   constructor(props) {
     super(props);
@@ -70,6 +53,16 @@ class SearchView extends Component {
       return (text.length > 0) && (pattern.test(name) || pattern.test(email));
     });
     this.setState({ result });
+  }
+
+  selectFriend(id, checked) {
+    const selectedFriends = {...this.state.selectedFriends};
+    if (checked) {
+      selectedFriends[id] = 'invited';
+    } else {
+      selectedFriends[id] = null;
+    }
+    this.setState({ selectedFriends });
   }
 
 }
