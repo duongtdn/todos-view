@@ -32,13 +32,10 @@ class FriendsView extends Component {
   }
 
   componentWillMount() {
-    const friends = [];
     const selectedFriends = {...this.props.data.share};
-    for ( let uid in this.props.friends) {
-      const user = {...this.props.friends[uid]};
-      user.connected = true;
-      friends.push(user);
-    }
+
+    const friends = this.getFriendsFromProps(this.props);
+
     this.setState({ friends, selectedFriends });
   }
 
@@ -49,8 +46,21 @@ class FriendsView extends Component {
       user.connected = false;
       user.relationship = '';
       result.push(user);
-      this.setState({ result });
     }
+
+    const friends = this.getFriendsFromProps(nextProps);
+
+    this.setState({ result,  friends });
+  }
+
+  getFriendsFromProps(props) {
+    const friends = [];
+    for ( let uid in props.friends) {
+      const user = {...props.friends[uid]};
+      user.connected = true;
+      friends.push(user);
+    }
+    return friends;
   }
 
   renderToolbar() {
@@ -97,7 +107,8 @@ class FriendsView extends Component {
                      data = {data}
                      selectedFriends = {this.state.selectedFriends} 
                      selectFriend = {this.selectFriend} 
-                     addAndSelectFriend = {this.addAndSelectFriend} />
+                     addAndSelectFriend = {this.addAndSelectFriend} 
+                     unfriend = {this.props.unfriend} />
       </Page>
     );
   }
@@ -175,6 +186,9 @@ const mapDispatchToProps = dispatch => {
       const friend = {...usr};
       friend.connected = null;
       dispatch(user.friends.add([friend]));
+    },
+    unfriend(id) {
+      dispatch(user.friends.remove(id));
     }
   }
 };

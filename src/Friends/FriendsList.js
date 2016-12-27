@@ -1,6 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
+import ons from 'onsenui'
 import { Page, List, ListItem, ListHeader, Input, Button, Icon, Row, Col, Dialog } from 'react-onsenui'
 
 class MyDialog extends Component {
@@ -70,12 +71,13 @@ export default class extends Component {
     this.hideDialog = this.hideDialog.bind(this);
     this.rename = this.rename.bind(this);
     this.setRelationship = this.setRelationship.bind(this);
+    this.showAlertDialog = this.showAlertDialog.bind(this);
   }
 
   renderRow(row) {
     
     const actionBtn = row.connected ? 
-      <Button modifier = 'quiet' > 
+      <Button modifier = 'quiet' onClick = {() => this.showAlertDialog(row)} > 
         <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/> 
       </Button> : 
       <Button modifier = 'quiet' onClick = {() => this.showDialog(row)} > 
@@ -195,6 +197,17 @@ export default class extends Component {
 
     this.props.addAndSelectFriend(user);
 
+  }
+
+  showAlertDialog(user) {
+    ons.notification.confirm({
+      message: `Do you want to remove ${user.name} from your connected list?`,
+      callback : ans => { 
+        if (ans === 1) { 
+          this.props.unfriend(user.id);
+        }
+      }
+    });
   }
 
 }
