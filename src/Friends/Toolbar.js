@@ -4,10 +4,7 @@ import React , { Component } from 'react'
 
 import {Toolbar, ToolbarButton, BackButton, Input, Icon} from 'react-onsenui';
 
-// const doneIOS = () => <ToolbarButton>> Done </ToolbarButton>;
-// const doneAndroid = () =>  <ToolbarButton> <Icon icon = 'fa-check' /> &nbsp; </ToolbarButton>;
-
-// class doneAndroid extends 
+import AutofocusInput from '../Components/AutofocusInput'
 
 export default class extends Component {
 
@@ -23,10 +20,9 @@ export default class extends Component {
           </BackButton>
         </div>
         <div className = 'center'>  
-          {this.props.title}
-        </div>
-        <div className = 'right'>  
-          <ToolbarButton> <Icon icon = 'fa-search' onClick = {() => this.props.pushPage('search')} /> &nbsp; </ToolbarButton>
+          <AutofocusInput type = 'search' placeholder = 'search by email' 
+                          onChange = {e => this.props.handleSearchInput(e.target.value)} 
+                          onKeyUp = { e => this.props.handleKeyUp(e.keyCode)} />
         </div>
       </Toolbar>
     );
