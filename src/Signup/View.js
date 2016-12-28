@@ -7,7 +7,7 @@ import { Page } from 'react-onsenui'
 import { connect } from 'react-redux'
 import { user } from 'todos-data'
 
-import Login from './login'
+import Signup from './signup'
 
 class LoginView extends Component {
 
@@ -20,9 +20,7 @@ class LoginView extends Component {
   render() {
     return (
       <Page>
-        <Login login = {this.props.login} 
-               signup = {() => this.props.pushPage('signup', null, { animation : 'lift' })} 
-               success = {this.success} />
+        <Signup signup = {this.props.signup} success = {this.success} />
       </Page>
     );
   }
@@ -43,8 +41,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login({ email, password }) {
-      return dispatch(user.signIn(email, password));
+    signup({email = null, password = null, name = null}) {
+      return dispatch(user.signUp({email , password , name }));
     }
   }
 };

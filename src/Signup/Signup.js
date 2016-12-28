@@ -11,17 +11,18 @@ export default class extends Component {
     this.state = { 
       email : '', 
       password : '',
-      isSigningIn : false,
+      name : '',
+      isSigningUp : false,
       status : '',
       message : ''
     };
 
-    this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
 
   }
 
   render() {
-    const spining = this.state.isSigningIn ? 
+    const spining = this.state.isSigningUp ? 
       <Icon icon = 'md-spinner' spin /> :
       null;
     return (
@@ -30,7 +31,7 @@ export default class extends Component {
 
           <div className = 'login-header' >
             <div>
-              <h3 className = 'center' > LOGIN </h3>
+              <h3 className = 'center' > SIGN UP </h3>
             </div>
             <div>
               {spining}
@@ -48,8 +49,13 @@ export default class extends Component {
                        onChange = {e => this.getUserEmail(e.target.value)} />
               </ListItem>
 
+              <ListItem modifier = 'noborder' >
+                <Input type = 'text' placeholder = 'Enter your display name'
+                       onChange = {e => this.getUserName(e.target.value)} />
+              </ListItem>
+
               <ListItem modifier = 'noborder'>
-                <Input type = 'password' placeholder = 'Password'
+                <Input type = 'password' placeholder = 'Enter your password'
                        onChange = {e => this.getUserPassword(e.target.value)} />
               </ListItem>
 
@@ -57,16 +63,9 @@ export default class extends Component {
           </div>
 
           <div className = 'login-action' >
-            <Button modifier = 'large' onClick = {this.login} > Login </Button>
+            <Button modifier = 'large' onClick = {this.signup} > Signup </Button>
           </div>
 
-          <div className = 'login-break' >
-            <hr />
-          </div>
-
-          <div className = 'login-action' >
-            <Button modifier = 'quiet large' onClick = {this.props.signup} > New user ? Sign up here </Button>
-          </div>
 
         </div>
       </Page>
@@ -82,22 +81,27 @@ export default class extends Component {
     this.setState({ password });
   }
 
-  login() {
+  getUserName(name) {
+    this.setState({ name });
+  }
+
+  signup() {
     const credential = {
       email : this.state.email,
-      password : this.state.password
+      password : this.state.password,
+      name : this.state.name
     };
     this.setState({ 
           message : '', 
-          isSigningIn : true, 
+          isSigningUp : true, 
           success : false 
         });
     // need to validate email before login
-    this.props.login(credential)
+    this.props.signup(credential)
       .then( usr => {
         this.setState({ 
-          message : 'login success', 
-          isSigningIn : false, 
+          message : 'signup success', 
+          isSigningUp : false, 
           success : true 
         });
         /* login success, move to sync page */
@@ -105,15 +109,10 @@ export default class extends Component {
       })
       .catch( err => {
         /* display login message */
-        const isSigningIn = false;
+        const isSigningUp = false;
         const success = false;
-        let message = '';
-        if (err.code === 'auth/invalid-email') {
-          message = 'Invalid email';
-        } else {
-          message = 'Wrong email or password';
-        }
-        this.setState({ message, isSigningIn, success });
+        const message = err.message;
+        this.setState({ message, isSigningUp, success });
       });
   }
 
