@@ -7,34 +7,76 @@ import { Page, List, ListItem, Input, Button, Icon } from 'react-onsenui'
 export default class extends Component {
   constructor(props) {
     super(props);
+
+    this.state = { email : '', password : '' };
+
+    this.login = this.login.bind(this);
+    this.openSignUpPage = this.openSignUpPage.bind(this);
+
   }
 
   render() {
     return (
       <Page >
         <div className = 'login-page' > 
+
           <div className = 'login-header' >
-            <h3 className = 'center' > login </h3>
+            <h3 className = 'center' > LOGIN </h3>
           </div>
+
           <div className = 'login-form' >
             <List modifier = 'noborder' >
 
               <ListItem modifier = 'noborder' >
-                <Input type = 'text' placeholder = 'Enter your email' />
+                <Input type = 'text' placeholder = 'Enter your email'
+                       onChange = {e => this.getUserEmail(e.target.value)} />
               </ListItem>
 
               <ListItem modifier = 'noborder'>
-                <Input type = 'password' placeholder = 'Password' />
+                <Input type = 'password' placeholder = 'Password'
+                       onChange = {e => this.getUserPassword(e.target.value)} />
               </ListItem>
 
             </List>
           </div>
+
           <div className = 'login-action' >
-            <Button modifier = 'large' > Login </Button>
+            <Button modifier = 'large' onClick = {this.login} > Login </Button>
           </div>
+
+          <div className = 'login-break' >
+            <hr />
+          </div>
+
+          <div className = 'login-action' >
+            <Button modifier = 'quiet large' onClick = {this.openSignUpPage} > New user ? Sign up here </Button>
+          </div>
+
         </div>
       </Page>
     );
+  }
+
+  getUserEmail(email) {
+    // need to validate email 
+    this.setState ({ email });
+  }
+
+  getUserPassword(password) {
+    this.setState({ password });
+  }
+
+  login() {
+    const credential = {
+      email : this.state.email,
+      password : this.state.password
+    };
+    // need to validate email before login
+    this.props.login(credential);
+  }
+
+  openSignUpPage() {
+
   }
 
 }

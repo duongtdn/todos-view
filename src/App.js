@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import {auth, store, user, todos } from 'todos-data'
 
 import AppView from './AppView'
-console.log ('loaded');
+
 // hook for test
 auth.onAuthStateChanged(usr => {
   if (usr) {
@@ -16,7 +16,7 @@ auth.onAuthStateChanged(usr => {
     });
   } else {
     console.log ('no logged user');
-    store.dispatch(user.signIn('duongtdn@stormgle.com', '123456'));
+    // store.dispatch(user.signIn('duongtdn@stormgle.com', '123456'));
   }
 });
 

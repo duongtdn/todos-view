@@ -322,7 +322,7 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
 
 /* Login */
 .login-page {
-  background-color: deepskyblue;
+  /*background-color: deepskyblue;*/
   height: 100%;
   width : 100%;
   position: absolute;
@@ -331,7 +331,8 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
 }
 
 .login-header {
-  
+  padding-top: 40px;
+  text-align: center;
   height: 100px;
 }
 
@@ -341,6 +342,16 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   border-radius: 4px;
 }
 
+.login-form ons-input[type=text],
+.login-form ons-input[type=password] {
+  width : 100%;
+}
+
 .login-action {
   margin : 16px;
+}
+
+.login-break {
+  margin-top : 36px;
+  margin-bottom : 24px;
 }

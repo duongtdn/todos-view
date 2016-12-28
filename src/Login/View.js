@@ -5,6 +5,7 @@ import React , { Component } from 'react'
 import { Page, Input, Button, Icon } from 'react-onsenui'
 
 import { connect } from 'react-redux'
+import { user } from 'todos-data'
 
 import Login from './login'
 
@@ -13,7 +14,7 @@ class LoginView extends Component {
   render() {
     return (
       <Page>
-        <Login />
+        <Login login = {this.props.login} />
       </Page>
     );
   }
@@ -29,7 +30,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    
+    login({ email, password }) {
+      dispatch(user.signIn(email, password));
+    }
   }
 };
 
