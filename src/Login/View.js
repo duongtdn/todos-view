@@ -11,13 +11,24 @@ import Login from './login'
 
 class LoginView extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.success = this.success.bind(this);
+  }
+
   render() {
     return (
       <Page>
-        <Login login = {this.props.login} />
+        <Login login = {this.props.login} success = {this.success} />
       </Page>
     );
   }
+
+  success() {
+    this.props.pushPage('sync');
+  }
+
 }
 
 /* Container */
@@ -31,7 +42,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     login({ email, password }) {
-      dispatch(user.signIn(email, password));
+      return dispatch(user.signIn(email, password));
     }
   }
 };

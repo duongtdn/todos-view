@@ -8,7 +8,12 @@ export default class extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { email : '', password : '' };
+    this.state = { 
+      email : '', 
+      password : '',
+      isSigningIn : false,
+      error : ''
+    };
 
     this.login = this.login.bind(this);
     this.openSignUpPage = this.openSignUpPage.bind(this);
@@ -16,12 +21,21 @@ export default class extends Component {
   }
 
   render() {
+    const spining = this.state.isSigningIn ? 
+      <Icon icon = 'md-spinner' spin /> :
+      null;
     return (
       <Page >
         <div className = 'login-page' > 
 
           <div className = 'login-header' >
-            <h3 className = 'center' > LOGIN </h3>
+            <div>
+              <h3 className = 'center' > LOGIN </h3>
+            </div>
+            <div>
+              {spining}
+              <label className = 'login-error' > {this.state.error} </label>
+            </div>
           </div>
 
           <div className = 'login-form' >
@@ -71,8 +85,26 @@ export default class extends Component {
       email : this.state.email,
       password : this.state.password
     };
+    this.setState({ error : '', isSigningIn : true });
     // need to validate email before login
-    this.props.login(credential);
+    this.props.login(credential)
+      .then( usr => {
+        this.setState({ error : 'login success', isSigningIn : false });
+        /* login success, move to sync page */
+        this.props.success();
+      })
+      .catch( err => {
+        /* display login error message */
+        const isSigningIn = false;
+        if (err.code === 'auth/invalid-email') {
+          const error = 'Invalid email';
+          this.setState({ error, isSigningIn });
+        } else {
+          const error = 'Wrong email or password';
+          this.setState({ error, isSigningIn });
+        }
+        
+      });
   }
 
   openSignUpPage() {
