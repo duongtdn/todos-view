@@ -359,3 +359,14 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
 .login-error {
   color: rgba(255, 0, 0, 0.7);
 }
+
+.login-success {
+  color: rgba(24,103,194,0.81);
+}
+
+.sync-info {
+  padding-top: 100px;
+  text-align: center;
+  height: 100px;
+  color: rgba(24,103,194,0.81);
+}

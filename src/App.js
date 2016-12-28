@@ -6,20 +6,6 @@ import {auth, store, user, todos } from 'todos-data'
 
 import AppView from './AppView'
 
-// hook for test
-// auth.onAuthStateChanged(usr => {
-//   if (usr) {
-//     console.log ('user logged in');
-//     console.log (usr.email);
-//     store.dispatch(user.load()).then( user => {
-//       store.dispatch(todos.fetch());
-//     });
-//   } else {
-//     console.log ('no logged user');
-//     // store.dispatch(user.signIn('duongtdn@stormgle.com', '123456'));
-//   }
-// });
-
 
 export default class extends Component {
   render() {

@@ -12,7 +12,8 @@ export default class extends Component {
       email : '', 
       password : '',
       isSigningIn : false,
-      error : ''
+      status : '',
+      message : ''
     };
 
     this.login = this.login.bind(this);
@@ -34,7 +35,9 @@ export default class extends Component {
             </div>
             <div>
               {spining}
-              <label className = 'login-error' > {this.state.error} </label>
+              <label className = {this.state.success ? 'login-success' : 'login-error'} > 
+                {this.state.message} 
+              </label>
             </div>
           </div>
 
@@ -85,25 +88,33 @@ export default class extends Component {
       email : this.state.email,
       password : this.state.password
     };
-    this.setState({ error : '', isSigningIn : true });
+    this.setState({ 
+          message : '', 
+          isSigningIn : true, 
+          success : false 
+        });
     // need to validate email before login
     this.props.login(credential)
       .then( usr => {
-        this.setState({ error : 'login success', isSigningIn : false });
+        this.setState({ 
+          message : 'login success', 
+          isSigningIn : false, 
+          success : true 
+        });
         /* login success, move to sync page */
-        this.props.success();
+        this.props.success(usr.uid);
       })
       .catch( err => {
-        /* display login error message */
+        /* display login message */
         const isSigningIn = false;
+        const success = false;
+        let message = '';
         if (err.code === 'auth/invalid-email') {
-          const error = 'Invalid email';
-          this.setState({ error, isSigningIn });
+          message = 'Invalid email';
         } else {
-          const error = 'Wrong email or password';
-          this.setState({ error, isSigningIn });
+          message = 'Wrong email or password';
         }
-        
+        this.setState({ message, isSigningIn, success });
       });
   }
 

@@ -25,8 +25,8 @@ class LoginView extends Component {
     );
   }
 
-  success() {
-    this.props.pushPage('sync');
+  success(uid) {
+    this.props.pushPage('sync', uid);
   }
 
 }
