@@ -29,7 +29,7 @@ export default class AppView extends Component {
       <Navigator
         animation = 'slide'
         renderPage = {this.renderPage}
-        initialRoute = {routes.todos} 
+        initialRoute = {routes.login} 
       />        
     );
   }

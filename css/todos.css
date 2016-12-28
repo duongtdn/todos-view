@@ -319,3 +319,28 @@ ons-toolbar.navigation-bar--material ons-input[type=search] input:focus {
 ons-toolbar.navigation-bar--material ons-input[type=search] span {
     padding-left: 0px;
 }
+
+/* Login */
+.login-page {
+  background-color: deepskyblue;
+  height: 100%;
+  width : 100%;
+  position: absolute;
+  top : 0;
+  left : 0;
+}
+
+.login-header {
+  
+  height: 100px;
+}
+
+.login-form {
+  margin : 16px;
+  border : 1px solid white;
+  border-radius: 4px;
+}
+
+.login-action {
+  margin : 16px;
+}
