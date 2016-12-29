@@ -29,7 +29,7 @@ class SyncView extends Component {
         /* wait at least 100ms for finishing navigation animation */
         setTimeout(() => {
           this.props.pushPage('todos')
-        }, 100);
+        }, 500);
         
       });
     };
