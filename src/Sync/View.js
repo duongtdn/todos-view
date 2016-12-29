@@ -25,7 +25,13 @@ class SyncView extends Component {
   componentDidUpdate() {
     if (this.props.user && this.shouldSyncTodo) {
       this.shouldSyncTodo = false; // prevent run twice
-      this.props.loadTodos().then(() => this.props.pushPage('todos'));
+      this.props.loadTodos().then(() => {
+        /* wait at least 100ms for finishing navigation animation */
+        setTimeout(() => {
+          this.props.pushPage('todos')
+        }, 100);
+        
+      });
     };
   }
 
@@ -37,7 +43,7 @@ class SyncView extends Component {
             <h3 className = 'center' > LOADING </h3>
           </div>
           <div>
-            <Icon icon = 'md-spinner' size ={48} spin onClick = {() => this.props.pushPage('todos')} />
+            <Icon icon = 'md-spinner' size ={48} spin />
           </div>
         </div>
       </Page>
