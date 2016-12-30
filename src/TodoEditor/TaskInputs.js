@@ -3,6 +3,8 @@
 import React , { Component } from 'react'
 import { List, ListItem, ListHeader, Switch, Button, Icon} from 'react-onsenui'
 
+import { DatePicker } from 'react-onsenui-datepicker'
+
 import AutofocusInput from '../Components/AutofocusInput'
 
 import CollaboratorList from './CollaboratorList'
@@ -72,6 +74,11 @@ export default class TaskInputs extends Component {
                    onChange = {e => this.props.getTodoText(e.target.value)} 
                    float />
           </div>
+        </ListItem>
+
+        <ListItem modifier = 'nodivider' >
+          <label> Due date </label> 
+          <label className = 'right' > <DatePicker onSelectDate = {this.props.getDueDate} /> </label>
         </ListItem>
 
         <ListItem modifier = 'nodivider'>

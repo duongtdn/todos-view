@@ -19,6 +19,7 @@ class TodoEditor extends Component {
     this.getTodoFromProps = this.getTodoFromProps.bind(this);
     this.getTodoText = this.getTodoText.bind(this);
     this.getTodoUrgent = this.getTodoUrgent.bind(this);
+    this.getDueDate = this.getDueDate.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.saveTodo = this.saveTodo.bind(this);
     this.inviteFriends = this.inviteFriends.bind(this);
@@ -73,6 +74,7 @@ class TodoEditor extends Component {
                     pushPage = {this.props.pushPage} 
                     getTodoText = {this.getTodoText}
                     getTodoUrgent = {this.getTodoUrgent} 
+                    getDueDate = {this.getDueDate}
                     inviteFriends = {this.inviteFriends}
                     unshare = {this.unshare}
                     />
@@ -89,6 +91,10 @@ class TodoEditor extends Component {
 
   getTodoUrgent(urgent) {
     this.todo.urgent = urgent;
+  }
+
+  getDueDate(date) {
+    this.todo.dueDate = date.timestamp;
   }
 
   addTodo() {
