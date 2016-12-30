@@ -3,6 +3,8 @@
 import React , { Component } from 'react'
 import {ListItem, Icon, Input, Col, Row, Button} from 'react-onsenui'
 
+import { calendar } from 'react-onsenui-datepicker'
+
 export default class extends Component {
 
   constructor(props) {
@@ -28,6 +30,8 @@ export default class extends Component {
     const numberOfShare = Object.keys(data.share).length; 
     const type = numberOfShare > 1 ? `${numberOfShare} shared` : 'private';
     const urgentStyle = data.urgent ? 'todos-urgent' : '';
+    const d = new Date(data.dueDate);
+    const dueDate = `${d.getDate()} ${calendar.month.map(d.getMonth(),'short')} `;
     return (
       <ListItem className = {`${this.state.animation} ${urgentStyle}`} key = {data.id} >
         <div className = 'left'> 
@@ -45,7 +49,7 @@ export default class extends Component {
           <div className = 'todos-ext'>
             <Row>
               <Col> {type} </Col>
-              <Col style = {{textAlign : 'right'}}> {data.dueDate} </Col>
+              <Col style = {{textAlign : 'right'}}> {dueDate} </Col>
             </Row>
           </div>
         </div>
