@@ -7,8 +7,6 @@ import { Page, Icon} from 'react-onsenui'
 import { connect } from 'react-redux'
 import {auth, user, todos } from 'todos-data'
 
-import Sync from './sync'
-
 class SyncView extends Component {
 
   constructor(props) {
