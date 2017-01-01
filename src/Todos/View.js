@@ -4,7 +4,7 @@ import React , { Component } from 'react'
 import { Page, Fab } from 'react-onsenui'
 
 import { connect } from 'react-redux'
-import { currentTodo } from 'todos-data'
+import { user, currentTodo } from 'todos-data'
 
 import Toolbar from './Toolbar'
 import Tabbar from './Tabbar'
@@ -16,11 +16,14 @@ class Todos extends Component {
     this.renderToolbar = this.renderToolbar.bind(this);
     this.renderFixed = this.renderFixed.bind(this);
     this.newTodo = this.newTodo.bind(this);
+    this.openSideMenu = this.openSideMenu.bind(this);
   }
 
   renderToolbar() {
     return (
-      <Toolbar platform = {this.props.platform} newTodoHandler = {this.newTodo} />
+      <Toolbar platform = {this.props.platform} 
+               newTodoHandler = {this.newTodo} 
+               openSideMenu = {this.openSideMenu} />
     );
   }
 
@@ -49,6 +52,11 @@ class Todos extends Component {
     this.props.pushPage('editor', null);
   }
 
+  openSideMenu() {
+    // temporary signout
+    this.props.signOut();
+  }
+
 }
 
 /* Container */
@@ -63,6 +71,9 @@ const mapDispatchToProps = dispatch => {
   return {
     updateCurrentTodo(todo) {
       dispatch(currentTodo.update(todo));
+    },
+    signOut() {
+      dispatch(user.signOut());
     }
   }
 };

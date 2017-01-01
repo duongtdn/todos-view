@@ -15,7 +15,7 @@ export default class extends Component {
     return (
       <Toolbar>
         <div className = 'left'>
-          <ToolbarButton> 
+          <ToolbarButton onClick = {this.props.openSideMenu} > 
             <Icon icon = 'md-menu' /> &nbsp;
           </ToolbarButton>
         </div>

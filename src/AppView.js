@@ -6,6 +6,8 @@ import { Navigator } from 'react-onsenui'
 import routes from './routes'
 import SceneView from './SceneView'
 
+
+
 export default class AppView extends Component {
 
   constructor(props) {
@@ -25,11 +27,12 @@ export default class AppView extends Component {
   }
 
   render() {
+    const initRoute = this.props.isLogged ? routes.sync : routes.login;
     return (
       <Navigator
         animation = 'slide'
         renderPage = {this.renderPage}
-        initialRoute = {routes.login} 
+        initialRoute = {initRoute} 
       />        
     );
   }

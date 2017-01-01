@@ -3,6 +3,7 @@
 import React , { Component } from 'react'
 import { render } from 'react-dom'
 import ons from 'onsenui'
+import { auth } from 'todos-data'
 
 import App from './App'
 
@@ -35,7 +36,20 @@ export default {
   },
 
   receivedEvent() {
-    render(<App platform = {this.platform} />, document.getElementById(this.rootEl));
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        render(
+          <App platform = {this.platform} isLogged = {true} />, 
+          document.getElementById(this.rootEl)
+        );
+      } else {
+        render(
+          <App platform = {this.platform} isLogged = {false} />, 
+          document.getElementById(this.rootEl)
+        );
+      }
+    });
+    
   }      
 
 }

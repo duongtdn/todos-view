@@ -17,7 +17,7 @@ class SyncView extends Component {
   }
 
   componentDidMount() {
-    if (this.props.data) {
+    if (auth.currentUser && auth.currentUser.uid) {
       this.props.loadUser();
     }
   }

@@ -50,7 +50,8 @@ export default class extends Component {
 
               <ListItem modifier = 'noborder'>
                 <Input type = 'password' placeholder = 'Password'
-                       onChange = {e => this.getUserPassword(e.target.value)} />
+                       onChange = {e => this.getUserPassword(e.target.value)}
+                       onKeyUp = {e => this.handleKeyUp(e.keyCode)} />
               </ListItem>
 
             </List>
@@ -110,11 +111,19 @@ export default class extends Component {
         let message = '';
         if (err.code === 'auth/invalid-email') {
           message = 'Invalid email';
+        } else if (err.code === 'auth/network-request-failed') {
+          message = 'Cannot connect to server';
         } else {
           message = 'Wrong email or password';
         }
         this.setState({ message, isSigningIn, success });
       });
+  }
+
+  handleKeyUp(code) {
+    if (code === 13) { // enter key
+      this.login()
+    }
   }
 
 }
