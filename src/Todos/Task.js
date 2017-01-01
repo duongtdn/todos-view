@@ -30,8 +30,11 @@ export default class extends Component {
     const numberOfShare = Object.keys(data.share).length; 
     const type = numberOfShare > 1 ? `${numberOfShare} shared` : 'private';
     const urgentStyle = data.urgent ? 'todos-urgent' : '';
-    const d = new Date(data.dueDate);
-    const dueDate = `${d.getDate()} ${calendar.month.map(d.getMonth(),'short')} `;
+    let dueDate = '';
+    if (data.dueDate.length !== 0) {
+      const d = new Date(data.dueDate);
+      dueDate = `${d.getDate()} ${calendar.month.map(d.getMonth(),'short')} `;
+    }
     return (
       <ListItem className = {`${this.state.animation} ${urgentStyle}`} key = {data.id} >
         <div className = 'left'> 
