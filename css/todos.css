@@ -370,3 +370,26 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   height: 100px;
   color: rgba(24,103,194,0.81);
 }
+
+.sidemenu-user {
+  padding : 8px 16px 8px 16px;
+  border-bottom: 1px solid grey;
+}
+
+.sidemenu-user div {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.sidemenu-username {
+  font-size: 24px;
+  font-style: bold;
+}
+
+.sidemenu-email {
+  font-size: 14px;
+}
+
+.sidemenu-btn {
+  color: rgba(38, 100, 171, 0.811765);
+}

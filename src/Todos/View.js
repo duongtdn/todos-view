@@ -1,29 +1,34 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page, Fab } from 'react-onsenui'
+import { Page, Fab, Splitter, SplitterSide, SplitterContent } from 'react-onsenui'
 
 import { connect } from 'react-redux'
 import { user, currentTodo } from 'todos-data'
 
 import Toolbar from './Toolbar'
 import Tabbar from './Tabbar'
+import SideMenu from './Sidebar/Menu'
 
 class Todos extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = { isSidebarOpen : false };
+
     this.renderToolbar = this.renderToolbar.bind(this);
     this.renderFixed = this.renderFixed.bind(this);
     this.newTodo = this.newTodo.bind(this);
-    this.openSideMenu = this.openSideMenu.bind(this);
+    this.showSidebar = this.showSidebar.bind(this);
+    this.hideSidebar = this.hideSidebar.bind(this);
   }
 
   renderToolbar() {
     return (
       <Toolbar platform = {this.props.platform} 
                newTodoHandler = {this.newTodo} 
-               openSideMenu = {this.openSideMenu} />
+               openSideMenu = {this.showSidebar} />
     );
   }
 
@@ -39,11 +44,28 @@ class Todos extends Component {
 
   render() {
     return (
-      <Page renderToolbar = {this.renderToolbar}
-            renderFixed = {this.renderFixed}
-       >
-        <Tabbar platform = {this.props.platform} pushPage = {this.props.pushPage} />
-      </Page>
+      <Splitter>
+
+        <SplitterSide side ='left' 
+                      collapse = 'portrait'
+                      isSwipeable = {true}
+                      isOpen = {this.state.isSidebarOpen}
+                      onClose = {this.hideSidebar}
+                      style={{
+                        boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'
+                      }} >
+          <SideMenu />
+        </SplitterSide>
+
+        <SplitterContent>
+          <Page renderToolbar = {this.renderToolbar}
+                renderFixed = {this.renderFixed}
+          >
+            <Tabbar platform = {this.props.platform} pushPage = {this.props.pushPage} />
+          </Page>
+          </SplitterContent>
+
+      </Splitter>
     );
   }
 
@@ -52,9 +74,14 @@ class Todos extends Component {
     this.props.pushPage('editor', null);
   }
 
-  openSideMenu() {
+  showSidebar() {
     // temporary signout
-    this.props.signOut();
+    // this.props.signOut();
+    this.setState({ isSidebarOpen : true });
+  }
+
+  hideSidebar() {
+    this.setState({ isSidebarOpen : false });
   }
 
 }
