@@ -13,6 +13,8 @@ class TodoEditor extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { hideToolbar : false };
+
     this.todo = {};
 
     this.renderToolbar = this.renderToolbar.bind(this);
@@ -24,6 +26,8 @@ class TodoEditor extends Component {
     this.saveTodo = this.saveTodo.bind(this);
     this.inviteFriends = this.inviteFriends.bind(this);
     this.unshare = this.unshare.bind(this);
+    this.hideToolbar = this.hideToolbar.bind(this);
+    this.showToolbar = this.showToolbar.bind(this);
   }
 
   renderToolbar() {
@@ -66,8 +70,11 @@ class TodoEditor extends Component {
               onClick = {this.addTodo} > 
               Add 
       </Button>;
+      const renderToolbar = this.state.hideToolbar ?
+        function() {return (null)} :
+        this.renderToolbar;
     return (
-     <Page renderToolbar = {this.renderToolbar} >
+     <Page renderToolbar = {renderToolbar} >
         <TaskInputs data = {this.todo} 
                     auth = {this.props.auth}
                     friends = {this.props.friends}
@@ -77,6 +84,7 @@ class TodoEditor extends Component {
                     getDueDate = {this.getDueDate}
                     inviteFriends = {this.inviteFriends}
                     unshare = {this.unshare}
+                    hideToolbar = {this.hideToolbar}
                     />
         <div style={{padding: '16px'}}>
           {btn}
@@ -95,6 +103,7 @@ class TodoEditor extends Component {
 
   getDueDate(date) {
     this.todo.dueDate = date.timestamp;
+    this.showToolbar();
   }
 
   addTodo() {
@@ -124,6 +133,14 @@ class TodoEditor extends Component {
       this.todo.share[id] = null;
       this.props.updateCurrentTodo(this.todo);
     }   
+  }
+
+  hideToolbar() {
+    this.setState({ hideToolbar : true });
+  }
+
+  showToolbar() {
+    this.setState({ hideToolbar : false });
   }
 
 }

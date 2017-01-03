@@ -61,6 +61,7 @@ export default class TaskInputs extends Component {
     const text = this.props.data.text;
     const urgent = this.props.data.urgent;
     const share = this.state.share;
+    const selectedDate = this.props.data.dueDate || null;
     return (
       <List>
 
@@ -78,7 +79,11 @@ export default class TaskInputs extends Component {
 
         <ListItem modifier = 'nodivider' >
           <label> Due date </label> 
-          <label className = 'right' > <DatePicker onSelectDate = {this.props.getDueDate} /> </label>
+          <label className = 'right' > 
+            <DatePicker preOpenCalendar = {this.props.hideToolbar} 
+                        onSelectDate = {this.props.getDueDate} 
+                        selectedDate = {selectedDate} /> 
+          </label>
         </ListItem>
 
         <ListItem modifier = 'nodivider'>
