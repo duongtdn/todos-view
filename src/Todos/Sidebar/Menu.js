@@ -38,9 +38,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signOut() {
-      dispatch(user.signOut());
-    }
   }
 };
 

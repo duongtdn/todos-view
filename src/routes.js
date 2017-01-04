@@ -14,6 +14,7 @@ export default {
   editor: { name : 'editor', view : <TodoEditorView /> },
   friends : { name : 'friends', view : <FriendsView /> },
   login : { name : 'login', view : <LoginView />},
+  relogin : { name : 'relogin', view : <LoginView />},  // workaround for onsenui resetPage issue
   signup : { name : 'signup', view : <SignupView />},
   sync : { name : 'sync', view : <SyncView />}
 }

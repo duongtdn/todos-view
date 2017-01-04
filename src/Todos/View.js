@@ -22,6 +22,7 @@ class Todos extends Component {
     this.newTodo = this.newTodo.bind(this);
     this.showSidebar = this.showSidebar.bind(this);
     this.hideSidebar = this.hideSidebar.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   renderToolbar() {
@@ -47,14 +48,14 @@ class Todos extends Component {
       <Splitter>
 
         <SplitterSide side ='left' 
-                      collapse = 'portrait'
+                      collapse = {true}
                       isSwipeable = {true}
                       isOpen = {this.state.isSidebarOpen}
                       onClose = {this.hideSidebar}
                       style={{
                         boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'
                       }} >
-          <SideMenu />
+          <SideMenu signOut = {this.signOut} />
         </SplitterSide>
 
         <SplitterContent>
@@ -82,6 +83,12 @@ class Todos extends Component {
 
   hideSidebar() {
     this.setState({ isSidebarOpen : false });
+  }
+
+  signOut() {
+    this.hideSidebar();
+    this.props.signOut();
+    this.props.resetPage('login');
   }
 
 }
