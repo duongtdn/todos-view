@@ -1,16 +1,52 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page, Col, Row, Button } from 'react-onsenui'
+import { Page, Toolbar, ToolbarButton, Col, Row, Button, List, ListItem } from 'react-onsenui'
 
 import { connect } from 'react-redux'
 import { user } from 'todos-data'
 
-class SideMenu extends Component {
+
+class Message extends Component {
 
   render() {
     return (
-      <Page>
+      <ListItem >
+
+      </ListItem>
+    );
+  }
+
+}
+
+class Messages extends Component {
+
+
+
+}
+
+class SideMenu extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.renderToolbar = this.renderToolbar.bind(this);
+
+  }
+
+  renderToolbar() {
+    return (
+      <Toolbar>
+        <div className = 'right'>
+          <ToolbarButton onClick = {this.props.hide} > X </ToolbarButton>
+        </div>
+      </Toolbar>
+    )
+  }
+
+  render() {
+    return (
+      <Page renderToolbar = {this.renderToolbar} >
         <div className = 'sidemenu-user' >
             <div className = 'sidemenu-username' > Duong Nguyen </div>
             <div className = 'sidemenu-email' > {this.props.user.email} </div>
