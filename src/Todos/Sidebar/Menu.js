@@ -1,29 +1,13 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page, Toolbar, ToolbarButton, Col, Row, Button, List, ListItem } from 'react-onsenui'
+import { Page, Toolbar, ToolbarButton, 
+         Col, Row, Button } from 'react-onsenui'
 
 import { connect } from 'react-redux'
 import { user } from 'todos-data'
 
-
-class Message extends Component {
-
-  render() {
-    return (
-      <ListItem >
-
-      </ListItem>
-    );
-  }
-
-}
-
-class Messages extends Component {
-
-
-
-}
+import Messages from './Messages'
 
 class SideMenu extends Component {
 
@@ -48,7 +32,7 @@ class SideMenu extends Component {
     return (
       <Page renderToolbar = {this.renderToolbar} >
         <div className = 'sidemenu-user' >
-            <div className = 'sidemenu-username' > Duong Nguyen </div>
+            <div className = 'sidemenu-username' > {this.props.user.displayName} </div>
             <div className = 'sidemenu-email' > {this.props.user.email} </div>
             <Row>
               <Col style ={{textAlign : 'left'}}> 
@@ -58,6 +42,9 @@ class SideMenu extends Component {
                 <div className = 'sidemenu-btn'> Edit </div> 
               </Col>
             </Row>
+        </div>
+        <div className = 'sidemenu-msg' >
+          <Messages />
         </div>
       </Page>
     );
