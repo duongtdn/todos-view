@@ -6,7 +6,7 @@ import { Page, Button, Icon,
          Col, Row } from 'react-onsenui'
 
 import { connect } from 'react-redux'
-import { user } from 'todos-data'
+import { todos } from 'todos-data'
 
 class AlertMessage extends Component {
   render() {
@@ -27,18 +27,19 @@ class AlertMessage extends Component {
 
 class ConfirmMessage extends Component {
   render() {
+    const msg = this.props.msg;
     return (
       <ListItem >
         <Col>
           <Row> <label > You're invited to join a todo </label> </Row>
           <Row> 
             <label style = {{fontSize : '14px', fontStyle : 'italic', color : 'grey'}} > 
-              {this.props.msg.content}
+              {msg.content}
             </label> 
           </Row>
           <Row>
-            <Col> <Button modifier = 'quiet' onClick = {this.props.ok} > OK </Button> </Col>
-            <Col> <Button modifier = 'quiet' onClick = {this.props.cancel} > Cancel </Button> </Col>
+            <Col> <Button modifier = 'quiet' onClick = {() => this.props.ok(msg)} > Accept </Button> </Col>
+            <Col> <Button modifier = 'quiet' onClick = {() => this.props.cancel(msg)} > Decline </Button> </Col>
           </Row>
         </Col>
       </ListItem>
@@ -69,12 +70,12 @@ class Message extends Component {
     return this.renderMessage(this.props.data);
   }
 
-  ok() {
-    console.log('ok')
+  ok(msg) {
+    this.props.acceptTodo(msg);
   }
 
-  cancel() {
-    console.log('cancel')
+  cancel(msg) {
+    this.props.ignoreTodo(msg);
   }
 
 }
@@ -92,15 +93,19 @@ class Messages extends Component {
   renderHeader() {
     return (
       <ListHeader>
-        <label> Notification </label>
-        <label className = 'right'> Clean ALl </label>
+        <Row>
+          <Col style = {{textAlign : 'left'}} > Notification </Col>
+          <Col style = {{textAlign : 'right'}} > Clean ALl </Col>
+        </Row>
       </ListHeader>
     );
   }
 
   renderRow(row) {
     return (
-      <Message key = {`${row.id}`} data = {row} />
+      <Message key = {`${row.id}`} data = {row}
+               acceptTodo = {this.props.acceptTodo}
+               ignoreTodo = {this.props.ignoreTodo} />
     );
   }
 
@@ -132,6 +137,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    acceptTodo(msg) {
+      dispatch(todos.accept(msg));
+    },
+    ignoreTodo(msg) {
+      dispatch(todos.decline(msg));
+    }
   }
 };
 

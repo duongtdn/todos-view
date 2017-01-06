@@ -37,7 +37,7 @@ export default class TaskInputs extends Component {
             relationship : props.data.share[uid]
           });
         } else {
-          if (props.friends[uid]) {
+          if (props.friends && props.friends[uid]) {
             share.push({
               id : uid,
               name : props.friends[uid].name,
