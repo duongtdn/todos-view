@@ -14,8 +14,8 @@ const mapStateToProps = state => {
   }
   todos.sort( (a, b) => {
     if (a.urgent && b.urgent) {
-      // both are urgent, sort by createdAt
-      return a.createdAt - b.createdAt;
+      // both are urgent, sort by duedate
+      return a.dueDate - b.dueDate;
     }
     if (a.urgent) {
       // only a is urgent
