@@ -113,12 +113,17 @@ class FriendsView extends Component {
     );
   }
 
-  selectFriend(id, checked) {
+  selectFriend(usr, checked) {
     const selectedFriends = {...this.state.selectedFriends};
     if (checked) {
-      selectedFriends[id] = 'invited';
+      selectedFriends[usr.id] = {
+        id : usr.id,
+        name : usr.name,
+        role : 'collaborator',
+        status : 'invited'
+      };
     } else {
-      selectedFriends[id] = null;
+      selectedFriends[usr.id] = null;
     }
     this.setState({ selectedFriends });
   }
@@ -158,7 +163,12 @@ class FriendsView extends Component {
     this.props.addToFriendList(usr);
     // then, select this user and add to todo share list
     const currentTodo = {...this.props.data};
-    currentTodo.share[usr.id] = 'invited';
+    currentTodo.share[usr.id] = {
+      id : usr.id,
+      name : usr.name,
+      role : 'collaborator',
+      status : 'invited'
+    };
     this.props.updateCurrentTodo(currentTodo);
     this.props.popPage();
   }
@@ -180,7 +190,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(currentTodo.update(todo));
     },
     searchByEmail(email) {
-      dispatch(search.apply(email));
+      dispatch(search.apply('email', email));
     },
     addToFriendList(usr) {
       const friend = {...usr};

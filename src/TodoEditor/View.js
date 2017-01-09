@@ -111,7 +111,7 @@ class TodoEditor extends Component {
     const share = [];
     for (let uid in this.todo.share) {
       if (this.todo.share[uid] !== null) {
-        share.push(uid);
+        share.push(this.todo.share[uid]);
       }
     }
     todo.share = share;

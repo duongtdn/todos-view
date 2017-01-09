@@ -110,7 +110,6 @@ class Messages extends Component {
   }
 
   render() {
-    console.log(this.props);
     return(
       <List renderHeader = {this.renderHeader}
             dataSource = {this.props.messages}

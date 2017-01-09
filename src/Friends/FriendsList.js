@@ -86,7 +86,7 @@ export default class extends Component {
 
     const selectBtn = row.connected ?
       <Input type = 'checkbox' inputId = {`checkbox-${row.id}`} 
-                 onChange = {evt => this.selectFriend(row.id, evt)}
+                 onChange = {evt => this.selectFriend(row, evt)}
                  checked = {this.isSelected(row.id)} /> :
       null;
 
@@ -144,9 +144,10 @@ export default class extends Component {
     );
   }
 
-  selectFriend(id, evt) {
+  selectFriend(usr, evt) {
+    console.log(usr)
     const checked = evt.target.checked;
-    this.props.selectFriend(id, checked);
+    this.props.selectFriend(usr, checked);
   }
 
   isSelected(id) {

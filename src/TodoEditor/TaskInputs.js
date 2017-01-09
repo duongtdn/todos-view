@@ -30,11 +30,12 @@ export default class TaskInputs extends Component {
     const share = [];
     for (let uid in props.data.share) {
       if (props.data.share[uid] !== null) {
+        const sharedUser = props.data.share[uid];
         if (uid === props.auth.uid) {
           share.push({ 
             id : uid,
             name : 'Me', 
-            relationship : props.data.share[uid]
+            relationship : sharedUser.role
           });
         } else {
           if (props.friends && props.friends[uid]) {
@@ -46,7 +47,7 @@ export default class TaskInputs extends Component {
           } else {
             share.push({
               id : uid,
-              name : 'Unknown',
+              name : sharedUser.name,
               relationship : 'not connected'
             });
           }
