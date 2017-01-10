@@ -25,8 +25,12 @@ const mapStateToProps = state => {
       // only b is urgent
       return 1;
     }
+    if (!b.dueDate) {
+      // b has no duedate
+      return -1;
+    }
     // none is urgent
-    return a.createdAt - b.createdAt;
+    return a.dueDate - b.dueDate;
   });
   return { todos };
 };
