@@ -145,7 +145,6 @@ export default class extends Component {
   }
 
   selectFriend(usr, evt) {
-    console.log(usr)
     const checked = evt.target.checked;
     this.props.selectFriend(usr, checked);
   }
