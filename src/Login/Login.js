@@ -45,7 +45,8 @@ export default class extends Component {
 
               <ListItem modifier = 'noborder' >
                 <Input type = 'text' placeholder = 'Enter your email'
-                       onChange = {e => this.getUserEmail(e.target.value)} />
+                       onChange = {e => this.getUserEmail(e.target.value)}
+                       onKeyUp = {e => this.handleKeyUp(e.keyCode)} />
               </ListItem>
 
               <ListItem modifier = 'noborder'>
@@ -85,8 +86,8 @@ export default class extends Component {
 
   login() {
     const credential = {
-      email : this.state.email,
-      password : this.state.password
+      email : this.state.email.trim(),
+      password : this.state.password.trim()
     };
     this.setState({ 
           message : '', 
