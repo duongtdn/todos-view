@@ -38,17 +38,18 @@ export default class TaskInputs extends Component {
             relationship : sharedUser.role
           });
         } else {
+          const label = (/invited/i).test(sharedUser.status) ? ', Inviting' : '';
           if (props.friends && props.friends[uid]) {
             share.push({
               id : uid,
               name : props.friends[uid].name,
-              relationship : props.friends[uid].relationship
+              relationship : `${props.friends[uid].relationship}${label}`
             });
           } else {
             share.push({
               id : uid,
               name : sharedUser.name,
-              relationship : 'not connected'
+              relationship : `not connected${label}`
             });
           }
         }
