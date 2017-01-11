@@ -25,9 +25,13 @@ const mapStateToProps = state => {
       // only b is urgent
       return 1;
     }
-    if (!b.dueDate) {
-      // b has no duedate
+    if (a.dueDate && !b.dueDate) {
+      // b has no due date
       return -1;
+    }
+    if (!a.dueDate && b.dueDate) {
+      // a has no due date
+      return 1;
     }
     // none is urgent
     return a.dueDate - b.dueDate;
