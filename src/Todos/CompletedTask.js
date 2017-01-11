@@ -22,8 +22,19 @@ export default class extends Component {
   }
 
   render() {
+    
     const data = this.props.data;
+
+    let completedBy = 'completed';
+    if (data.completedBy === this.props.auth.uid) {
+      completedBy = 'by Me';
+    }
+    if (this.props.friends && this.props.friends[data.completedBy]) {
+      completedBy = `by ${this.props.friends[data.completedBy].name}`;
+    }
+
     const urgentStyle = data.urgent ? 'todos-urgent' : '';
+
     return (
       <ListItem className = {`${this.state.animation} ${urgentStyle}`} key = {data.id} >
         <div className = 'left'> 
@@ -35,7 +46,7 @@ export default class extends Component {
             {data.text}
           </div>
           <div className = 'todos-ext'>
-            completed at {formatDate(data.completedAt)}
+            {completedBy} at {formatDate(data.completedAt)}
           </div>
         </div>
 

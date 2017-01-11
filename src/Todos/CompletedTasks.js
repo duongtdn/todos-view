@@ -24,6 +24,8 @@ export default class extends Component {
         key = {row.id}
         undoComplete = {this.props.undoComplete}
         deleteTodo = {this.props.deleteTodo}
+        friends = {this.props.friends}
+        auth = {this.props.auth}
       />
     );   
   }

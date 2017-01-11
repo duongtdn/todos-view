@@ -12,7 +12,9 @@ const mapStateToProps = state => {
       todos.push(state.todos[todoId]);
     }    
   }
-  return { todos };
+  const friends = state.user.friends;
+  const auth = state.user.auth;
+  return { todos, friends, auth };
 };
 
 const mapDispatchToProps = dispatch => {
