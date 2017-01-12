@@ -35,8 +35,16 @@ export default class extends Component {
       const d = new Date(data.dueDate);
       dueDate = `${d.getDate()} ${calendar.month.map(d.getMonth(),'short')} `;
     }
+    const today = new Date();
+    let overdueStyle = '';
+    if (data.dueDate.length !== 0) {
+      const dueDate = new Date(data.dueDate);
+      if (dueDate < today) {
+        overdueStyle = 'todos-highlight todos-urgent';
+      }
+    }
     return (
-      <ListItem className = {`${this.state.animation} ${urgentStyle}`} key = {data.id} >
+      <ListItem className = {`${this.state.animation} ${urgentStyle} ${overdueStyle}`} key = {data.id} >
         <div className = 'left'> 
           <Input type = 'checkbox'  onChange = {() => this.completeTodo(data) } />
         </div>
@@ -52,7 +60,7 @@ export default class extends Component {
           <div className = 'todos-ext'>
             <Row>
               <Col> {type} </Col>
-              <Col style = {{textAlign : 'right'}}> {dueDate} </Col>
+              <Col className = {`${overdueStyle}`} style = {{textAlign : 'right'}}> {dueDate} </Col>
             </Row>
           </div>
         </div>
