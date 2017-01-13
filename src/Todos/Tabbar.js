@@ -37,7 +37,7 @@ export default class extends Component {
   render() {
     return (
       <Tabbar
-        position = 'auto'
+        position = 'top'
         animation = 'none'
         index = {this.state.index}
         onPreChange = {this.onPreChange}

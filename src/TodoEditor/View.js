@@ -102,7 +102,9 @@ class TodoEditor extends Component {
   }
 
   getDueDate(date) {
-    this.todo.dueDate = date.timestamp;
+    if (date) {
+      this.todo.dueDate = date.timestamp;
+    }
     this.showToolbar();
   }
 

@@ -373,7 +373,7 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
 
 .sidemenu-user {
   padding : 8px 16px 8px 16px;
-  border-bottom: 1px solid grey;
+  border-bottom: 0px solid grey;
 }
 
 .sidemenu-user div {
