@@ -4,55 +4,7 @@ import React , { Component } from 'react'
 import ons from 'onsenui'
 import { Page, List, ListItem, ListHeader, Input, Button, Icon, Row, Col, Dialog } from 'react-onsenui'
 
-class MyDialog extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.value = '';
-
-  }
-
-  componentDidMount() {
-    this.value = this.props.value;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.value = nextProps.value;
-  }
-
-  render() {
-    return (
-      <Dialog isOpen = {this.props.dialogShown}
-              isCancelable = {true}
-              onCancel={this.props.cancel} >
-        <div className='alert-dialog-title'> {this.props.title} </div>
-        <div className='alert-dialog-content'>
-            <Input value ={this.value} onChange = {e => this.getUserInputValue(e.target.value)} />
-        </div>
-        <div className='alert-dialog-footer'>
-          <Row>
-            <Col>
-              <button className='alert-dialog-button' onClick = {this.props.cancel} >
-                Cancel
-              </button>
-            </Col>
-            <Col>
-              <button className='alert-dialog-button' onClick = {() => this.props.accept(this.value)} >
-                Ok
-              </button>
-            </Col>
-          </Row>
-        </div>
-      </Dialog>
-    );
-  }
-
-  getUserInputValue(value) {
-    this.value = value;
-  }
-
-}
+import AddFriend from './AddFriend.js'
 
 
 export default class extends Component {
@@ -60,7 +12,7 @@ export default class extends Component {
     super(props);
 
     this.state = { 
-      dialogShown : { rename : false, relationship : false} , 
+      dialogShown : false , 
       user : {} 
     };
 
@@ -69,8 +21,7 @@ export default class extends Component {
     this.isSelected = this.isSelected.bind(this);
     this.showDialog = this.showDialog.bind(this);
     this.hideDialog = this.hideDialog.bind(this);
-    this.rename = this.rename.bind(this);
-    this.setRelationship = this.setRelationship.bind(this);
+    this.addAndSelectFriend = this.addAndSelectFriend.bind(this);
     this.showAlertDialog = this.showAlertDialog.bind(this);
   }
 
@@ -128,18 +79,11 @@ export default class extends Component {
               renderHeader = {this.renderHeader}
               modifier = 'noborder'
         />
-        <MyDialog dialogShown = {this.state.dialogShown.rename} 
-                  cancel = {this.hideDialog} 
-                  accept = {this.rename}
-                  title = 'Rename as' 
-                  value = {this.state.user.name} 
-                  animation = 'none' />
-        <MyDialog dialogShown = {this.state.dialogShown.relationship} 
-                  cancel = {this.hideDialog} 
-                  accept = {this.setRelationship}
-                  title = 'Set relationship as' 
-                  value = {'Friend'} 
-                  animation = 'none' />
+        <AddFriend show = {this.state.dialogShown}
+                   cancel = {this.hideDialog}
+                   accept = {this.addAndSelectFriend}
+                   name = {this.state.user.name}
+                   animation = 'none' />
       </Page>
     );
   }
@@ -154,47 +98,25 @@ export default class extends Component {
   }
 
   showDialog(user) {
-    const dialogShown = {
-      rename : true,
-      relationship : false
-    };
-    this.setState({ user: user, dialogShown });
+    const dialogShown = true;
+    this.setState({ user, dialogShown });
   }
 
   hideDialog() {
-    const dialogShown = {
-      rename : false,
-      relationship : false
-    };
+    const dialogShown = false;
     this.setState({ dialogShown });
   }
 
-  rename(name) {
-    // get user and rename
+  addAndSelectFriend(name, rel) {
     const user = {...this.state.user};
     user.name = name;   // security, sanity user input
+    user.relationship = rel;
 
-    const dialogShown = {
-      rename : false,
-      relationship : true
-    };
-
-    this.setState({ user: user, dialogShown });
-  }
-
-  setRelationship(value) {
-    const user = {...this.state.user};
-    user.relationship = value;    // security, sanity use input
-
-    const dialogShown = {
-      rename : false,
-      relationship : false
-    };
+    const dialogShown = false;
 
     this.setState({ user: user, dialogShown });
 
     // finally, add this user to friend list and todo share list
-
     this.props.addAndSelectFriend(user);
 
   }
