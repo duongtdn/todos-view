@@ -108,7 +108,8 @@ class FriendsView extends Component {
                      selectedFriends = {this.state.selectedFriends} 
                      selectFriend = {this.selectFriend} 
                      addAndSelectFriend = {this.addAndSelectFriend} 
-                     unfriend = {this.props.unfriend} />
+                     unfriend = {this.props.unfriend}
+                     platform = {this.props.platform} />
       </Page>
     );
   }

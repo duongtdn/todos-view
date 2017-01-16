@@ -32,19 +32,19 @@ export default class extends Component {
       <Dialog isOpen = {this.props.show}
               isCancelable = {true}
               onCancel={this.props.cancel} >
-        <div className='alert-dialog-title'> Add to Friends list  </div>
+        <div className='alert-dialog-title' style = {{padding:'8px 8px 8px 8px'}} > Add to Friends list  </div>
         <div className='alert-dialog-content'>
           <List modifier = 'nodivider'>
             <div className = 'add-friend-diaglog-title' > Save this person as </div>
             <ListItem modifier = 'nodivider' >
-              <Input  style = {{width : '100%'}}
+              <Input className = {`add-friend-diaglog-rename-${this.props.platform}`} style = {{width : '100%'}}
                       value ={this.state.name} 
                       onChange = {e => this.getName(e.target.value)} />
             </ListItem>
 
             <div className = 'add-friend-diaglog-title' > Relationship </div>
             {this.predefinedRels.map(rel => (
-              <ListItem key = {rel} tappable>
+              <ListItem key = {rel} modifier = 'nodivider' tappable>
                 <label style = {{minWidth : '35px'}} >
                   <Input inputId = {`radio-${rel}`}
                         type = 'radio' 
@@ -57,7 +57,7 @@ export default class extends Component {
               </ListItem>
             ))}
 
-            <div className = 'add-friend-diaglog-relinput' >
+            <div className = {`add-friend-diaglog-relinput-${this.props.platform}`} style = {{display: this.state.showOtherRelInput}} >
               <Input  
                       onChange = {e => this.handleRelInput(e.target.value)} 
                       onKeyUp = { e => this.handleRelInputKeyUp(e.keyCode)}

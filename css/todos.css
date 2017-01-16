@@ -399,15 +399,35 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   margin-bottom: 16px;
 }
 
-.add-friend-diaglog-relinput {
+.add-friend-diaglog-rename-ios {
+  border-bottom: 1px solid grey;
+  padding: 8px;
+}
+
+.add-friend-diaglog-relinput-ios {
   padding-left: 16px;
   padding-right: 16px;
   background-color: white; 
   margin-bottom: 5px;
 }
 
-.add-friend-diaglog-relinput ons-input {
-  border-bottom: 1px solid grey;
+.add-friend-diaglog-relinput-ios ons-input {
+  border: 1px solid grey;
   border-radius: 4px;
-  
+  padding : 4px;
+}
+
+.add-friend-diaglog-relinput-android {
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: white; 
+  margin-bottom: 5px;
+}
+
+.add-friend-diaglog-relinput-android ons-input {
+  padding : 4px;
+}
+
+.dialog-container {
+  background-color: white;
 }

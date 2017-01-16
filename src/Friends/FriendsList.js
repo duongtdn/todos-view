@@ -83,6 +83,7 @@ export default class extends Component {
                    cancel = {this.hideDialog}
                    accept = {this.addAndSelectFriend}
                    name = {this.state.user.name}
+                   platform = {this.props.platform}
                    animation = 'none' />
       </Page>
     );
