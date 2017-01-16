@@ -393,3 +393,21 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
 .sidemenu-btn {
   color: rgba(38, 100, 171, 0.811765);
 }
+
+.add-friend-diaglog-title {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.add-friend-diaglog-relinput {
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: white; 
+  margin-bottom: 5px;
+}
+
+.add-friend-diaglog-relinput ons-input {
+  border-bottom: 1px solid grey;
+  border-radius: 4px;
+  
+}

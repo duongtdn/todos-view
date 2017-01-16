@@ -35,14 +35,14 @@ export default class extends Component {
         <div className='alert-dialog-title'> Add to Friends list  </div>
         <div className='alert-dialog-content'>
           <List modifier = 'nodivider'>
-            <div> Save this person as </div>
+            <div className = 'add-friend-diaglog-title' > Save this person as </div>
             <ListItem modifier = 'nodivider' >
               <Input  style = {{width : '100%'}}
                       value ={this.state.name} 
                       onChange = {e => this.getName(e.target.value)} />
             </ListItem>
 
-            <div> Relationship </div>
+            <div className = 'add-friend-diaglog-title' > Relationship </div>
             {this.predefinedRels.map(rel => (
               <ListItem key = {rel} tappable>
                 <label style = {{minWidth : '35px'}} >
@@ -57,7 +57,7 @@ export default class extends Component {
               </ListItem>
             ))}
 
-            <div style = {{paddingLeft : '16px'}} >
+            <div className = 'add-friend-diaglog-relinput' >
               <Input  
                       onChange = {e => this.handleRelInput(e.target.value)} 
                       onKeyUp = { e => this.handleRelInputKeyUp(e.keyCode)}
