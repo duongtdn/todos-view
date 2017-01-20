@@ -168,19 +168,18 @@ class FriendsView extends Component {
     this.props.addToFriendList(usr);
     // then, select this user and add to todo share list if there's a todo, i.e.
     // page is open from todo editor, otherwise just show friends list
+    this.searchInput = '';
+    const result = [];
     if (this.props.data) {
-      const currentTodo = {...this.props.data};
-      currentTodo.share[usr.id] = {
+      const selectedFriends = {...this.state.selectedFriends};
+      selectedFriends[usr.id] = {
         id : usr.id,
         name : usr.name,
         role : 'collaborator',
         status : 'invited'
       };
-      this.props.updateCurrentTodo(currentTodo);
-      this.props.popPage();
+      this.setState({ selectedFriends, result });
     } else {
-      this.searchInput = '';
-      const result = [];
       this.setState({ result });  
     }
   }
