@@ -42,7 +42,7 @@ export default class extends Component {
       null;
 
     const thirdLbl = row.connected ?
-      null :
+      <Row className = 'todo-editor-collaborate-relationship'> {row.relationship} </Row> :
       <Row className = 'todo-editor-collaborate-relationship'> not connected </Row> ;
     
     return (

@@ -32,7 +32,10 @@ class FriendsView extends Component {
   }
 
   componentWillMount() {
-    const selectedFriends = {...this.props.data.share};
+
+    const selectedFriends = this.props.data && this.props.data.share ?
+                 {...this.props.data.share} :
+                 {};
 
     const friends = this.getFriendsFromProps(this.props);
 
@@ -151,7 +154,8 @@ class FriendsView extends Component {
     this.setState({ result });       
   }
 
-  handleKeyUp(code) {
+  handleKeyUp(code, text) {
+    this.searchInput = text; 
     if (code === 13) { // enter key
       if (this.state.result.length === 0) {
         this.props.searchByEmail(this.searchInput);
@@ -162,16 +166,23 @@ class FriendsView extends Component {
   addAndSelectFriend(usr) {
     // add this user to friend list
     this.props.addToFriendList(usr);
-    // then, select this user and add to todo share list
-    const currentTodo = {...this.props.data};
-    currentTodo.share[usr.id] = {
-      id : usr.id,
-      name : usr.name,
-      role : 'collaborator',
-      status : 'invited'
-    };
-    this.props.updateCurrentTodo(currentTodo);
-    this.props.popPage();
+    // then, select this user and add to todo share list if there's a todo, i.e.
+    // page is open from todo editor, otherwise just show friends list
+    if (this.props.data) {
+      const currentTodo = {...this.props.data};
+      currentTodo.share[usr.id] = {
+        id : usr.id,
+        name : usr.name,
+        role : 'collaborator',
+        status : 'invited'
+      };
+      this.props.updateCurrentTodo(currentTodo);
+      this.props.popPage();
+    } else {
+      this.searchInput = '';
+      const result = [];
+      this.setState({ result });  
+    }
   }
 
 }

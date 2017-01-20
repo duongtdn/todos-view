@@ -15,7 +15,7 @@ class SideMenu extends Component {
     super(props);
 
     this.renderToolbar = this.renderToolbar.bind(this);
-
+    this.openProfilePage = this.openProfilePage.bind(this);
   }
 
   renderToolbar() {
@@ -39,7 +39,7 @@ class SideMenu extends Component {
                 <div className = 'sidemenu-btn' onClick = {this.props.signOut} > Logout </div> 
               </Col>
               <Col style ={{textAlign : 'right'}} > 
-                <div className = 'sidemenu-btn'> Edit </div> 
+                <div className = 'sidemenu-btn' onClick = {this.openProfilePage} > Edit </div> 
               </Col>
             </Row>
         </div>
@@ -48,6 +48,10 @@ class SideMenu extends Component {
         </div>
       </Page>
     );
+  }
+
+  openProfilePage() {
+    this.props.pushPage('profile');
   }
 }
 
