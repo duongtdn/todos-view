@@ -1,7 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page, Toolbar, ToolbarButton, 
+import { Page, Toolbar, ToolbarButton, Icon,
          Col, Row, Button } from 'react-onsenui'
 
 import { connect } from 'react-redux'
@@ -22,7 +22,7 @@ class SideMenu extends Component {
     return (
       <Toolbar>
         <div className = 'right'>
-          <ToolbarButton onClick = {this.props.hide} > X </ToolbarButton>
+          <ToolbarButton onClick = {this.props.hide} > <Icon icon = 'md-close' /> </ToolbarButton>
         </div>
       </Toolbar>
     )

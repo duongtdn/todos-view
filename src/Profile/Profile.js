@@ -2,7 +2,7 @@
 
 import React , { Component } from 'react'
 
-import { Page, Input, Button, Icon } from 'react-onsenui'
+import { Page, Input, Button, Icon, Toolbar, BackButton, ToolbarButton } from 'react-onsenui'
 
 import Connection from './Connection'
 
@@ -39,10 +39,28 @@ export default class extends Component {
 
   }
 
+  renderToolbar() {
+    return (
+      <Toolbar>
+        <div className = 'left'>
+          <BackButton> 
+            Back
+          </BackButton>
+        </div>
+        <div className = 'center'>  
+          <label> Profile </label> 
+        </div>
+        <div className = 'right'>  
+          <ToolbarButton> <Icon icon = 'md-people' /> </ToolbarButton> 
+        </div>
+      </Toolbar>
+    );
+  }
+
   render() {
 
     return (
-      <Page>
+      <Page renderToolbar = {this.renderToolbar} >
 
         <div className = 'profile-info'>
           <div className = 'display-name'>
