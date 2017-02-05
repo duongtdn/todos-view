@@ -16,6 +16,7 @@ class SideMenu extends Component {
 
     this.renderToolbar = this.renderToolbar.bind(this);
     this.openFriendsList = this.openFriendsList.bind(this);
+    this.changeName = this.changeName.bind(this);
   }
 
   renderToolbar() {
@@ -35,7 +36,7 @@ class SideMenu extends Component {
         <div className = 'sidemenu-user' >
             <div className = 'sidemenu-username' > 
               {this.props.user.displayName} 
-              <Button modifier = 'quiet' > 
+              <Button modifier = 'quiet' onClick = {this.changeName} > 
                 <Icon icon = 'md-edit' />
               </Button>
             </div>
@@ -60,6 +61,10 @@ class SideMenu extends Component {
 
   openFriendsList() {
     this.props.pushPage('friends');
+  }
+
+  changeName() {
+
   }
 }
 
