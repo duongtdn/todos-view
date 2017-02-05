@@ -4,8 +4,6 @@ import React , { Component } from 'react'
 
 import { Page, Input, Button, Icon, Toolbar, BackButton, ToolbarButton } from 'react-onsenui'
 
-import Connection from './Connection'
-
 export default class extends Component {
   constructor(props) {
     super(props);
