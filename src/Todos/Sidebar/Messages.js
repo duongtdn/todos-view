@@ -95,7 +95,7 @@ class Messages extends Component {
       <ListHeader>
         <Row>
           <Col style = {{textAlign : 'left'}} > Notification </Col>
-          <Col style = {{textAlign : 'right'}} > Clean ALl </Col>
+          <Col style = {{textAlign : 'right'}} >  </Col>
         </Row>
       </ListHeader>
     );

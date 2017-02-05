@@ -15,7 +15,7 @@ class SideMenu extends Component {
     super(props);
 
     this.renderToolbar = this.renderToolbar.bind(this);
-    this.openProfilePage = this.openProfilePage.bind(this);
+    this.openFriendsList = this.openFriendsList.bind(this);
   }
 
   renderToolbar() {
@@ -29,17 +29,25 @@ class SideMenu extends Component {
   }
 
   render() {
+    console.log(this.props.user)
     return (
       <Page renderToolbar = {this.renderToolbar} >
         <div className = 'sidemenu-user' >
-            <div className = 'sidemenu-username' > {this.props.user.displayName} </div>
+            <div className = 'sidemenu-username' > 
+              {this.props.user.displayName} 
+              <Button modifier = 'quiet' > 
+                <Icon icon = 'md-edit' />
+              </Button>
+            </div>
             <div className = 'sidemenu-email' > {this.props.user.email} </div>
+            <div>
+              <Button onClick = {this.openFriendsList}> <Icon icon = 'md-share' /> Connection </Button>
+            </div>
             <Row>
               <Col style ={{textAlign : 'left'}}> 
-                <div className = 'sidemenu-btn' onClick = {this.props.signOut} > Logout </div> 
               </Col>
               <Col style ={{textAlign : 'right'}} > 
-                <div className = 'sidemenu-btn' onClick = {this.openProfilePage} > Edit </div> 
+                <div className = 'sidemenu-btn' onClick = {this.props.signOut} > Logout </div> 
               </Col>
             </Row>
         </div>
@@ -50,8 +58,8 @@ class SideMenu extends Component {
     );
   }
 
-  openProfilePage() {
-    this.props.pushPage('profile');
+  openFriendsList() {
+    this.props.pushPage('friends');
   }
 }
 
