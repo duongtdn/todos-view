@@ -386,6 +386,11 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   font-style: bold;
 }
 
+.sidemenu-username input {
+  font-size: 24px;
+  font-style: bold;
+}
+
 .sidemenu-email {
   font-size: 14px;
 }

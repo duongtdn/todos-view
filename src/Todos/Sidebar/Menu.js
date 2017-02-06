@@ -1,7 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page, Toolbar, ToolbarButton, Icon,
+import { Page, Toolbar, ToolbarButton, Icon, Input,
          Col, Row, Button } from 'react-onsenui'
 
 import { connect } from 'react-redux'
@@ -13,6 +13,10 @@ class SideMenu extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      showNameInput : false
+    }
 
     this.renderToolbar = this.renderToolbar.bind(this);
     this.openFriendsList = this.openFriendsList.bind(this);
@@ -35,10 +39,17 @@ class SideMenu extends Component {
       <Page renderToolbar = {this.renderToolbar} >
         <div className = 'sidemenu-user' >
             <div className = 'sidemenu-username' > 
-              {this.props.user.displayName} 
-              <Button modifier = 'quiet' onClick = {this.changeName} > 
-                <Icon icon = 'md-edit' />
-              </Button>
+              <Row>
+                <Col> 
+                  <label className = {this.state.showNameInput ? 'hide' : ''}> {this.props.user.displayName} </label> 
+                  <Input className = {this.state.showNameInput ? '' : 'hide'} value = {this.props.user.displayName} />
+                </Col>              
+                <Col width = {40} >
+                  <Button modifier = 'quiet' onClick = {this.changeName} > 
+                    <Icon icon = {this.state.showNameInput ? 'md-save' : 'md-edit'} />
+                  </Button>
+                </Col>
+              </Row>
             </div>
             <div className = 'sidemenu-email' > {this.props.user.email} </div>
             <div>
@@ -64,7 +75,7 @@ class SideMenu extends Component {
   }
 
   changeName() {
-
+    this.setState({ showNameInput : !this.state.showNameInput });
   }
 }
 
