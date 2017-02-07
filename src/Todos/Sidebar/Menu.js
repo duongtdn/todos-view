@@ -48,7 +48,8 @@ class SideMenu extends Component {
               <Row>
                 <Col> 
                   <label className = {this.state.showNameInput ? 'hide' : ''}> {this.state.userDisplayName} </label> 
-                  <Input className = {this.state.showNameInput ? '' : 'hide'} 
+                  <Input modifier = 'underbar'
+                         className = {this.state.showNameInput ? '' : 'hide'} 
                          value = {this.props.user.displayName}
                          onChange = {e => this.handleNameInput(e.target.value)} />
                 </Col>              
