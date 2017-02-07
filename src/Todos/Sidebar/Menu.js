@@ -15,34 +15,42 @@ class SideMenu extends Component {
     super(props);
 
     this.state = {
+      userDisplayName : '',
       showNameInput : false
     }
 
     this.renderToolbar = this.renderToolbar.bind(this);
     this.openFriendsList = this.openFriendsList.bind(this);
     this.changeName = this.changeName.bind(this);
+    this.handleNameInput = this.handleNameInput.bind(this);
+    this.close = this.close.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({ userDisplayName : this.props.user.displayName});
   }
 
   renderToolbar() {
     return (
       <Toolbar>
         <div className = 'right'>
-          <ToolbarButton onClick = {this.props.hide} > <Icon icon = 'md-close' /> </ToolbarButton>
+          <ToolbarButton onClick = {this.close} > <Icon icon = 'md-close' /> </ToolbarButton>
         </div>
       </Toolbar>
     )
   }
 
   render() {
-    console.log(this.props.user)
     return (
       <Page renderToolbar = {this.renderToolbar} >
         <div className = 'sidemenu-user' >
             <div className = 'sidemenu-username' > 
               <Row>
                 <Col> 
-                  <label className = {this.state.showNameInput ? 'hide' : ''}> {this.props.user.displayName} </label> 
-                  <Input className = {this.state.showNameInput ? '' : 'hide'} value = {this.props.user.displayName} />
+                  <label className = {this.state.showNameInput ? 'hide' : ''}> {this.state.userDisplayName} </label> 
+                  <Input className = {this.state.showNameInput ? '' : 'hide'} 
+                         value = {this.props.user.displayName}
+                         onChange = {e => this.handleNameInput(e.target.value)} />
                 </Col>              
                 <Col width = {30} style = {{textAlign : 'right', color : 'rgba(38, 100, 171, 0.811765)'}} >
                   <label onClick = {this.changeName} > 
@@ -75,8 +83,35 @@ class SideMenu extends Component {
   }
 
   changeName() {
-    this.setState({ showNameInput : !this.state.showNameInput });
+    if (this.state.showNameInput) {
+      this.props.changeName(this.userInputName).then(() => {
+        // actual update user display name in UI after server response
+        this.setState({userDisplayName : this.props.user.displayName });
+      });
+      this.setState({ 
+        userDisplayName : this.userInputName, // optimistic update new user name
+        showNameInput : false
+      });
+    } else {
+      this.setState({ 
+        showNameInput : true
+      });
+    }
+    
   }
+
+  handleNameInput(name) {
+    if (name.length > 0) {
+      this.userInputName = name;
+    }   
+  }
+
+  close() {
+    this.userInputName = this.props.user.displayName;
+    this.setState({ showNameInput : false});
+    this.props.hide();
+  }
+
 }
 
 /* Container */
@@ -89,6 +124,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    changeName(name) {
+      return dispatch(user.changeName(name));
+    }
   }
 };
 

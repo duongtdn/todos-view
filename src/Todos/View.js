@@ -78,8 +78,6 @@ class Todos extends Component {
   }
 
   showSidebar() {
-    // temporary signout
-    // this.props.signOut();
     this.setState({ isSidebarOpen : true });
   }
 
