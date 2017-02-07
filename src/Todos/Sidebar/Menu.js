@@ -44,10 +44,10 @@ class SideMenu extends Component {
                   <label className = {this.state.showNameInput ? 'hide' : ''}> {this.props.user.displayName} </label> 
                   <Input className = {this.state.showNameInput ? '' : 'hide'} value = {this.props.user.displayName} />
                 </Col>              
-                <Col width = {40} >
-                  <Button modifier = 'quiet' onClick = {this.changeName} > 
-                    <Icon icon = {this.state.showNameInput ? 'md-save' : 'md-edit'} />
-                  </Button>
+                <Col width = {30} style = {{textAlign : 'right', color : 'rgba(38, 100, 171, 0.811765)'}} >
+                  <label onClick = {this.changeName} > 
+                    <Icon size = {18} icon = {this.state.showNameInput ? 'md-save' : 'md-edit'} />
+                  </label>
                 </Col>
               </Row>
             </div>
