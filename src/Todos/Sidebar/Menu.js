@@ -23,6 +23,8 @@ class SideMenu extends Component {
     this.openFriendsList = this.openFriendsList.bind(this);
     this.changeName = this.changeName.bind(this);
     this.handleNameInput = this.handleNameInput.bind(this);
+    this.showNameEditor = this.showNameEditor.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
     this.close = this.close.bind(this);
   }
 
@@ -51,11 +53,12 @@ class SideMenu extends Component {
                   <Input modifier = 'underbar'
                          className = {this.state.showNameInput ? '' : 'hide'} 
                          value = {this.props.user.displayName}
-                         onChange = {e => this.handleNameInput(e.target.value)} />
+                         onChange = {e => this.handleNameInput(e.target.value)}
+                         onKeyUp = {e => this.handleKeyUp(e.keyCode, e.target.value)} />
                 </Col>              
                 <Col width = {30} style = {{textAlign : 'right', color : 'rgba(38, 100, 171, 0.811765)'}} >
-                  <label onClick = {this.changeName} > 
-                    <Icon size = {18} icon = {this.state.showNameInput ? 'md-save' : 'md-edit'} />
+                  <label onClick = {this.showNameEditor} > 
+                    <Icon size = {18} icon = {this.state.showNameInput ? null : 'md-edit'} />
                   </label>
                 </Col>
               </Row>
@@ -83,6 +86,18 @@ class SideMenu extends Component {
     this.props.pushPage('friends');
   }
 
+  showNameEditor() {
+    this.setState({ 
+      showNameInput : true
+    });
+  }
+
+  handleKeyUp(code, text) {
+    if (code === 13) {  // enter
+      this.changeName();
+    }
+  }
+
   changeName() {
     if (this.state.showNameInput) {
       this.props.changeName(this.userInputName).then(() => {
@@ -93,12 +108,7 @@ class SideMenu extends Component {
         userDisplayName : this.userInputName, // optimistic update new user name
         showNameInput : false
       });
-    } else {
-      this.setState({ 
-        showNameInput : true
-      });
     }
-    
   }
 
   handleNameInput(name) {
