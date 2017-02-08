@@ -146,9 +146,9 @@ class FriendsView extends Component {
   handleSearchInput(text) {
     this.searchInput = text;
     const result = this.state.friends.filter(user => {
-      const pattern = new RegExp(text.toUpperCase());
-      const email = user.email.toUpperCase();
-      const name = user.name.toUpperCase();
+      const pattern = new RegExp(text.toLowerCase());
+      const email = user.email.toLowerCase();
+      const name = user.name.toLowerCase();
       return (text.length === 0) || (pattern.test(name) || pattern.test(email));
     });
     this.setState({ result });       
@@ -158,7 +158,7 @@ class FriendsView extends Component {
     this.searchInput = text; 
     if (code === 13) { // enter key
       if (this.state.result.length === 0) {
-        this.props.searchByEmail(this.searchInput);
+        this.props.searchByEmail(this.searchInput.toLowerCase().replace(/ +/g,''));
       }
     }
   }
