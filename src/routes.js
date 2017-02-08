@@ -8,7 +8,6 @@ import FriendsView from './Friends/View'
 import LoginView from './Login/View'
 import SignupView from './Signup/View'
 import SyncView from './Sync/View'
-import ProfileView from './Profile/View'
 
 export default {
   todos : { name : 'todos', view : <TodosView /> },
@@ -17,6 +16,5 @@ export default {
   login : { name : 'login', view : <LoginView />},
   relogin : { name : 'relogin', view : <LoginView />},  // workaround for onsenui resetPage issue
   signup : { name : 'signup', view : <SignupView />},
-  sync : { name : 'sync', view : <SyncView />},
-  profile : { name : 'profile', view : <ProfileView />}
+  sync : { name : 'sync', view : <SyncView />}
 }
