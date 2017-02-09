@@ -4,7 +4,6 @@ import React , { Component } from 'react'
 
 import {Toolbar, ToolbarButton, BackButton, Input, Icon} from 'react-onsenui';
 
-import AutofocusInput from '../Components/AutofocusInput'
 
 export default class extends Component {
 
@@ -20,7 +19,7 @@ export default class extends Component {
           </BackButton>
         </div>
         <div className = 'center'>  
-          <AutofocusInput type = 'search' placeholder = 'search by email' 
+          <Input type = 'search' placeholder = 'search by email' 
                           onChange = {e => this.props.handleSearchInput(e.target.value)} 
                           onKeyUp = { e => this.props.handleKeyUp(e.keyCode, e.target.value)} />
         </div>
