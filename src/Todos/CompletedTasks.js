@@ -37,6 +37,7 @@ export default class extends Component {
           dataSource = {this.props.todos}
           renderRow = {this.renderRow}
         />
+        <div style = {{paddingBottom : '80px'}} />
       </Page>
     );
   }
