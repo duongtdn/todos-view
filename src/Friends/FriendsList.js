@@ -26,8 +26,8 @@ export default class extends Component {
   }
 
   renderRow(row) {
-    
-    const actionBtn = row.connected ? 
+  
+    const actionBtn = row.id === this.props.auth.uid ? null : row.connected ? 
       <Button modifier = 'quiet' onClick = {() => this.showAlertDialog(row)} > 
         <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/> 
       </Button> : 
@@ -35,15 +35,24 @@ export default class extends Component {
         <Icon icon = 'md-plus' size = {24} style={{color: 'grey'}}/> 
       </Button>;
 
-    const selectBtn = row.connected ?
+    const selectBtn = row.id === this.props.auth.uid ? null : row.connected ?
       <Input type = 'checkbox' inputId = {`checkbox-${row.id}`} 
                  onChange = {evt => this.selectFriend(row, evt)}
                  checked = {this.isSelected(row.id)} /> :
       null;
 
-    const thirdLbl = row.connected ?
-      <Row className = 'todo-editor-collaborate-relationship'> {row.relationship} </Row> :
-      <Row className = 'todo-editor-collaborate-relationship'> not connected </Row> ;
+    const thirdLbl = row.id === this.props.auth.uid ? 
+        <Row className = 'todo-editor-collaborate-relationship'> 
+           This is Me 
+        </Row>  : 
+        row.connected ?
+          <Row className = 'todo-editor-collaborate-relationship'> 
+            {row.relationship} 
+          </Row> 
+          :
+          <Row className = 'todo-editor-collaborate-relationship'> 
+            not connected 
+          </Row> ;
     
     return (
       <ListItem key = {row.id} modifier = 'nodivider' >

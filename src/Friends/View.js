@@ -112,7 +112,8 @@ class FriendsView extends Component {
                      selectFriend = {this.selectFriend} 
                      addAndSelectFriend = {this.addAndSelectFriend} 
                      unfriend = {this.props.unfriend}
-                     platform = {this.props.platform} />
+                     platform = {this.props.platform}
+                     auth = {this.props.auth} />
       </Page>
     );
   }
@@ -191,7 +192,8 @@ class FriendsView extends Component {
 const mapStateToProps = state => {  
   return { 
     friends : state.user.friends,
-    search : state.search
+    search : state.search,
+    auth : state.user.auth
   };
 };
 
