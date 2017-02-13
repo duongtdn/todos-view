@@ -81,6 +81,10 @@ export default class extends Component {
   }
 
   render() {
+    const message = this.props.searchingDatabase ?
+      <div className = 'search-message'> Searching... </div> :
+      this.props.matchedSearch ? null :
+      <div className = 'search-message'> No match found </div>
     return (
       <Page>
         <List dataSource = {this.props.data} 
@@ -88,6 +92,7 @@ export default class extends Component {
               renderHeader = {this.renderHeader}
               modifier = 'noborder'
         />
+        {message}
         <AddFriend show = {this.state.dialogShown}
                    cancel = {this.hideDialog}
                    accept = {this.addAndSelectFriend}

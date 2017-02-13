@@ -436,3 +436,7 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
 .dialog-container {
   background-color: white;
 }
+.search-message {
+  padding: 16px;
+  color: #ff5722;
+}

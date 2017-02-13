@@ -15,6 +15,8 @@ class FriendsView extends Component {
 
     this.state = {
       result : [],
+      searchingDatabase : false,
+      matchedSearch : true,
       friends : [],
       selectedFriends : {}
     };
@@ -45,10 +47,16 @@ class FriendsView extends Component {
   componentWillReceiveProps(nextProps) {    
     const result = [];
     if (nextProps.search) {
-      const user = {...nextProps.search};
-      user.connected = false;
-      user.relationship = '';
-      result.push(user);
+      if (nextProps.search.length > 0) {
+        nextProps.search.forEach(user => {
+          user.connected = false;
+          user.relationship = '';
+          result.push(user);
+        });
+        this.setState({matchedSearch : true, searchingDatabase : false});
+      } else {
+        this.setState({matchedSearch : false, searchingDatabase : false});
+      } 
     }
 
     const friends = this.getFriendsFromProps(nextProps);
@@ -107,6 +115,8 @@ class FriendsView extends Component {
             renderBottomToolbar = {this.renderBottomToolbar}
       >
         <FriendsList category = 'Friends' 
+                     searchingDatabase = {this.state.searchingDatabase}
+                     matchedSearch = {this.state.matchedSearch}
                      data = {data}
                      selectedFriends = {this.state.selectedFriends} 
                      selectFriend = {this.selectFriend} 
@@ -152,14 +162,19 @@ class FriendsView extends Component {
       const name = user.name.toLowerCase();
       return (text.length === 0) || (pattern.test(name) || pattern.test(email));
     });
-    this.setState({ result });       
+    if (result.length > 0) {
+      this.setState({ result, matchedSearch : true }); // explicitly specify matched
+    } else {
+      this.setState({ result }); // since no match is only show up for search DB, don't specify it here for local search
+    }       
   }
 
   handleKeyUp(code, text) {
     this.searchInput = text; 
     if (code === 13) { // enter key
-      if (this.state.result.length === 0) {
+      if (this.state.result.length === 0) { // not found from local, search DB
         this.props.searchByEmail(this.searchInput.toLowerCase().replace(/ +/g,''));
+        this.setState({ searchingDatabase : true});
       }
     }
   }
