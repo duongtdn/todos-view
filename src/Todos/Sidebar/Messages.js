@@ -6,18 +6,19 @@ import { Page, Button, Icon,
          Col, Row } from 'react-onsenui'
 
 import { connect } from 'react-redux'
-import { todos } from 'todos-data'
+import { user, todos } from 'todos-data'
 
 class AlertMessage extends Component {
   render() {
     return (
       <ListItem >
-        <div className = 'center' >
+        <div >
           {this.props.msg.content}
         </div>
-        <div className = 'right' >
-          <Button modifier = 'quiet'  > 
-            <Icon icon = 'md-delete' style={{color: 'grey'}}/> 
+        <div style = {{textAlign: 'center', width : '100%'}} >
+          <Button modifier = 'quiet' 
+                  onClick = {() => this.props.deleteMessage(this.props.msg.id)} > 
+            OK 
           </Button>
         </div>
       </ListItem>
@@ -60,7 +61,7 @@ class Message extends Component {
   renderMessage(msg) {
     switch (msg.type) {
       case 'alert' :
-        return <AlertMessage msg = {msg} />
+        return <AlertMessage msg = {msg} deleteMessage = {this.props.deleteMessage} />
       case 'confirm' :
         return <ConfirmMessage msg = {msg} ok = {this.ok} cancel = {this.cancel} />
     }
@@ -105,7 +106,8 @@ class Messages extends Component {
     return (
       <Message key = {`${row.id}`} data = {row}
                acceptTodo = {this.props.acceptTodo}
-               ignoreTodo = {this.props.ignoreTodo} />
+               ignoreTodo = {this.props.ignoreTodo}
+               deleteMessage = {this.props.deleteMessage} />
     );
   }
 
@@ -141,6 +143,9 @@ const mapDispatchToProps = dispatch => {
     },
     ignoreTodo(msg) {
       dispatch(todos.decline(msg));
+    },
+    deleteMessage(msgId) {
+      dispatch(user.messages.delete([msgId]));
     }
   }
 };
