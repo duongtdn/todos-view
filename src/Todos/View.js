@@ -87,8 +87,10 @@ class Todos extends Component {
 
   signOut() {
     this.hideSidebar();
-    this.props.signOut();
-    this.props.resetPage('login');
+    this.props.signOut().then(() => {
+      this.props.resetPage('login');
+    });
+    
   }
 
 }
@@ -107,7 +109,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(currentTodo.update(todo));
     },
     signOut() {
-      dispatch(user.signOut());
+      return dispatch(user.signOut());
     }
   }
 };

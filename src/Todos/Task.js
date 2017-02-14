@@ -52,7 +52,7 @@ export default class extends Component {
         <div className = 'center' onClick = {() => this.toggleEditMenu()}>
           <div className = {this.state.editMenu}>
             <Button modifier='quiet' onClick = {() => this.openEditPage(data)}>  Edit <Icon icon = 'md-edit' /> </Button>
-            <Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>
+            {/*<Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>*/}
           </div>
           <div className = 'todos-text' >
             {data.text}
