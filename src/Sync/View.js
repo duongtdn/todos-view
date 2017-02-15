@@ -26,7 +26,7 @@ class SyncView extends Component {
       this.props.loadTodos().then(() => {
         /* wait at least 100ms for finishing navigation animation */
         setTimeout(() => {
-          this.props.pushPage('todos')
+          this.props.resetPage('todos')
         }, 500);
         
       });
