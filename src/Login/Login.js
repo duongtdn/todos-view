@@ -59,7 +59,7 @@ export default class extends Component {
           </div>
 
           <div className = 'login-action' >
-            <Button modifier = 'large' onClick = {this.login} > Login </Button>
+            <Button modifier = 'large' onClick = {this.login} disabled = {this.state.isSigningIn} > Login </Button>
           </div>
 
           <div className = 'login-break' >

@@ -63,7 +63,7 @@ export default class extends Component {
           </div>
 
           <div className = 'login-action' >
-            <Button modifier = 'large' onClick = {this.signup} > Signup </Button>
+            <Button modifier = 'large' onClick = {this.signup} disabled = {this.state.isSigningUp} > Signup </Button>
           </div>
 
 
