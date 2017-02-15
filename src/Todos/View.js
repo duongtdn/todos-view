@@ -86,11 +86,7 @@ class Todos extends Component {
   }
 
   signOut() {
-    this.hideSidebar();
-    this.props.signOut().then(() => {
-      this.props.resetPage('login');
-    });
-    
+    this.props.resetPage('logout');   
   }
 
 }

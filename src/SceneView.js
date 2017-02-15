@@ -51,7 +51,7 @@ export default class AppView extends Component {
 
   resetPage(name, options = {}) {
     /* quick fix for onsenui resetPage duplicated key */
-    if (this.navigator.pages[0].key === 'login') {
+    if (name === 'login' && this.navigator.pages[0].key === 'login') {
       name = 'relogin';
     }
     if (routes[name]) {
