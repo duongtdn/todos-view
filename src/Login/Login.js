@@ -70,6 +70,10 @@ export default class extends Component {
             <Button modifier = 'quiet large' onClick = {this.props.signup} > New user ? Sign up here </Button>
           </div>
 
+          <div className = 'dummy-btn' >
+            <button id = 'dummy' />
+          </div>
+
         </div>
       </Page>
     );
@@ -97,12 +101,15 @@ export default class extends Component {
     // need to validate email before login
     this.props.login(credential)
       .then( usr => {
+        // login success
         this.setState({ 
           message : 'login success', 
           isSigningIn : false, 
           success : true 
         });
-        /* login success, move to sync page */
+        // blur from input box by focus to a dummy element
+        document.getElementById('dummy').focus();
+        /* move to sync page */
         this.props.success(usr.uid);
       })
       .catch( err => {
