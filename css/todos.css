@@ -440,3 +440,8 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   padding: 16px;
   color: #ff5722;
 }
+
+.dummy-btn {
+  position: fixed;
+  top: -100px;
+}

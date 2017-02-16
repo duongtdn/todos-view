@@ -124,6 +124,11 @@ class FriendsView extends Component {
                      unfriend = {this.props.unfriend}
                      platform = {this.props.platform}
                      auth = {this.props.auth} />
+        
+        <div className = 'dummy-btn' >
+          <button id = 'dummy' />
+        </div>
+
       </Page>
     );
   }
@@ -174,8 +179,10 @@ class FriendsView extends Component {
     if (code === 13) { // enter key
       if (this.state.result.length === 0) { // not found from local, search DB
         this.props.searchByEmail(this.searchInput.toLowerCase().replace(/ +/g,''));
-        this.setState({ searchingDatabase : true});
+        this.setState({ searchingDatabase : true});        
       }
+      // blur from input box by focus to a dummy element
+      document.getElementById('dummy').focus();
     }
   }
 
