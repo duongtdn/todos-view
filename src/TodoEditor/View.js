@@ -31,7 +31,7 @@ class TodoEditor extends Component {
   }
 
   renderToolbar() {
-    const title = this.props.data ? 'Edit Todo' : 'New Todo';
+    const title = this.props.currentTodo ? 'Edit Todo' : 'New Todo';
     return (
       <Toolbar platform = {this.props.platform} title = {title}/>
     );
