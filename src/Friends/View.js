@@ -178,6 +178,11 @@ class FriendsView extends Component {
   handleKeyUp(code, text) {
     this.searchInput = text; 
     if (code === 13) { // enter key
+      if (text === '') {
+        // blur from input box by focus to a dummy element
+        document.getElementById('dummy').focus();
+        return;
+      }
       const result = this.handleSearchInput(text); // make sure that local search is done first
                                                    // since this event is invoked before react update state.result from handleSearchInput
       if (result.length === 0) { // not found from local, search DB
