@@ -15,8 +15,6 @@ const mapStateToProps = state => {
   todos.sort( (a, b) => {
 
     function sortBy(key, a, b, nextSortFn) {
-      console.log(key);
-      console.log(`${a.text}  -   ${b.text}`)
       if (a[key] && b[key]) {
         return nextSortFn(a, b);
       }
