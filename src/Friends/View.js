@@ -171,13 +171,16 @@ class FriendsView extends Component {
       this.setState({ result, matchedSearch : true }); // explicitly specify matched
     } else {
       this.setState({ result }); // since no match is only show up for search DB, don't specify it here for local search
-    }       
+    }   
+    return result; 
   }
 
   handleKeyUp(code, text) {
     this.searchInput = text; 
     if (code === 13) { // enter key
-      if (this.state.result.length === 0) { // not found from local, search DB
+      const result = this.handleSearchInput(text); // make sure that local search is done first
+                                                   // since this event is invoked before react update state.result from handleSearchInput
+      if (result.length === 0) { // not found from local, search DB
         this.props.searchByEmail(this.searchInput.toLowerCase().replace(/ +/g,''));
         this.setState({ searchingDatabase : true});        
       }
