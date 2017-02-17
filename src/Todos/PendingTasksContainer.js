@@ -13,28 +13,35 @@ const mapStateToProps = state => {
     }    
   }
   todos.sort( (a, b) => {
-    if (a.urgent && b.urgent) {
-      // both are urgent, sort by duedate
-      return a.dueDate - b.dueDate;
+
+    function sortBy(key, a, b, nextSortFn) {
+      console.log(key);
+      console.log(`${a.text}  -   ${b.text}`)
+      if (a[key] && b[key]) {
+        return nextSortFn(a, b);
+      }
+      if (a[key]) {
+        // a[key] exist but not b[key]
+        return -1;
+      }
+      if (b[key]) {
+        // b[key] exist but not a[key]
+        return 1;
+      }
+      // none has key defined
+      return nextSortFn(a, b);
     }
-    if (a.urgent) {
-      // only a is urgent
-      return -1;
+
+    function sortByDueDate(a, b) {
+      return sortBy('dueDate', a, b, (a, b) => a.dueDate - b.dueDate);
     }
-    if (b.urgent) {
-      // only b is urgent
-      return 1;
+
+    function sortByUrgent(a, b, nextSortFn) {
+      return sortBy('urgent', a, b, (a, b) => sortByDueDate(a, b));
     }
-    if (a.dueDate && !b.dueDate) {
-      // b has no due date
-      return -1;
-    }
-    if (!a.dueDate && b.dueDate) {
-      // a has no due date
-      return 1;
-    }
-    // none is urgent
-    return a.dueDate - b.dueDate;
+    
+    return sortByUrgent(a, b);
+    
   });
   return { todos };
 };
