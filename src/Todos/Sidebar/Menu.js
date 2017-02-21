@@ -65,10 +65,13 @@ class SideMenu extends Component {
             </div>
             <div className = 'sidemenu-email' > {this.props.user.email} </div>
             <div>
-              <Button onClick = {this.openFriendsList}> <Icon icon = 'md-share' /> Connection </Button>
+              <a className = 'sidemenu-link' href='#'> Change Password </a>
             </div>
-            <Row>
+            <Row className = 'sidemenu-bottom-bar'>
               <Col style ={{textAlign : 'left'}}> 
+                <div>
+                  <div className = 'sidemenu-btn' onClick = {this.openFriendsList}> Connection </div>
+                </div>
               </Col>
               <Col style ={{textAlign : 'right'}} > 
                 <div className = 'sidemenu-btn' onClick = {this.props.signOut} > Logout </div> 

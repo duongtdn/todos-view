@@ -399,6 +399,14 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   color: rgba(38, 100, 171, 0.811765);
 }
 
+.sidemenu-link {
+  font-size: 12px;
+}
+
+.sidemenu-bottom-bar {
+  margin-top: 32px;
+}
+
 .add-friend-diaglog-title {
   margin-top: 16px;
   margin-bottom: 16px;
