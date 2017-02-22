@@ -21,14 +21,16 @@ class SyncView extends Component {
   }
 
   componentDidUpdate() {
+    const resetTodo = () => {
+      this.props.resetPage('todos').catch(err => {
+        /* not finish animation, wait at least 100ms then retry */
+        setTimeout(() => resetTodo(), 100);
+      });
+    }
     if (this.props.user && this.shouldSyncTodo) {
       this.shouldSyncTodo = false; // prevent run twice
       this.props.loadTodos().then(() => {
-        /* wait at least 100ms for finishing navigation animation */
-        setTimeout(() => {
-          this.props.resetPage('todos')
-        }, 500);
-        
+        resetTodo();
       });
     };
   }

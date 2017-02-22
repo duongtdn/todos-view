@@ -26,6 +26,7 @@ class SideMenu extends Component {
     this.showNameEditor = this.showNameEditor.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.close = this.close.bind(this);
+    this.openChangePSW = this.openChangePSW.bind(this);
   }
 
   componentWillMount() {
@@ -65,7 +66,7 @@ class SideMenu extends Component {
             </div>
             <div className = 'sidemenu-email' > {this.props.user.email} </div>
             <div>
-              <a className = 'sidemenu-link' href='#'> Change Password </a>
+              <a className = 'sidemenu-link' href='#' onClick = {this.openChangePSW} > Change Password </a>
             </div>
             <Row className = 'sidemenu-bottom-bar'>
               <Col style ={{textAlign : 'left'}}> 
@@ -124,6 +125,10 @@ class SideMenu extends Component {
     this.userInputName = this.props.user.displayName;
     this.setState({ showNameInput : false});
     this.props.hide();
+  }
+
+  openChangePSW() {
+    this.props.pushPage('login', {nextRoute : 'changePSW'});
   }
 
 }

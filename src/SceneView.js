@@ -40,8 +40,9 @@ export default class AppView extends Component {
 
   pushPage(name, data, options) {
     if (routes[name]) {
-      routes[name].data = data;
-      this.navigator.pushPage(routes[name], options);
+      const page = {...routes[name]};
+      page.data = data;
+      this.navigator.pushPage(page, options);
     }    
   }
 
@@ -55,7 +56,7 @@ export default class AppView extends Component {
       name = 'relogin';
     }
     if (routes[name]) {
-      this.navigator.resetPage(routes[name], options);
+      return this.navigator.resetPage(routes[name], options);
     }
   }
 
