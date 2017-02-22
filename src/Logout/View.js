@@ -15,9 +15,7 @@ class Logout extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.signOut();
-    },1000);
+    this.signOut();
   }
 
   render() {
@@ -36,8 +34,13 @@ class Logout extends Component {
   }
 
   signOut() {
+    const resetToLogin = () => {
+      this.props.resetPage('login').catch(err => {
+        setTimeout(() => resetToLogin(), 100);
+      });
+    }
     this.props.signOut().then(() => {
-      this.props.resetPage('login');
+      resetToLogin();
     });
     
   }
