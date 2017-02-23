@@ -31,7 +31,6 @@ class SyncView extends Component {
   }
 
   render() {
-    console.log(this.state.conn)
     if (this.state.conn) {
       return (
         <Page>
