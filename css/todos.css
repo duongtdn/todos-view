@@ -364,6 +364,12 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   color: rgba(24,103,194,0.81);
 }
 
+.forgot-pwd {
+  font-size: 12px;
+  text-align: right;
+  width: 100%;
+}
+
 .sync-info {
   padding-top: 100px;
   text-align: center;
