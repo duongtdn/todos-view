@@ -27,7 +27,7 @@ class SyncView extends Component {
   }
 
   componentDidUpdate() {
-    this.tryLoadTodos();
+    // this.tryLoadTodos();
   }
 
   render() {
@@ -67,13 +67,15 @@ class SyncView extends Component {
     this.setState({conn : true});
     setTimeout(() => {
       this.tryLoadUser();
-    }, 3000);
+    }, 1000);
   }
 
   tryLoadUser() {
     this.props.checkConnection().then(() => {
       if (auth.currentUser && auth.currentUser.uid) {
-        this.props.loadUser();
+        this.props.loadUser().then(() => {
+          this.tryLoadTodos();
+        });
       }
       this.setState({ conn : true });     
     }).catch(() => {
