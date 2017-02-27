@@ -38,9 +38,6 @@ class ChangePSW extends Component {
   }
 
   render() {
-    const spining = this.state.isSigningIn ? 
-      <Icon icon = 'md-spinner' spin /> :
-      null;
     return (
       <Page renderToolbar = {this.renderToolbar} >
 
@@ -51,7 +48,6 @@ class ChangePSW extends Component {
               <h3 className = 'center' > CHANGE PASSWORD </h3>
             </div>
             <div>
-              {spining}
               <label className = {this.state.success ? 'login-success' : 'login-error'} > 
                 {this.state.message} 
               </label>

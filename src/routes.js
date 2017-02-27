@@ -9,7 +9,7 @@ import LoginView from './Login/View'
 import SignupView from './Signup/View'
 import SyncView from './Sync/View'
 import LogoutView from './Logout/View'
-import ChangePSWView from './Password/View'
+import ChangePSWView from './Password/ChangeView'
 import ResetPSWView from './Password/ResetView'
 
 export default {
