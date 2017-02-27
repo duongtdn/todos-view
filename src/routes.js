@@ -10,6 +10,7 @@ import SignupView from './Signup/View'
 import SyncView from './Sync/View'
 import LogoutView from './Logout/View'
 import ChangePSWView from './Password/View'
+import ResetPSWView from './Password/ResetView'
 
 export default {
   todos : { name : 'todos', view : <TodosView /> },
@@ -20,5 +21,6 @@ export default {
   signup : { name : 'signup', view : <SignupView />},
   sync : { name : 'sync', view : <SyncView />},
   logout : { name : 'logout', view : <LogoutView />},
-  changePSW : { name : 'changePSW', view : <ChangePSWView />}
+  changePSW : { name : 'changePSW', view : <ChangePSWView />},
+  resetPSW : { name : 'resetPSW', view : <ResetPSWView />}
 }

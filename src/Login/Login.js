@@ -17,6 +17,7 @@ export default class extends Component {
     };
 
     this.login = this.login.bind(this);
+    this.openResetPasswordPage = this.openResetPasswordPage.bind(this);
 
   }
 
@@ -53,7 +54,7 @@ export default class extends Component {
                 <Input type = 'password' placeholder = 'Password'
                        onChange = {e => this.getUserPassword(e.target.value)}
                        onKeyUp = {e => this.handleKeyUp(e.keyCode)} />
-                <div className = 'forgot-pwd'> <a href = '#'>Forgot your password </a> </div>
+                <div className = 'forgot-pwd' onClick = {this.openResetPasswordPage} > <a href = '#'>Forgot your password </a> </div>
               </ListItem>
 
             </List>
@@ -133,6 +134,10 @@ export default class extends Component {
     if (code === 13) { // enter key
       this.login()
     }
+  }
+
+  openResetPasswordPage() {
+    this.props.openResetPasswordPage()
   }
 
 }

@@ -16,6 +16,7 @@ class LoginView extends Component {
 
     this.success = this.success.bind(this);
     this.renderToolbar = this.renderToolbar.bind(this);
+    this.openResetPasswordPage = this.openResetPasswordPage.bind(this);
   }
 
   renderToolbar() {
@@ -40,7 +41,8 @@ class LoginView extends Component {
       <Page renderToolbar = {this.renderToolbar} >
         <Login login = {this.props.login} 
                signup = {() => this.props.pushPage('signup', null, { animation : 'lift' })} 
-               success = {this.success} />
+               success = {this.success}
+               openResetPasswordPage = {this.openResetPasswordPage} />
       </Page>
     );
   }
@@ -51,6 +53,10 @@ class LoginView extends Component {
     } else {
       this.props.pushPage('sync', uid);
     }
+  }
+
+  openResetPasswordPage() {
+    this.props.pushPage('resetPSW');
   }
 
 }
