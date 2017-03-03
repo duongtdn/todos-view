@@ -11,7 +11,9 @@ export default {
 
   platform : null,
   rootEl : 'app-root',
-  
+  ready : false,
+  taskQueue: [],
+
   setPlatform (platform) {
     ons.platform.select(platform);
     this.platform = platform;
@@ -35,21 +37,40 @@ export default {
     this.receivedEvent('deviceready');
   },
 
-  receivedEvent() {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        render(
-          <App platform = {this.platform} isLogged = {true} />, 
-          document.getElementById(this.rootEl)
-        );
-      } else {
-        render(
-          <App platform = {this.platform} isLogged = {false} />, 
-          document.getElementById(this.rootEl)
-        );
+  receivedEvent(event) {
+    if (event === 'deviceready') {
+      // mark internal state as ready
+      this.ready = true;
+      // load react element dpending login status 
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          render(
+            <App platform = {this.platform} isLogged = {true} />, 
+            document.getElementById(this.rootEl)
+          );
+        } else {
+          render(
+            <App platform = {this.platform} isLogged = {false} />, 
+            document.getElementById(this.rootEl)
+          );
+        }
+      });
+      // exec queue func if any
+      if (this.taskQueue.length !== 0) {
+        // exec all task in queue, then empty the queue
+        this.taskQueue.forEach(task => task());
+        this.taskQueue = [];
       }
-    });
+    }
     
+  },
+
+  exec(fn) {
+    if (this.ready) {
+      fn();
+    } else {
+      this.taskQueue.push(fn);
+    }  
   }      
 
 }
