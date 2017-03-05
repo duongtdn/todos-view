@@ -72,22 +72,32 @@ class SyncView extends Component {
 
   retryLoadUser() {
     this.setState({conn : true});
-    setTimeout(() => {
-      this.tryLoadUser();
-    }, 3000);
+    let attemp = 0;
+
+    const retry = () => {
+      this.props.checkConnection().then(() => {
+        this.tryLoadUser();
+        this.setState({ conn : true }); 
+      }).catch(() => {
+        attemp++;
+        if (attemp < 100) {   // try 100 times, each check 100ms
+          setTimeout(() => retry(), 100);
+        } else {
+          this.setState({ conn : false });
+        }    
+      });
+    };
+
+    retry();
+
   }
 
   tryLoadUser() {
-    this.props.checkConnection().then(() => {
-      if (auth.currentUser && auth.currentUser.uid) {
-        this.props.loadUser().then(() => {
-          this.tryLoadTodos();
-        });
-      }
-      this.setState({ conn : true });     
-    }).catch(() => {
-      this.setState({ conn : false });
-    });
+    if (auth.currentUser && auth.currentUser.uid) {
+      this.props.loadUser().then(() => {
+        this.tryLoadTodos();
+      });
+    }    
   }
 
   tryLoadTodos() {
@@ -100,8 +110,8 @@ class SyncView extends Component {
     if (this.props.user && this.shouldSyncTodo) {
       this.shouldSyncTodo = false; // prevent run twice
       this.props.loadTodos().then(() => {
-        resetTodo();
         loadAd();
+        resetTodo();
       });
     };
   }
