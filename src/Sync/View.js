@@ -6,6 +6,13 @@ import { Page, Icon, Button} from 'react-onsenui'
 
 import { connect } from 'react-redux'
 import {auth, user, todos, connection } from 'todos-data'
+import app from '../exporter'
+
+function loadAd() {
+  if (app && app.plugin('ad')) {
+    app.plugin('ad').showBottomBanner();
+  }
+}
 
 class SyncView extends Component {
 
@@ -94,6 +101,7 @@ class SyncView extends Component {
       this.shouldSyncTodo = false; // prevent run twice
       this.props.loadTodos().then(() => {
         resetTodo();
+        loadAd();
       });
     };
   }
