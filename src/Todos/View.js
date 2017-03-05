@@ -10,6 +10,8 @@ import Toolbar from './Toolbar'
 import Tabbar from './Tabbar'
 import SideMenu from './Sidebar/Menu'
 
+import app from '../exporter'
+
 class Todos extends Component {
 
   constructor(props) {
@@ -23,6 +25,12 @@ class Todos extends Component {
     this.showSidebar = this.showSidebar.bind(this);
     this.hideSidebar = this.hideSidebar.bind(this);
     this.signOut = this.signOut.bind(this);
+  }
+
+  componentDidMount() {
+    if (app && app.plugin('ad')) {
+      app.plugin('ad').showBottomBanner();
+    }
   }
 
   renderToolbar() {

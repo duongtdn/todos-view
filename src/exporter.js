@@ -13,6 +13,7 @@ export default {
   rootEl : 'app-root',
   ready : false,
   taskQueue: [],
+  _plugins : {},
 
   setPlatform (platform) {
     ons.platform.select(platform);
@@ -72,6 +73,18 @@ export default {
       this.taskQueue.push(fn);
     }  
     return this;
-  }      
+  },
+
+  addPlugin(plugin) {
+    for (let key in plugin) {
+      this._plugins[key] = plugin[key];
+    }
+    
+    return this;
+  },
+
+  plugin(name) {
+    return this._plugins[name];
+  }
 
 }
