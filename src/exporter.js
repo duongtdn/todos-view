@@ -71,6 +71,7 @@ export default {
     } else {
       this.taskQueue.push(fn);
     }  
+    return this;
   }      
 
 }
