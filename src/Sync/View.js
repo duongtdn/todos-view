@@ -23,7 +23,7 @@ class SyncView extends Component {
   }
 
   componentDidMount() {
-    this.tryLoadUser();
+    this.retryLoadUser();
   }
 
   componentDidUpdate() {
@@ -67,7 +67,7 @@ class SyncView extends Component {
     this.setState({conn : true});
     setTimeout(() => {
       this.tryLoadUser();
-    }, 1000);
+    }, 3000);
   }
 
   tryLoadUser() {
