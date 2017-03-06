@@ -104,7 +104,7 @@ class SyncView extends Component {
     if (this.props.user && this.shouldSyncTodo) {
       this.shouldSyncTodo = false; // prevent run twice
       this.props.loadTodos().then(() => {
-        ad.loadBanner();
+        ad.showBanner();
         resetTodo();
       });
     };

@@ -7,6 +7,8 @@ import { Page, Icon } from 'react-onsenui'
 import { connect } from 'react-redux'
 import { user } from 'todos-data'
 
+import ad from '../ad'
+
 class Logout extends Component {
 
   constructor(props) {
@@ -40,6 +42,7 @@ class Logout extends Component {
       });
     }
     this.props.signOut().then(() => {
+      ad.hideBanner();
       resetToLogin();
     });
     
