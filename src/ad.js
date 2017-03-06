@@ -8,6 +8,12 @@ export default {
     if (app && app.plugin('ad')) {
       app.plugin('ad').showBottomBanner();
     }
+  },
+
+  loadInterstitial() {
+    if (app && app.plugin('ad')) {   
+      app.plugin('ad').showInterstitial();
+    }
   }
 
 }
