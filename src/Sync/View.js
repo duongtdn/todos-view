@@ -6,13 +6,7 @@ import { Page, Icon, Button} from 'react-onsenui'
 
 import { connect } from 'react-redux'
 import {auth, user, todos, connection } from 'todos-data'
-import app from '../exporter'
-
-function loadAd() {
-  if (app && app.plugin('ad')) {
-    app.plugin('ad').showBottomBanner();
-  }
-}
+import ad from '../ad'
 
 class SyncView extends Component {
 
@@ -110,7 +104,7 @@ class SyncView extends Component {
     if (this.props.user && this.shouldSyncTodo) {
       this.shouldSyncTodo = false; // prevent run twice
       this.props.loadTodos().then(() => {
-        loadAd();
+        ad.loadBanner();
         resetTodo();
       });
     };
