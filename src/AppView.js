@@ -5,7 +5,7 @@ import { Navigator } from 'react-onsenui'
 
 import routes from './routes'
 import SceneView from './SceneView'
-
+import ad from './ad'
 
 
 export default class AppView extends Component {
@@ -33,8 +33,15 @@ export default class AppView extends Component {
         animation = 'slide'
         renderPage = {this.renderPage}
         initialRoute = {initRoute} 
+        onPrePop = {nav => this.onPrePop(nav.routes.poppingRoute)}
       />        
     );
+  }
+
+  onPrePop(route) {
+    if (route.name !== 'friends') {
+      ad.showInterstitial();
+    }
   }
 
 }
