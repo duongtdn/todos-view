@@ -103,6 +103,7 @@ class SideMenu extends Component {
   }
 
   openFriendsList() {
+    this.close();
     this.props.pushPage('friends');
   }
 
