@@ -45,7 +45,7 @@ export default class extends Component {
     }
     return (
       <ListItem className = {`${this.state.animation} ${urgentStyle} ${overdueStyle}`} key = {data.id} >
-        <div className = 'left'> 
+        <div className = 'left todos-check'> 
           <Input type = 'checkbox'  onChange = {() => this.completeTodo(data) } />
         </div>
 

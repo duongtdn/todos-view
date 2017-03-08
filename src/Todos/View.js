@@ -8,7 +8,7 @@ import { user, currentTodo } from 'todos-data'
 
 import Toolbar from './Toolbar'
 import Tabbar from './Tabbar'
-import SideMenu from './Sidebar/Menu'
+import SideMenu from './Sidebar/SideMenu'
 
 class Todos extends Component {
 

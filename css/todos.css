@@ -6,7 +6,7 @@ ons-tabbar .list {
   overflow-x: hidden;
 }
 
-ons-list-item > .left {
+.todos-check {
   padding-bottom : 25px;
   min-width: 35px;
 }
