@@ -26,6 +26,7 @@ class SideMenu extends Component {
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.close = this.close.bind(this);
     this.openChangePSW = this.openChangePSW.bind(this);
+    this.openMessagesPage = this.openMessagesPage.bind(this);
   }
 
   componentWillMount() {
@@ -87,7 +88,7 @@ class SideMenu extends Component {
           </ListItem>
         </a>
 
-         <a href = '#' style = {{textDecoration : 'none'}}  >
+         <a href = '#' style = {{textDecoration : 'none'}} onClick = {this.openMessagesPage} >
           <ListItem modifier = 'longdivider chevron' >
             <div className = 'left' style = {{color : 'grey'}} >
               <Icon icon = 'fa-external-link' />
@@ -105,6 +106,11 @@ class SideMenu extends Component {
   openFriendsList() {
     this.close();
     this.props.pushPage('friends');
+  }
+
+  openMessagesPage() {
+    this.close();
+    this.props.pushPage('messages');
   }
 
   showNameEditor() {

@@ -11,6 +11,7 @@ import SyncView from './Sync/View'
 import LogoutView from './Logout/View'
 import ChangePSWView from './Password/ChangeView'
 import ResetPSWView from './Password/ResetView'
+import Messages from './Messages/Messages'
 
 export default {
   todos : { name : 'todos', view : <TodosView /> },
@@ -22,5 +23,6 @@ export default {
   sync : { name : 'sync', view : <SyncView />},
   logout : { name : 'logout', view : <LogoutView />},
   changePSW : { name : 'changePSW', view : <ChangePSWView />},
-  resetPSW : { name : 'resetPSW', view : <ResetPSWView />}
+  resetPSW : { name : 'resetPSW', view : <ResetPSWView />},
+  messages : { name : 'messages', view : <Messages />}
 }

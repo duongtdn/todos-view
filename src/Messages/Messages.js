@@ -3,7 +3,8 @@
 import React , { Component } from 'react'
 import { Page, Button, Icon,
          List, ListHeader, ListItem, 
-         Col, Row } from 'react-onsenui'
+         Col, Row,
+         Toolbar, BackButton } from 'react-onsenui'
 
 import { connect } from 'react-redux'
 import { user, todos } from 'todos-data'
@@ -11,7 +12,7 @@ import { user, todos } from 'todos-data'
 class AlertMessage extends Component {
   render() {
     return (
-      <ListItem >
+      <ListItem className = 'msgbox' >
         <div >
           {this.props.msg.content}
         </div>
@@ -30,17 +31,19 @@ class ConfirmMessage extends Component {
   render() {
     const msg = this.props.msg;
     return (
-      <ListItem >
+      <ListItem className = 'msgbox' >
         <Col>
-          <Row> <label > You're invited to join a todo </label> </Row>
+          <Row> <label style = {{fontSize : '14px', fontStyle : 'italic', color : 'grey', marginBottom : '3px'}} > 
+            <label style = {{color : '#1E90FF'}} > {msg.from.name} </label> invited you to join a todo 
+          </label> </Row>
           <Row> 
-            <label style = {{fontSize : '14px', fontStyle : 'italic', color : 'grey'}} > 
+            <div  > 
               {msg.content}
-            </label> 
+            </div> 
           </Row>
-          <Row>
+          <Row style = {{marginTop : '6px'}}>
             <Col> <Button modifier = 'quiet' onClick = {() => this.props.ok(msg)} > Accept </Button> </Col>
-            <Col> <Button modifier = 'quiet' onClick = {() => this.props.cancel(msg)} > Decline </Button> </Col>
+            <Col style = {{textAlign : 'center'}}> <Button modifier = 'quiet' onClick = {() => this.props.cancel(msg)} > Decline </Button> </Col>
           </Row>
         </Col>
       </ListItem>
@@ -91,6 +94,18 @@ class Messages extends Component {
 
   }
 
+  renderToolbar() {
+    return (
+      <Toolbar>
+        <div className = 'left'>
+          <BackButton> 
+            Back
+          </BackButton  >
+        </div>
+      </Toolbar>
+    );
+  }
+
   renderHeader() {
     return (
       <ListHeader>
@@ -104,19 +119,23 @@ class Messages extends Component {
 
   renderRow(row) {
     return (
-      <Message key = {`${row.id}`} data = {row}
-               acceptTodo = {this.props.acceptTodo}
-               ignoreTodo = {this.props.ignoreTodo}
-               deleteMessage = {this.props.deleteMessage} />
+      <div key = {`${row.id}`} style = {{margin : '8px'}} >
+        <Message data = {row}
+                acceptTodo = {this.props.acceptTodo}
+                ignoreTodo = {this.props.ignoreTodo}
+                deleteMessage = {this.props.deleteMessage} />
+      </div>
     );
   }
 
   render() {
     return(
-      <List renderHeader = {this.renderHeader}
-            dataSource = {this.props.messages}
-            renderRow = {this.renderRow} >
-      </List>
+      <Page renderToolbar = {this.renderToolbar} >
+        <List renderHeader = {this.renderHeader}
+              dataSource = {this.props.messages}
+              renderRow = {this.renderRow} >
+        </List>
+      </Page>
     )
   }
 
@@ -129,7 +148,13 @@ class Messages extends Component {
 const mapStateToProps = state => {  
   const messages = [];
   for (let id in state.user.messages) {
-    messages.push(state.user.messages[id]);
+    const msg = {...state.user.messages[id]};
+    const from = {...msg.from};
+    if (state.user.friends && state.user.friends[from.id]) {
+      from.name = state.user.friends[from.id].name;
+    }
+    msg.from = from;
+    messages.push(msg);
   }
   return { 
     messages
