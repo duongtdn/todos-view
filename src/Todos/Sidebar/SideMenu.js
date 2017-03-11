@@ -62,7 +62,7 @@ class SideMenu extends Component {
           </ListItem>
 
           <ListItem modifier = 'nodivider'>
-            <div className = 'sidemenu-email' > {this.props.user.email} </div>
+            <div className = 'sidemenu-email' style = {{width : '100%'}} > {this.props.user.email} </div>
             <div>
               <a className = 'sidemenu-link' href='#' onClick = {this.openChangePSW} > Change Password </a>
             </div>

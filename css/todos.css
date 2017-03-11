@@ -1,6 +1,10 @@
 
 /* TODOS */
 
+.list__header {
+  padding-right: 15px;
+}
+
 ons-tabbar .list {
   /*background-color: grey;*/
   overflow-x: hidden;
