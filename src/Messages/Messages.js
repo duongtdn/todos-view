@@ -42,7 +42,7 @@ class ConfirmMessage extends Component {
             </div> 
           </Row>
           <Row style = {{marginTop : '6px'}}>
-            <Col> <Button modifier = 'quiet' onClick = {() => this.props.ok(msg)} > Accept </Button> </Col>
+            <Col style = {{textAlign : 'center'}}> <Button modifier = 'quiet' onClick = {() => this.props.ok(msg)} > Accept </Button> </Col>
             <Col style = {{textAlign : 'center'}}> <Button modifier = 'quiet' onClick = {() => this.props.cancel(msg)} > Decline </Button> </Col>
           </Row>
         </Col>
@@ -119,7 +119,7 @@ class Messages extends Component {
 
   renderRow(row) {
     return (
-      <div key = {`${row.id}`} style = {{margin : '8px'}} >
+      <div key = {`${row.id}`}  >
         <Message data = {row}
                 acceptTodo = {this.props.acceptTodo}
                 ignoreTodo = {this.props.ignoreTodo}

@@ -72,7 +72,7 @@ class SideMenu extends Component {
 
 
 
-        <ListHeader>
+        <ListHeader modifier = 'nodivider'>
           Links
         </ListHeader>
 
