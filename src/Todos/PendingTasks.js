@@ -1,7 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page, List } from 'react-onsenui'
+import { Page, List, ListHeader } from 'react-onsenui'
 
 import Task from './Task'
 
@@ -34,12 +34,19 @@ export default class extends Component {
     );
   }
 
+  renderHeader() {
+    return (
+      <ListHeader> All pending todos </ListHeader>
+    )
+  }
+
   render() {
     return (
       <Page>
         <List
           dataSource = {this.props.todos}
           renderRow = {this.renderRow}
+          renderHeader = {this.renderHeader}
         />
         <div style = {{paddingBottom : '80px'}} />
       </Page>
