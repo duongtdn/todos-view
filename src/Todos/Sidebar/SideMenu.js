@@ -39,7 +39,10 @@ class SideMenu extends Component {
         <List>
 
           <ListHeader>
-            Profile
+            <Row>
+              <Col className = 'center'> Profile </Col>
+              <Col className = 'sidemenu-btn' style = {{textAlign : 'right'}} onClick = {this.props.signOut} > Logout </Col>
+            </Row>
           </ListHeader>
 
           <ListItem modifier = 'nodivider' >
@@ -63,10 +66,6 @@ class SideMenu extends Component {
             <div>
               <a className = 'sidemenu-link' href='#' onClick = {this.openChangePSW} > Change Password </a>
             </div>
-          </ListItem>
-
-          <ListItem modifier = 'nodivider'>
-            <div className = 'right sidemenu-btn' onClick = {this.props.signOut} > Logout </div> 
           </ListItem>
 
         </List>
