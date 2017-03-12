@@ -57,7 +57,8 @@ class Todos extends Component {
                       }} >
           <SideMenu signOut = {this.signOut}
                     hide = {this.hideSidebar}
-                    pushPage = {this.props.pushPage} />
+                    pushPage = {this.props.pushPage}
+                    msgCount = {this.props.msgCount} />
         </SplitterSide>
 
         <SplitterContent>
@@ -95,7 +96,7 @@ class Todos extends Component {
 
 const mapStateToProps = state => {  
   return { 
-    
+    msgCount : state.user.messages ? Object.keys(state.user.messages).length : 0
   };
 };
 

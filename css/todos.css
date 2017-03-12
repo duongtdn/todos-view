@@ -464,3 +464,21 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   position: fixed;
   top: -100px;
 }
+
+
+.badge {
+  display: inline-block;
+  margin-left: 3px;
+  margin-right: 3px;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #ffc107;
+  border-radius: 10px;
+}

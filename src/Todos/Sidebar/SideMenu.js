@@ -34,6 +34,12 @@ class SideMenu extends Component {
   }
 
   render() {
+    const badge = this.props.msgCount > 0 ? 
+                    this.props.msgCount < 10 ?  
+                      <label className = 'badge'> {this.props.msgCount} </label>:
+                      <label className = 'badge'> 9+ </label>
+                    :
+                    null;
     return (
       <Page >
         <List>
@@ -93,7 +99,7 @@ class SideMenu extends Component {
               <Icon icon = 'fa-external-link' />
             </div> 
             <div className = 'center' >
-              Notification
+              Notification {badge}
             </div>
           </ListItem>
         </a>
