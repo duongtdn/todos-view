@@ -2,7 +2,7 @@
 
 import React , { Component } from 'react'
 
-import { Page } from 'react-onsenui'
+import { Page, Toolbar, BackButton } from 'react-onsenui'
 
 import { connect } from 'react-redux'
 import { user } from 'todos-data'
@@ -17,9 +17,21 @@ class LoginView extends Component {
     this.success = this.success.bind(this);
   }
 
+  renderToolbar() {
+    return (
+      <Toolbar>
+        <div className = 'left'>
+          <BackButton> 
+            Back
+          </BackButton  >
+        </div>
+      </Toolbar>
+    );
+  }
+
   render() {
     return (
-      <Page>
+      <Page renderToolbar = {this.renderToolbar} >
         <Signup signup = {this.props.signup} success = {this.success} />
       </Page>
     );
