@@ -11,6 +11,7 @@ export default class extends Component {
     this.state = { 
       email : '', 
       password : '',
+      repeatPassword : '',
       name : '',
       isSigningUp : false,
       status : '',
@@ -59,6 +60,11 @@ export default class extends Component {
                        onChange = {e => this.getUserPassword(e.target.value)} />
               </ListItem>
 
+              <ListItem modifier = 'noborder'>
+                <Input type = 'password' placeholder = 'Repeat your password'
+                       onChange = {e => this.getUserRepeatPassword(e.target.value)} />
+              </ListItem>
+
             </List>
           </div>
 
@@ -81,11 +87,34 @@ export default class extends Component {
     this.setState({ password });
   }
 
+  getUserRepeatPassword(repeatPassword) {
+    this.setState({ repeatPassword });
+  }
+
   getUserName(name) {
     this.setState({ name });
   }
 
   signup() {
+    /* validate password */
+    if (this.state.password.length === 0) {
+      this.setState({
+        isSigningUp : false,
+        success : false,
+        message : 'Missing Password'
+      });
+      return;
+    }
+
+    if (this.state.password !== this.state.repeatPassword) {
+      this.setState({
+        isSigningUp : false,
+        success : false,
+        message : 'Password mismatch'
+      });
+      return;
+    }
+
     const credential = {
       email : this.state.email,
       password : this.state.password,
