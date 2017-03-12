@@ -482,3 +482,19 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   background-color: #ffc107;
   border-radius: 10px;
 }
+
+.menu-badge-android {
+  left: -30px;
+  position: relative;
+  top: -10px;
+  min-width: 6px;
+  font-size: 14px;
+}
+
+.menu-badge-ios {
+  left: -26px;
+  position: relative;
+  top: -10px;
+  min-width: 5px;
+  font-size: 12px;
+}

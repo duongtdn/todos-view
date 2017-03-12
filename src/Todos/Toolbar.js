@@ -12,11 +12,18 @@ export default class extends Component {
       <ToolbarButton onClick = {this.props.newTodoHandler}> 
         New
       </ToolbarButton>;
+
+      const badge = this.props.msgCount > 0 ? 
+                  this.props.msgCount < 10 ?  
+                    <label className = {`badge menu-badge-${this.props.platform}`}> {this.props.msgCount} </label>:
+                    <label className = {`badge menu-badge-${this.props.platform}`}> 9+ </label>
+                  :
+                  null;
     return (
       <Toolbar>
         <div className = 'left'>
           <ToolbarButton onClick = {this.props.openSideMenu} > 
-            <Icon icon = 'md-menu' /> &nbsp;
+            <Icon icon = 'md-menu' /> &nbsp; {badge}
           </ToolbarButton>
         </div>
         <div className = 'center'> Todos </div>

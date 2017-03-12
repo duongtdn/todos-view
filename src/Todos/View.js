@@ -29,7 +29,8 @@ class Todos extends Component {
     return (
       <Toolbar platform = {this.props.platform} 
                newTodoHandler = {this.newTodo} 
-               openSideMenu = {this.showSidebar} />
+               openSideMenu = {this.showSidebar}
+               msgCount = {this.props.msgCount} />
     );
   }
 
