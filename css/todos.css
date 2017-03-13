@@ -498,3 +498,19 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
   min-width: 5px;
   font-size: 12px;
 }
+
+.fe-title {
+  width : 100%;
+  margin-bottom: 6px;
+  color : grey;
+  font-size: 14px;
+}
+
+.fe-input {
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.toolbar-button--material {
+  font-size: 20px;
+}

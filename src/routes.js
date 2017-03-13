@@ -12,6 +12,7 @@ import LogoutView from './Logout/View'
 import ChangePSWView from './Password/ChangeView'
 import ResetPSWView from './Password/ResetView'
 import Messages from './Messages/Messages'
+import FriendEditorView from './Friends/FriendEditor'
 
 export default {
   todos : { name : 'todos', view : <TodosView /> },
@@ -24,5 +25,6 @@ export default {
   logout : { name : 'logout', view : <LogoutView />},
   changePSW : { name : 'changePSW', view : <ChangePSWView />},
   resetPSW : { name : 'resetPSW', view : <ResetPSWView />},
-  messages : { name : 'messages', view : <Messages />}
+  messages : { name : 'messages', view : <Messages />},
+  friendEditor : { name : 'friendEditor', view : <FriendEditorView />}
 }

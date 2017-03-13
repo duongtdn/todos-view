@@ -123,7 +123,8 @@ class FriendsView extends Component {
                      addAndSelectFriend = {this.addAndSelectFriend} 
                      unfriend = {this.props.unfriend}
                      platform = {this.props.platform}
-                     auth = {this.props.auth} />
+                     auth = {this.props.auth}
+                     pushPage = {this.props.pushPage} />
         
         <div className = 'dummy-btn' >
           <button id = 'dummy' />

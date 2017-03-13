@@ -4,25 +4,20 @@ import React , { Component } from 'react'
 import ons from 'onsenui'
 import { Page, List, ListItem, ListHeader, Input, Button, Icon, Row, Col, Dialog } from 'react-onsenui'
 
-import AddFriend from './AddFriend.js'
-
-
-export default class extends Component {
+export default class FriendsList extends Component {
   constructor(props) {
     super(props);
 
     this.state = { 
-      dialogShown : false , 
       user : {} 
     };
 
     this.renderRow = this.renderRow.bind(this);
     this.renderHeader = this.renderHeader.bind(this);
     this.isSelected = this.isSelected.bind(this);
-    this.showDialog = this.showDialog.bind(this);
-    this.hideDialog = this.hideDialog.bind(this);
     this.addAndSelectFriend = this.addAndSelectFriend.bind(this);
     this.showAlertDialog = this.showAlertDialog.bind(this);
+    this.openFriendEditor = this.openFriendEditor.bind(this);
   }
 
   renderRow(row) {
@@ -31,7 +26,7 @@ export default class extends Component {
       <Button modifier = 'quiet' onClick = {() => this.showAlertDialog(row)} > 
         <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/> 
       </Button> : 
-      <Button modifier = 'quiet' onClick = {() => this.showDialog(row)} > 
+      <Button modifier = 'quiet' onClick = {() => this.openFriendEditor(row)} > 
         <Icon icon = 'md-plus' size = {24} style={{color: 'grey'}}/> 
       </Button>;
 
@@ -53,7 +48,6 @@ export default class extends Component {
           <Row className = 'todo-editor-collaborate-relationship'> 
             not connected 
           </Row> ;
-    
     return (
       <ListItem key = {row.id} modifier = 'nodivider' >
         <label className = 'left'> 
@@ -93,12 +87,6 @@ export default class extends Component {
               modifier = 'noborder'
         />
         {message}
-        <AddFriend show = {this.state.dialogShown}
-                   cancel = {this.hideDialog}
-                   accept = {this.addAndSelectFriend}
-                   name = {this.state.user.name}
-                   platform = {this.props.platform}
-                   animation = 'none' />
       </Page>
     );
   }
@@ -112,24 +100,12 @@ export default class extends Component {
     return (this.props.selectedFriends[id] && this.props.selectedFriends[id] !== null);
   }
 
-  showDialog(user) {
-    const dialogShown = true;
-    this.setState({ user, dialogShown });
-  }
-
-  hideDialog() {
-    const dialogShown = false;
-    this.setState({ dialogShown });
-  }
-
   addAndSelectFriend(name, rel) {
     const user = {...this.state.user};
     user.name = name;   // security, sanity user input
     user.relationship = rel;
 
-    const dialogShown = false;
-
-    this.setState({ user: user, dialogShown });
+    this.setState({ user });
 
     // finally, add this user to friend list and todo share list
     this.props.addAndSelectFriend(user);
@@ -144,6 +120,15 @@ export default class extends Component {
           this.props.unfriend(user.id);
         }
       }
+    });
+  }
+
+  openFriendEditor(user) {
+    this.setState({ user });
+    this.props.pushPage('friendEditor', { 
+      name : user.name,
+      email : user.email,
+      save : this.addAndSelectFriend
     });
   }
 
