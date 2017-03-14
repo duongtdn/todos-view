@@ -24,7 +24,24 @@ class FriendEditor extends Component {
   }
 
   componentDidMount() {
-    this.setState({ name: this.props.data.name, email: this.props.data.email });
+    let rel = '';
+    let selectedRel = '';
+    let showOtherRelInput = 'none';
+    if (this.props.data.rel) {
+      rel = this.props.data.rel;
+      if (this.predefinedRels.indexOf(this.props.data.rel) === -1) {
+        selectedRel = 'Other';
+        showOtherRelInput = 'block';
+      } else {
+        selectedRel = rel;
+        showOtherRelInput = 'none';
+      }
+    }
+    this.setState({ 
+      name: this.props.data.name, 
+      email: this.props.data.email, 
+      selectedRel, rel, showOtherRelInput 
+    });
   }
 
   renderToolbar() {
@@ -88,7 +105,7 @@ class FriendEditor extends Component {
           <ListItem style = {{display: this.state.showOtherRelInput}} >
              <Input   className = 'fe-input'
                       onChange = {e => this.handleRelInput(e.target.value)} 
-                      
+                      value = {this.state.rel}
                       style = {{display: this.state.showOtherRelInput}}   />
           </ListItem>
 

@@ -9,7 +9,8 @@ export default class FriendsList extends Component {
     super(props);
 
     this.state = { 
-      user : {} 
+      user : {},
+      editMenu : {},
     };
 
     this.renderRow = this.renderRow.bind(this);
@@ -18,6 +19,22 @@ export default class FriendsList extends Component {
     this.addAndSelectFriend = this.addAndSelectFriend.bind(this);
     this.showAlertDialog = this.showAlertDialog.bind(this);
     this.openFriendEditor = this.openFriendEditor.bind(this);
+  }
+
+  componentWillMount() {
+    const editMenu = this._prepareEditMenu(this.props);
+    this.setState({ editMenu });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const editMenu = this._prepareEditMenu(nextProps);
+    this.setState({ editMenu });
+  }
+
+  _prepareEditMenu(props) {
+    const editMenu = {};
+    props.data.forEach(item => editMenu[item.id] = `todos-action-${props.platform} hide`);
+    return editMenu;
   }
 
   renderRow(row) {
@@ -53,12 +70,17 @@ export default class FriendsList extends Component {
         <label className = 'left'> 
           {selectBtn}
         </label>
-        <label className = 'center' htmlFor = {`checkbox-${row.id}`} >
-          <Col>
-            <Row className = 'todo-editor-collaborate-name'> {row.name} </Row>
-            <Row className = 'todo-editor-collaborate-relationship'> {row.email} </Row>
-            {thirdLbl}
-          </Col>
+        <label className = 'center' onClick = {() => this.toggleEditMenu(row.id)} >
+          <div className = {this.state.editMenu[row.id]}>
+            <Button modifier='quiet' onClick = {() => this.openFriendEditor(row)}>  Edit <Icon icon = 'md-edit' /> </Button>
+          </div>
+          <div className = 'todos-text' >
+            <Col>
+              <Row className = 'todo-editor-collaborate-name'> {row.name} </Row>
+              <Row className = 'todo-editor-collaborate-relationship'> {row.email} </Row>
+              {thirdLbl}
+            </Col>
+          </div>
         </label>
         <label className = 'right'>
           {actionBtn}
@@ -128,8 +150,41 @@ export default class FriendsList extends Component {
     this.props.pushPage('friendEditor', { 
       name : user.name,
       email : user.email,
+      rel : user.relationship || null,
       save : this.addAndSelectFriend
     });
+  }
+
+  toggleEditMenu(id) {
+    const editMenu = this._prepareEditMenu(this.props);
+
+    const patt = /\shide/g;
+    if (patt.test(this.state.editMenu[id])) {
+      // this item is currently hidden
+      editMenu[id] = `todos-action-${this.props.platform} animation-show-up`;
+    } else {
+      editMenu[id] = `todos-action-${this.props.platform} animation-hide`
+    }    
+    this.setState({ editMenu });
+
+    setTimeout(() => {
+      this._cleanAnimationClass(id);      
+    }, 250);
+  }
+
+  _cleanAnimationClass(id) {
+    const editMenu = this._prepareEditMenu(this.props);
+
+    const patt2 = /\sanimation-show-up/g;
+    const _class = this.state.editMenu[id];
+
+    if (patt2.test(_class)) {
+      // this item need to be show up
+      editMenu[id] = `todos-action-${this.props.platform}`
+    }   
+    
+    this.setState({ editMenu });
+
   }
 
 }
