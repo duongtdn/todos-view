@@ -70,7 +70,7 @@ export default class FriendsList extends Component {
         <label className = 'left'> 
           {selectBtn}
         </label>
-        <label className = 'center' onClick = {() => this.toggleEditMenu(row.id)} >
+        <label className = 'center' onClick = {() => this.toggleEditMenu(row)} >
           <div className = {this.state.editMenu[row.id]}>
             <Button modifier='quiet' onClick = {() => this.openFriendEditor(row)}>  Edit <Icon icon = 'md-edit' /> </Button>
           </div>
@@ -155,20 +155,25 @@ export default class FriendsList extends Component {
     });
   }
 
-  toggleEditMenu(id) {
+  toggleEditMenu(row) {
+
+    if (row.id === this.props.auth.uid  || !row.connected) {
+      return;
+    }
+
     const editMenu = this._prepareEditMenu(this.props);
 
     const patt = /\shide/g;
-    if (patt.test(this.state.editMenu[id])) {
+    if (patt.test(this.state.editMenu[row.id])) {
       // this item is currently hidden
-      editMenu[id] = `todos-action-${this.props.platform} animation-show-up`;
+      editMenu[row.id] = `todos-action-${this.props.platform} animation-show-up`;
     } else {
-      editMenu[id] = `todos-action-${this.props.platform} animation-hide`
+      editMenu[row.id] = `todos-action-${this.props.platform} animation-hide`
     }    
     this.setState({ editMenu });
 
     setTimeout(() => {
-      this._cleanAnimationClass(id);      
+      this._cleanAnimationClass(row.id);      
     }, 250);
   }
 

@@ -46,7 +46,6 @@ class FriendsView extends Component {
 
   componentWillReceiveProps(nextProps) {    
     const result = [];
-    console.log(nextProps)
     if (nextProps.search) {
       if (nextProps.search.length > 0) {
         nextProps.search.forEach(user => {
