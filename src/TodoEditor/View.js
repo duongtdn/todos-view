@@ -113,6 +113,12 @@ class TodoEditor extends Component {
   }
 
   addTodo() {
+    
+    if (this.todo.text.length === 0) { 
+      this.props.popPage();
+      return;
+    }
+
     const todo = {...this.todo};
     const share = [];
     for (let uid in this.todo.share) {
@@ -126,6 +132,12 @@ class TodoEditor extends Component {
   }
 
   saveTodo() {
+
+    if (this.todo.text.length === 0) { 
+      this.props.popPage();
+      return;
+    }
+
     this.props.editTodo(this.todo);
     this.props.popPage();
   }
