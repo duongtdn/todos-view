@@ -46,6 +46,7 @@ class FriendsView extends Component {
 
   componentWillReceiveProps(nextProps) {    
     const result = [];
+    console.log(nextProps)
     if (nextProps.search) {
       if (nextProps.search.length > 0) {
         nextProps.search.forEach(user => {
@@ -54,7 +55,7 @@ class FriendsView extends Component {
           result.push(user);
         });
         this.setState({matchedSearch : true, searchingDatabase : false});
-      } else {
+      } else if (this.searchInput.length > 0) {
         this.setState({matchedSearch : false, searchingDatabase : false});
       } 
     }
