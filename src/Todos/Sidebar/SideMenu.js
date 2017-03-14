@@ -1,7 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page, List, ListHeader, ListItem, Icon, Input,
+import { Page, List, ListHeader, ListItem, Icon, Input, BottomToolbar,
          Col, Row, Button } from 'react-onsenui'
 
 import { connect } from 'react-redux'
@@ -27,10 +27,28 @@ class SideMenu extends Component {
     this.close = this.close.bind(this);
     this.openChangePSW = this.openChangePSW.bind(this);
     this.openMessagesPage = this.openMessagesPage.bind(this);
+    this.renderBottomToolbar = this.renderBottomToolbar.bind(this);
   }
 
   componentWillMount() {
     this.setState({ userDisplayName : this.props.user.displayName});
+  }
+
+  renderBottomToolbar() {
+    return (
+      <BottomToolbar>
+        <List>
+          <ListItem modifier = 'nodivider' >
+            <div className = 'left'  >
+              <Icon icon = 'fa-sign-out' />
+            </div> 
+            <div className = 'center' >
+              <label className = 'sidemenu-btn' onClick = {this.props.signOut} > Logout </label>
+            </div>
+          </ListItem>
+        </List>
+      </BottomToolbar>
+    );       
   }
 
   render() {
@@ -41,13 +59,12 @@ class SideMenu extends Component {
                     :
                     null;
     return (
-      <Page >
+      <Page renderBottomToolbar = {this.renderBottomToolbar} >
         <List>
 
           <ListHeader>
             <Row>
               <Col className = 'center'> Profile </Col>
-              <Col className = 'sidemenu-btn' style = {{textAlign : 'right'}} onClick = {this.props.signOut} > Logout </Col>
             </Row>
           </ListHeader>
 
