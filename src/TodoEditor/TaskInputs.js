@@ -1,7 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { List, ListItem, ListHeader, Switch, Button, Icon} from 'react-onsenui'
+import { Page, List, ListItem, ListHeader, Switch, Button, Icon} from 'react-onsenui'
 
 import { DatePicker } from 'react-onsenui-datepicker'
 
@@ -65,57 +65,72 @@ export default class TaskInputs extends Component {
     const share = this.state.share;
     const selectedDate = this.props.data.dueDate || null;
     return (
-      <List>
+      <Page>
+        <List>
 
-        <ListHeader> {title} </ListHeader>
+          <ListHeader> {title} </ListHeader>
 
-        <ListItem modifier = 'nodivider'>
-          <div className = 'center'>
-            <AutofocusInput className = 'todo-editor-text-input' type = 'text' 
-                   placeholder = 'I want to...' 
-                   value = {text}
-                   onChange = {e => this.props.getTodoText(e.target.value)} 
-                   float />
-          </div>
-        </ListItem>
+          <ListItem modifier = 'nodivider'>
+            <div className = 'center'>
+              <AutofocusInput className = 'todo-editor-text-input' type = 'text' 
+                    placeholder = 'I want to...' 
+                    value = {text}
+                    onChange = {e => this.props.getTodoText(e.target.value)} 
+                    onKeyUp = {e => this.handleKeyUp(e.keyCode)}
+                    float />
+            </div>
+          </ListItem>
 
-        <ListItem modifier = 'nodivider' >
-          <label> Due date </label> 
-          <label className = 'right' > 
-            <DatePicker preOpenCalendar = {this.props.hideToolbar} 
-                        onSelectDate = {this.props.getDueDate} 
-                        selectedDate = {selectedDate} /> 
-          </label>
-        </ListItem>
+          <ListItem modifier = 'nodivider' >
+            <label> Due date </label> 
+            <label className = 'right' > 
+              <DatePicker preOpenCalendar = {this.props.hideToolbar} 
+                          onSelectDate = {this.props.getDueDate} 
+                          selectedDate = {selectedDate} /> 
+            </label>
+          </ListItem>
 
-        <ListItem modifier = 'nodivider'>
-          <label className = 'center todo-editor-urgent-label' > 
-            Is it Urgent? 
-          </label>
-          <label className = 'right' > 
-            <Switch checked = {urgent} 
-                    onChange = {e => this.props.getTodoUrgent(e.target.checked)} 
-            /> 
-          </label>
-        </ListItem>
+          <ListItem modifier = 'nodivider'>
+            <label className = 'center todo-editor-urgent-label' > 
+              Is it Urgent? 
+            </label>
+            <label className = 'right' > 
+              <Switch checked = {urgent} 
+                      onChange = {e => this.props.getTodoUrgent(e.target.checked)} 
+              /> 
+            </label>
+          </ListItem>
 
-        <ListHeader> Collaborate </ListHeader>
+          <ListHeader> Collaborate </ListHeader>
 
-        <ListItem modifier = 'nodivider'>
-          <div style = {{width : '100%'}}>
-            <Button modifier = 'quiet' 
-                    onClick = {() => this.props.inviteFriends()}
-            > 
-              <Icon icon = 'fa-user-plus' /> Invite People 
-            </Button>
-          </div>
-          <div style = {{width : '100%'}} >
-            <CollaboratorList data = {share} unshare = {this.props.unshare} />
-          </div>
-        </ListItem>
+          <ListItem modifier = 'nodivider'>
+            <div style = {{width : '100%'}}>
+              <Button modifier = 'quiet' 
+                      onClick = {() => this.props.inviteFriends()}
+              > 
+                <Icon icon = 'fa-user-plus' /> Invite People 
+              </Button>
+            </div>
+            <div style = {{width : '100%'}} >
+              <CollaboratorList data = {share} unshare = {this.props.unshare} />
+            </div>
+          </ListItem>
 
-      </List>
+        </List>
+
+        <div className = 'dummy-btn' >
+          <button id = 'dummy' />
+        </div>
+
+      </Page>
     );
+  }
+
+    handleKeyUp(code) {
+    if (code === 13) { // enter key
+      // blur from input box by focus to a dummy element
+      document.getElementById('dummy').focus();
+    }
   }
 
 }
