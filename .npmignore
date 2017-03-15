@@ -2,3 +2,4 @@ src/
 node_modules/
 .vscode
 .babelrc
+npm-debug.log
