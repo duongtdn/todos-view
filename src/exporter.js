@@ -30,6 +30,9 @@ export default {
     if (this.platform === null) { 
       this.platform = ons.platform.isAndroid() ? 'android' : 'ios';
     }
+    // disable onsen auto satus bar fill as we use cordovar plugin for status bar
+    ons.disableAutoStatusBarFill();
+    // register app init when device ready
     document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     return this;    
   },
