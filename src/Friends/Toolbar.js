@@ -14,7 +14,7 @@ export default class extends Component {
     return (
       <Toolbar>
         <div className = 'left'>
-          <BackButton> 
+          <BackButton onClick = {() => this.back()} > 
             Back
           </BackButton>
         </div>
@@ -25,6 +25,11 @@ export default class extends Component {
         </div>
       </Toolbar>
     );
+  }
+
+  back() {
+    this.props.addToShareList();
+    this.props.popPage().catch(err => console.log(err));
   }
 
 }

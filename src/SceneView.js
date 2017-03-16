@@ -42,12 +42,12 @@ export default class AppView extends Component {
     if (routes[name]) {
       const page = {...routes[name]};
       page.data = data;
-      this.navigator.pushPage(page, options);
+      return this.navigator.pushPage(page, options);
     }    
   }
 
   popPage() {
-    this.navigator.popPage();
+    return this.navigator.popPage();
   }
 
   resetPage(name, options = {}) {

@@ -79,7 +79,9 @@ class FriendsView extends Component {
       <Toolbar platform = {this.props.platform} 
                pushPage = {this.props.pushPage} 
                handleSearchInput = {this.handleSearchInput} 
-               handleKeyUp = {this.handleKeyUp} />
+               handleKeyUp = {this.handleKeyUp}
+               addToShareList = {this.addToShareList}
+               popPage = {this.props.popPage} />
     );
   }
 
@@ -154,9 +156,11 @@ class FriendsView extends Component {
   }
 
   addToShareList() {
-    const currentTodo = {...this.props.data};
-    currentTodo.share = this.state.selectedFriends;
-    this.props.updateCurrentTodo(currentTodo);
+    if (this.props.data) {
+      const currentTodo = {...this.props.data};
+      currentTodo.share = this.state.selectedFriends;
+      this.props.updateCurrentTodo(currentTodo);
+    }
     this.props.popPage();
   }
 
