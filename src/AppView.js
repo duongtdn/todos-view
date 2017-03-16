@@ -39,9 +39,9 @@ export default class AppView extends Component {
   }
 
   onPrePop(route) {
-    if (route.name !== 'friends') {
-      ad.showInterstitial();
-    }
+    // if (route.name !== 'friends') {
+    //   ad.showInterstitial();
+    // }
   }
 
 }
