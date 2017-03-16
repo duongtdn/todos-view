@@ -11,17 +11,25 @@ import { user, todos } from 'todos-data'
 
 class AlertMessage extends Component {
   render() {
+    const msg = this.props.msg;;
     return (
       <ListItem className = 'msgbox' >
-        <div >
-          {this.props.msg.content}
-        </div>
-        <div style = {{textAlign: 'center', width : '100%'}} >
-          <Button modifier = 'quiet' 
-                  onClick = {() => this.props.deleteMessage(this.props.msg.id)} > 
-            OK 
-          </Button>
-        </div>
+        <Col>
+          <Row> <label style = {{fontSize : '14px', fontStyle : 'italic', color : 'grey', marginBottom : '3px'}} > 
+            <label style = {{color : '#1E90FF'}} > {msg.from.name} </label> has removed you from the shared list of 
+          </label> </Row>
+          <Row >
+            <div> {msg.content} </div>
+          </Row>
+          <Row style = {{marginTop : '6px'}}>
+            <div style = {{textAlign: 'center', width : '100%'}} >
+              <Button modifier = 'quiet' 
+                      onClick = {() => this.props.deleteMessage(msg.id)} > 
+                OK 
+              </Button>
+            </div>
+          </Row>
+        </Col>
       </ListItem>
     );
   }
