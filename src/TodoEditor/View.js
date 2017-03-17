@@ -152,13 +152,17 @@ class TodoEditor extends Component {
         const share = {...this.todo.share[id]};
         const [status, msgId] = share.status.split('.');
         if (msgId) {
-          share.status = `deleted.${msgId}`;
+          share.status = `recall.${msgId}`;
           this.todo.share[id] = share;
         } else {
+          // just add for invited, not saved in db yet -> ok to set to null
           this.todo.share[id] = null;
         }
       } else {
-        this.todo.share[id] = null;
+        // user has accepted and now be unshare
+        const share = {...this.todo.share[id]};
+        share.status = 'unshared';
+        this.todo.share[id] = share;
       }      
       this.props.updateCurrentTodo(this.todo);
     }   

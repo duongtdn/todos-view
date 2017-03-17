@@ -38,7 +38,6 @@ class FriendsView extends Component {
     const selectedFriends = this.props.data && this.props.data.share ?
                  {...this.props.data.share} :
                  {};
-console.log(selectedFriends)
     const friends = this.getFriendsFromProps(this.props);
 
     this.setState({ friends, selectedFriends });
@@ -140,9 +139,13 @@ console.log(selectedFriends)
     const selectedFriends = {...this.state.selectedFriends};
     if (checked) {
       let status = 'invited';
-      if (selectedFriends[usr.id] && (/deleted/i).test(selectedFriends[usr.id].status)) {
+      if (selectedFriends[usr.id] && (/recall/i).test(selectedFriends[usr.id].status)) {
         const [s, msgId] = selectedFriends[usr.id].status.split('.');
         status = `invited.${msgId}`;
+      }
+      if (selectedFriends[usr.id] && selectedFriends[usr.id].status === 'unshared') {
+        const [s, msgId] = selectedFriends[usr.id].status.split('.');
+        status = `accepted`;
       }
       selectedFriends[usr.id] = {
         id : usr.id,
@@ -155,13 +158,17 @@ console.log(selectedFriends)
         const share = {...selectedFriends[usr.id]};
         const [status, msgId] = share.status.split('.');
         if (msgId) {
-          share.status = `deleted.${msgId}`;
+          share.status = `recall.${msgId}`;
           selectedFriends[usr.id] = share;
         } else {
+          // just add for invited, not saved in db yet -> ok to set to null
           selectedFriends[usr.id] = null;
         }
       } else {
-        selectedFriends[usr.id] = null;
+        // user has accepted and now be unshare
+        const share = {...selectedFriends[usr.id]};
+        share.status = 'unshared';
+        selectedFriends[usr.id] = share;
       }
     }
     this.setState({ selectedFriends });

@@ -38,7 +38,7 @@ export default class TaskInputs extends Component {
             relationship : sharedUser.role
           });
         } else {
-          if ((/deleted/i).test(sharedUser.status)) {
+          if (/recall/i.test(sharedUser.status) || sharedUser.status === 'unshared') {
             continue;
           }
           const label = (/invited/i).test(sharedUser.status) ? ', Inviting' : '';

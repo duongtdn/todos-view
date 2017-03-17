@@ -121,7 +121,8 @@ export default class FriendsList extends Component {
   isSelected(id) {    
     return this.props.selectedFriends[id] && 
           this.props.selectedFriends[id] !== null && 
-          !/deleted/i.test(this.props.selectedFriends[id].status);
+          this.props.selectedFriends[id].status !== 'unshared' &&
+          !/recall/i.test(this.props.selectedFriends[id].status);
   }
 
   addAndSelectFriend(name, rel) {
