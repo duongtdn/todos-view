@@ -148,7 +148,18 @@ class TodoEditor extends Component {
 
   unshare(id) {
     if (this.todo.share[id]) {
-      this.todo.share[id] = null;
+      if ((/invited/i).test(this.todo.share[id].status)) {
+        const share = {...this.todo.share[id]};
+        const [status, msgId] = share.status.split('.');
+        if (msgId) {
+          share.status = `deleted.${msgId}`;
+          this.todo.share[id] = share;
+        } else {
+          this.todo.share[id] = null;
+        }
+      } else {
+        this.todo.share[id] = null;
+      }      
       this.props.updateCurrentTodo(this.todo);
     }   
   }

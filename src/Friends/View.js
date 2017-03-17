@@ -38,7 +38,7 @@ class FriendsView extends Component {
     const selectedFriends = this.props.data && this.props.data.share ?
                  {...this.props.data.share} :
                  {};
-
+console.log(selectedFriends)
     const friends = this.getFriendsFromProps(this.props);
 
     this.setState({ friends, selectedFriends });
@@ -139,14 +139,30 @@ class FriendsView extends Component {
   selectFriend(usr, checked) {
     const selectedFriends = {...this.state.selectedFriends};
     if (checked) {
+      let status = 'invited';
+      if (selectedFriends[usr.id] && (/deleted/i).test(selectedFriends[usr.id].status)) {
+        const [s, msgId] = selectedFriends[usr.id].status.split('.');
+        status = `invited.${msgId}`;
+      }
       selectedFriends[usr.id] = {
         id : usr.id,
         name : usr.name,
         role : 'collaborator',
-        status : 'invited'
+        status : status
       };
     } else {
-      selectedFriends[usr.id] = null;
+      if (selectedFriends[usr.id] && (/invited/i).test(selectedFriends[usr.id].status)) {
+        const share = {...selectedFriends[usr.id]};
+        const [status, msgId] = share.status.split('.');
+        if (msgId) {
+          share.status = `deleted.${msgId}`;
+          selectedFriends[usr.id] = share;
+        } else {
+          selectedFriends[usr.id] = null;
+        }
+      } else {
+        selectedFriends[usr.id] = null;
+      }
     }
     this.setState({ selectedFriends });
   }
