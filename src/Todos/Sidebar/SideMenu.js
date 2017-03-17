@@ -7,8 +7,6 @@ import { Page, List, ListHeader, ListItem, Icon, Input, BottomToolbar,
 import { connect } from 'react-redux'
 import { user } from 'todos-data'
 
-import Messages from './Messages'
-
 class SideMenu extends Component {
 
   constructor(props) {
