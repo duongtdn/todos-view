@@ -149,7 +149,7 @@ class FriendsView extends Component {
       }
       selectedFriends[usr.id] = {
         id : usr.id,
-        name : usr.name,
+        name : usr.email,
         role : 'collaborator',
         status : status
       };
@@ -223,6 +223,7 @@ class FriendsView extends Component {
   }
 
   addAndSelectFriend(usr) {
+    console.log(usr)
     // add this user to friend list
     this.props.addToFriendList(usr);
     // then, select this user and add to todo share list if there's a todo, i.e.
@@ -233,7 +234,7 @@ class FriendsView extends Component {
       const selectedFriends = {...this.state.selectedFriends};
       selectedFriends[usr.id] = {
         id : usr.id,
-        name : usr.name,
+        name : usr.email,
         role : 'collaborator',
         status : 'invited'
       };
