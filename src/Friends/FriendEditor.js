@@ -124,7 +124,7 @@ class FriendEditor extends Component {
 
   getRel(rel) {
     if (rel === 'Other') {
-      this.setState({ selectedRel : rel, showOtherRelInput : 'block' });
+      this.setState({ rel, selectedRel : rel, showOtherRelInput : 'block' });
     } else {
       this.setState({ rel, selectedRel : rel, showOtherRelInput : 'none' });
     }
