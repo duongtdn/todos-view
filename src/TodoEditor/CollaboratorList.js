@@ -10,7 +10,7 @@ export default class CollaboratorList extends Component {
   }
 
   renderRow(row, index) {
-    const unshareBtn = row.relationship === 'owner' ? null :
+    const unshareBtn = row.role === 'owner' ? null :
           <Button modifier = 'quiet' onClick = {() => this.unshare(row.id)} > 
                 <Icon icon = 'md-close' size = {24} style={{color: 'grey'}}/> 
           </Button>

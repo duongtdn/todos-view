@@ -35,7 +35,8 @@ export default class TaskInputs extends Component {
           share.push({ 
             id : uid,
             name : 'Me', 
-            relationship : sharedUser.role
+            role : sharedUser.role,
+            relationship : sharedUser.role === 'owner' ? 'Task owner' : sharedUser.role
           });
         } else {
           if (/recall/i.test(sharedUser.status) || sharedUser.status === 'unshared') {
@@ -46,12 +47,14 @@ export default class TaskInputs extends Component {
             share.push({
               id : uid,
               name : props.friends[uid].name,
+              role : sharedUser.role,
               relationship : `${props.friends[uid].relationship}${label}`
             });
           } else {
             share.push({
               id : uid,
               name : sharedUser.name,
+              role : sharedUser.role,
               relationship : `not connected${label}`
             });
           }
