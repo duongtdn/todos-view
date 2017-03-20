@@ -148,6 +148,8 @@ class TodoEditor extends Component {
 
   unshare(id) {
     if (this.todo.share[id]) {
+      if (this.todo.share[id].role === 'owner') { return; }
+      
       if ((/invited/i).test(this.todo.share[id].status)) {
         const share = {...this.todo.share[id]};
         const [status, msgId] = share.status.split('.');

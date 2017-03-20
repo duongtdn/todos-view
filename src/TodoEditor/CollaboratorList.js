@@ -10,6 +10,10 @@ export default class CollaboratorList extends Component {
   }
 
   renderRow(row, index) {
+    const unshareBtn = row.relationship === 'owner' ? null :
+          <Button modifier = 'quiet' onClick = {() => this.unshare(row.id)} > 
+                <Icon icon = 'md-close' size = {24} style={{color: 'grey'}}/> 
+          </Button>
     return (
       <ListItem key = {index} modifier = 'nodivider' >
         <div className = 'center'>
@@ -17,9 +21,7 @@ export default class CollaboratorList extends Component {
           <div className = 'todo-editor-collaborate-relationship'> {row.relationship} </div>
         </div>
         <div className = 'right'>
-          <Button modifier = 'quiet' onClick = {() => this.unshare(row.id)} > 
-            <Icon icon = 'md-close' size = {24} style={{color: 'grey'}}/> 
-          </Button>
+          {unshareBtn}
         </div>
       </ListItem>
     );
