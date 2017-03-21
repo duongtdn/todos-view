@@ -12,9 +12,16 @@ class SideMenu extends Component {
   constructor(props) {
     super(props);
 
+    this.taskGroups = [
+      {id : 0, name : 'All Todos'},
+      {id : 1, name : 'Grocery'},
+      {id : 2, name : 'Class Assignment'},
+      {id : 3, name : 'Project: Todos Together'},
+    ];
+
     this.state = {
       userDisplayName : '',
-      showNameInput : false
+      showNameInput : false,
     }
 
     this.openFriendsList = this.openFriendsList.bind(this);
@@ -26,6 +33,8 @@ class SideMenu extends Component {
     this.openChangePSW = this.openChangePSW.bind(this);
     this.openMessagesPage = this.openMessagesPage.bind(this);
     this.renderBottomToolbar = this.renderBottomToolbar.bind(this);
+    this.createNewTaskGroup = this.createNewTaskGroup.bind(this);
+    this.selectTaskGroup = this.selectTaskGroup.bind(this);
   }
 
   componentWillMount() {
@@ -50,6 +59,7 @@ class SideMenu extends Component {
   }
 
   render() {
+    const taskGroups = this.taskGroups;
     const badge = this.props.msgCount > 0 ? 
                     this.props.msgCount < 10 ?  
                       <label className = 'badge'> {this.props.msgCount} </label>:
@@ -99,7 +109,7 @@ class SideMenu extends Component {
 
         <a href = '#' style = {{textDecoration : 'none'}} onClick = {this.openFriendsList} >
           <ListItem modifier = 'longdivider chevron' >
-            <div className = 'left' style = {{color : 'grey'}} >
+            <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} >
               <Icon icon = 'fa-external-link' />
             </div> 
             <div className = 'center' >
@@ -110,7 +120,7 @@ class SideMenu extends Component {
 
          <a href = '#' style = {{textDecoration : 'none'}} onClick = {this.openMessagesPage} >
           <ListItem modifier = 'longdivider chevron' >
-            <div className = 'left' style = {{color : 'grey'}} >
+            <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} >
               <Icon icon = 'fa-external-link' />
             </div> 
             <div className = 'center' >
@@ -118,6 +128,26 @@ class SideMenu extends Component {
             </div>
           </ListItem>
         </a>
+
+        <ListHeader modifier = 'nodivider'>
+          Task group
+        </ListHeader>
+
+        <ListItem modifier = 'nodivider' onClick = {this.createNewTaskGroup}>
+          <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} > <Icon icon = 'md-plus' /> </div>
+          <div className = 'center' style = {{fontStyle : 'italic'}}> New Task group </div>
+        </ListItem>
+
+        {taskGroups.map(task => {
+          return (
+            <ListItem modifier = 'nodivider' key = {task.id} onClick = {() => this.selectTaskGroup(task)} >
+              <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} > <Icon icon = 'md-label' /> </div>
+              <div className = 'center'> {task.name} </div>
+            </ListItem>
+          );
+        })}
+
+        <div style = {{paddingBottom : '80px'}} />
 
       </Page>
     );
@@ -172,6 +202,14 @@ class SideMenu extends Component {
 
   openChangePSW() {
     this.props.pushPage('login', {nextRoute : 'changePSW'});
+  }
+
+  createNewTaskGroup() {
+    console.log('create new task group')
+  }
+
+  selectTaskGroup(task) {
+    console.log('select a tash group ' + task.id + ' / ' + task.name)
   }
 
 }
