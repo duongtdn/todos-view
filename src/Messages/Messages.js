@@ -7,7 +7,7 @@ import { Page, Button, Icon,
          Toolbar, BackButton } from 'react-onsenui'
 
 import { connect } from 'react-redux'
-import { user, todos } from 'todos-data'
+import { user, todos, taskGroup } from 'todos-data'
 
 class AlertMessage extends Component {
   render() {
@@ -38,11 +38,12 @@ class AlertMessage extends Component {
 class ConfirmMessage extends Component {
   render() {
     const msg = this.props.msg;
+    const target = msg.todo.length > 0 ? 'todo item' : 'task group';
     return (
       <ListItem className = 'msgbox' >
         <Col>
           <Row> <label style = {{fontSize : '14px', fontStyle : 'italic', color : 'grey', marginBottom : '3px'}} > 
-            <label style = {{color : '#1E90FF'}} > {msg.from.name} </label> invited you to join a todo 
+            <label style = {{color : '#1E90FF'}} > {msg.from.name} </label> invited you to join a {target} 
           </label> </Row>
           <Row> 
             <div  > 
@@ -83,7 +84,12 @@ class Message extends Component {
   }
 
   ok(msg) {
-    this.props.acceptTodo(msg);
+    if (msg.todo.length > 0) {
+      this.props.acceptTodo(msg);
+    } else if (msg.taskGroup.length > 0) {
+      this.props.acceptTaskGroup(msg);
+    }
+    
   }
 
   cancel(msg) {
@@ -130,6 +136,7 @@ class Messages extends Component {
       <div key = {`${row.id}`}  >
         <Message data = {row}
                 acceptTodo = {this.props.acceptTodo}
+                acceptTaskGroup = {this.props.acceptTaskGroup}
                 ignoreTodo = {this.props.ignoreTodo}
                 deleteMessage = {this.props.deleteMessage} />
       </div>
@@ -179,6 +186,9 @@ const mapDispatchToProps = dispatch => {
     },
     deleteMessage(msgId) {
       dispatch(user.messages.delete([msgId]));
+    },
+    acceptTaskGroup(msg) {
+      dispatch(taskGroup.accept(msg));
     }
   }
 };
