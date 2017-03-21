@@ -4,7 +4,7 @@ import React , { Component } from 'react'
 import { Page, Fab, Splitter, SplitterSide, SplitterContent } from 'react-onsenui'
 
 import { connect } from 'react-redux'
-import { user, currentTodo } from 'todos-data'
+import { user, currentTodo, taskGroup } from 'todos-data'
 
 import Toolbar from './Toolbar'
 import Tabbar from './Tabbar'
@@ -59,7 +59,8 @@ class Todos extends Component {
           <SideMenu signOut = {this.signOut}
                     hide = {this.hideSidebar}
                     pushPage = {this.props.pushPage}
-                    msgCount = {this.props.msgCount} />
+                    msgCount = {this.props.msgCount}
+                    createTaskGroup = {this.props.createTaskGroup} />
         </SplitterSide>
 
         <SplitterContent>
@@ -108,6 +109,9 @@ const mapDispatchToProps = dispatch => {
     },
     signOut() {
       return dispatch(user.signOut());
+    },
+    createTaskGroup(group) {
+      dispatch(taskGroup.create(group));
     }
   }
 };
