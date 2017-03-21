@@ -93,7 +93,11 @@ class Message extends Component {
   }
 
   cancel(msg) {
-    this.props.ignoreTodo(msg);
+    if (msg.todo.length > 0) {
+      this.props.ignoreTodo(msg);
+    } else if (msg.taskGroup.length > 0) {
+      this.props.declineTaskGroup(msg);
+    }
   }
 
 }
@@ -136,9 +140,10 @@ class Messages extends Component {
       <div key = {`${row.id}`}  >
         <Message data = {row}
                 acceptTodo = {this.props.acceptTodo}
-                acceptTaskGroup = {this.props.acceptTaskGroup}
                 ignoreTodo = {this.props.ignoreTodo}
-                deleteMessage = {this.props.deleteMessage} />
+                deleteMessage = {this.props.deleteMessage}
+                acceptTaskGroup = {this.props.acceptTaskGroup}
+                declineTaskGroup = {this.props.declineTaskGroup} />
       </div>
     );
   }
@@ -189,7 +194,10 @@ const mapDispatchToProps = dispatch => {
     },
     acceptTaskGroup(msg) {
       dispatch(taskGroup.accept(msg));
-    }
+    },
+    declineTaskGroup(msg) {
+      dispatch(taskGroup.decline(msg));
+    },
   }
 };
 
