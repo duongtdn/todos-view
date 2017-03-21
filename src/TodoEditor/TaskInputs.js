@@ -31,6 +31,9 @@ export default class TaskInputs extends Component {
     for (let uid in props.data.share) {
       if (props.data.share[uid] !== null) {
         const sharedUser = props.data.share[uid];
+        if (/recall/i.test(sharedUser.status) || sharedUser.status === 'unshared') {
+          continue;
+        }
         if (uid === props.auth.uid) {
           share.push({ 
             id : uid,
@@ -39,9 +42,6 @@ export default class TaskInputs extends Component {
             relationship : sharedUser.role === 'owner' ? 'Task owner' : sharedUser.role
           });
         } else {
-          if (/recall/i.test(sharedUser.status) || sharedUser.status === 'unshared') {
-            continue;
-          }
           const label = (/invited/i).test(sharedUser.status) ? ', Inviting' : '';
           if (props.friends && props.friends[uid]) {
             share.push({
