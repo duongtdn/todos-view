@@ -5,7 +5,7 @@ import { Page, List, ListHeader, ListItem, Icon, Input, BottomToolbar,
          Col, Row, Button } from 'react-onsenui'
 
 import { connect } from 'react-redux'
-import { user } from 'todos-data'
+import { user, filter } from 'todos-data'
 
 class SideMenu extends Component {
 
@@ -201,8 +201,9 @@ class SideMenu extends Component {
     this.props.pushPage('taskGroupEditor')
   }
 
-  selectTaskGroup(task) {
-    console.log('select a tash group ' + task.id + ' / ' + task.name)
+  selectTaskGroup(group) {
+    this.props.selectTaskGroup(group);
+    this.close();
   }
 
 }
@@ -221,7 +222,7 @@ const mapStateToProps = state => {
   }
   return { 
     user : state.user.auth,
-    taskGroups : groups
+    taskGroups : groups,
   };
 
 };
@@ -230,7 +231,10 @@ const mapDispatchToProps = dispatch => {
   return {
     changeName(name) {
       return dispatch(user.changeName(name));
-    }
+    },
+    selectTaskGroup(group) {
+      return dispatch(filter.apply(group))
+    },
   }
 };
 

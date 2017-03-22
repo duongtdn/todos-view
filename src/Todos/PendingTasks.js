@@ -16,7 +16,7 @@ export default class extends Component {
     this.setActiveTask = this.setActiveTask.bind(this);
     this.openEditPage = this.openEditPage.bind(this);
     this.openSharePage = this.openSharePage.bind(this);
-
+    this.renderHeader = this.renderHeader.bind(this);
   }
 
   renderRow(row, index) {
@@ -35,8 +35,9 @@ export default class extends Component {
   }
 
   renderHeader() {
+    const title = this.props.filter.name ? this.props.filter.name : 'All Todos';
     return (
-      <ListHeader> All pending todos </ListHeader>
+      <ListHeader> {title} </ListHeader>
     )
   }
 
