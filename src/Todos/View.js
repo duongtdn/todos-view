@@ -110,9 +110,6 @@ const mapDispatchToProps = dispatch => {
     signOut() {
       return dispatch(user.signOut());
     },
-    createTaskGroup(group) {
-      dispatch(taskGroup.create(group));
-    }
   }
 };
 

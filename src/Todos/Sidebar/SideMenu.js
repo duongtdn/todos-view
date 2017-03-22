@@ -198,11 +198,7 @@ class SideMenu extends Component {
   }
 
   createNewTaskGroup() {
-    this.props.createTaskGroup({ 
-      name : 'Work: Enhance work place', 
-      members : ['q76mtFjzLBTxeU8IWZPkoUuRklA2'],
-      color : 'grey'
-    })
+    this.props.pushPage('taskGroupEditor')
   }
 
   selectTaskGroup(task) {

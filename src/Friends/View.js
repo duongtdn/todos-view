@@ -180,9 +180,15 @@ class FriendsView extends Component {
 
   addToShareList() {
     if (this.props.data) {
-      const currentTodo = {...this.props.data};
-      currentTodo.share = this.state.selectedFriends;
-      this.props.updateCurrentTodo(currentTodo);
+      if (this.props.data.get) {
+        this.props.data.get(this.state.selectedFriends);
+      } else {
+        // remain current todo as I should not touch to already worked solution
+        // but it should replaced by a callback like above
+        const currentTodo = {...this.props.data};
+        currentTodo.share = this.state.selectedFriends;
+        this.props.updateCurrentTodo(currentTodo);
+      }
     }
     this.props.popPage();
   }

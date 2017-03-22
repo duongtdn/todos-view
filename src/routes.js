@@ -13,6 +13,7 @@ import ChangePSWView from './Password/ChangeView'
 import ResetPSWView from './Password/ResetView'
 import Messages from './Messages/Messages'
 import FriendEditorView from './Friends/FriendEditor'
+import TaskGroupEditor from './TaskGroup/TaskGroupEditor'
 
 export default {
   todos : { name : 'todos', view : <TodosView /> },
@@ -26,5 +27,6 @@ export default {
   changePSW : { name : 'changePSW', view : <ChangePSWView />},
   resetPSW : { name : 'resetPSW', view : <ResetPSWView />},
   messages : { name : 'messages', view : <Messages />},
-  friendEditor : { name : 'friendEditor', view : <FriendEditorView />}
+  friendEditor : { name : 'friendEditor', view : <FriendEditorView />},
+  taskGroupEditor : { name : 'taskGroupEditor', view : <TaskGroupEditor />},
 }
