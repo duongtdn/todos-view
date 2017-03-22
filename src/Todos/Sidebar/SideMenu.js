@@ -12,13 +12,6 @@ class SideMenu extends Component {
   constructor(props) {
     super(props);
 
-    this.taskGroups = [
-      {id : 0, name : 'All Todos'},
-      {id : 1, name : 'Grocery'},
-      {id : 2, name : 'Class Assignment'},
-      {id : 3, name : 'Project: Todos Together'},
-    ];
-
     this.state = {
       userDisplayName : '',
       showNameInput : false,
@@ -59,7 +52,7 @@ class SideMenu extends Component {
   }
 
   render() {
-    const taskGroups = this.taskGroups;
+    const taskGroups = this.props.taskGroups;
     const badge = this.props.msgCount > 0 ? 
                     this.props.msgCount < 10 ?  
                       <label className = 'badge'> {this.props.msgCount} </label>:
@@ -221,9 +214,20 @@ class SideMenu extends Component {
 /* Container */
 
 const mapStateToProps = state => {  
+  const groups = [];
+  groups.push({
+    id : '_0_',
+    name : 'All Todos',
+    role : 'owner'
+  });
+  for (let key in state.user.groups) {
+    groups.push({id : key, ...state.user.groups[key]});
+  }
   return { 
-    user : state.user.auth
+    user : state.user.auth,
+    taskGroups : groups
   };
+
 };
 
 const mapDispatchToProps = dispatch => {
