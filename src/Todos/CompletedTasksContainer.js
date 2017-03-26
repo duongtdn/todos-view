@@ -7,10 +7,18 @@ import CompletedTasks from './CompletedTasks'
 
 const mapStateToProps = state => {
   const todos = [];
+  let filterGroup = '';
+  if (state.filter.id && state.filter.id !== '_0_') {
+    filterGroup = state.filter.id;
+  }
   for (let todoId in state.todos) {
-    if (state.todos[todoId].status === 'completed') {
-      todos.push(state.todos[todoId]);
-    }    
+    if ( filterGroup.length === 0 || 
+      ( state.todos[todoId].group && 
+        state.todos[todoId].group === filterGroup)) {
+      if (state.todos[todoId].status === 'completed') {
+        todos.push(state.todos[todoId]);
+      }  
+    }  
   }
   const friends = state.user.friends;
   const auth = state.user.auth;
