@@ -5,7 +5,7 @@ import React , { Component } from 'react'
 import { Page, Icon, Button} from 'react-onsenui'
 
 import { connect } from 'react-redux'
-import {auth, user, todos, connection } from 'todos-data'
+import {auth, user, todos, connection, taskGroup } from 'todos-data'
 import ad from '../ad'
 
 class SyncView extends Component {
@@ -20,6 +20,7 @@ class SyncView extends Component {
     this.tryLoadUser = this.tryLoadUser.bind(this);
     this.retryLoadUser = this.retryLoadUser.bind(this);
     this.tryLoadTodos = this.tryLoadTodos.bind(this);
+    this.tryLoadTaskGroup = this.tryLoadTaskGroup.bind(this);
     this.relogin = this.relogin.bind(this);
   }
 
@@ -89,9 +90,15 @@ class SyncView extends Component {
   tryLoadUser() {
     if (auth.currentUser && auth.currentUser.uid) {
       this.props.loadUser().then(() => {
-        this.tryLoadTodos();
+        this.tryLoadTaskGroup();
       });
     }    
+  }
+
+  tryLoadTaskGroup() {
+    this.props.loadTaskGroup().then(() => {
+      this.tryLoadTodos();
+    })
   }
 
   tryLoadTodos() {
@@ -131,6 +138,9 @@ const mapDispatchToProps = dispatch => {
     },
     loadTodos() {
       return dispatch(todos.fetch());
+    },
+    loadTaskGroup() {
+      return dispatch(taskGroup.fetch());
     },
     checkConnection() {
       return dispatch(connection.check());

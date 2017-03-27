@@ -19,15 +19,38 @@ class View extends Component {
       members : []
     };
 
+    this.groupId = null;
+
     this.renderToolbar = this.renderToolbar.bind(this);
     this.createNewTaskGroup = this.createNewTaskGroup.bind(this);
     this.inviteFriends = this.inviteFriends.bind(this);
     this.getMembers = this.getMembers.bind(this);
     this._getMembers = this._getMembers.bind(this);
     this.unshare = this.unshare.bind(this);
+    this.updateTaskGroup = this.updateTaskGroup.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.props.data && this.props.data.group) {
+      const group = this.props.data.group;
+      const members = {...this.props.taskGroup[group.id].members};
+      this.setState({
+        name : group.name,
+        members
+      });
+      this.groupId = group.id;
+    }
   }
 
   renderToolbar() {
+    const actionBtn = this.groupId? 
+      <ToolbarButton ripple = {true} modifier = 'quiet' onClick = {this.updateTaskGroup} > 
+          Save 
+      </ToolbarButton>
+      :
+      <ToolbarButton ripple = {true} modifier = 'quiet' onClick = {this.createNewTaskGroup} > 
+          Add 
+      </ToolbarButton>
     return (
       <Toolbar>
         <div className = 'left'>
@@ -39,9 +62,7 @@ class View extends Component {
           Task Group
         </div>
         <div className = 'right'>
-          <ToolbarButton ripple = {true} modifier = 'quiet' onClick = {this.createNewTaskGroup} > 
-              Add 
-          </ToolbarButton>
+          {actionBtn}
         </div>
       </Toolbar>
     );
@@ -167,6 +188,16 @@ class View extends Component {
     this.setState({ members });
   }
 
+  updateTaskGroup() {
+    this.props.updateTaskGroup({
+      id: this.groupId,
+      name : this.state.name, 
+      members : this.state.members,
+      color : 'grey'
+    });
+    this.props.popPage();
+  }
+
 }
 
 /* Container */
@@ -175,6 +206,7 @@ const mapStateToProps = state => {
   return { 
     auth : state.user.auth,
     friends : state.user.friends,
+    taskGroup : state.taskGroup
   };
 };
 
@@ -182,6 +214,9 @@ const mapDispatchToProps = dispatch => {
   return {
     createTaskGroup(group) {
       dispatch(taskGroup.create(group));
+    },
+    updateTaskGroup(group) {
+      dispatch(taskGroup.edit(group));
     }
   }
 };

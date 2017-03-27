@@ -6,7 +6,7 @@ import { Page, Button, Icon,
          Col, Row,
          Toolbar, BackButton } from 'react-onsenui'
 
-import ons from 'onsenui'
+// import ons from 'onsenui'
 
 import { connect } from 'react-redux'
 import { user, todos, taskGroup } from 'todos-data'
@@ -89,9 +89,10 @@ class Message extends Component {
     if (msg.todo.length > 0) {
       this.props.acceptTodo(msg);
     } else if (msg.taskGroup.length > 0) {
-      ons.notification.prompt('Name this Task Group as:', {
-        defaultValue: msg.content
-      }).then( result => this.props.acceptTaskGroup(result, msg) );
+      // ons.notification.prompt('Name this Task Group as:', {
+      //   defaultValue: msg.content
+      // }).then( result => this.props.acceptTaskGroup(result, msg) );
+      this.props.acceptTaskGroup('grey', msg)
     }
     
   }
@@ -196,8 +197,8 @@ const mapDispatchToProps = dispatch => {
     deleteMessage(msgId) {
       dispatch(user.messages.delete([msgId]));
     },
-    acceptTaskGroup(name, msg) {
-      dispatch(taskGroup.accept(name, msg));
+    acceptTaskGroup(color, msg) {
+      dispatch(taskGroup.accept(color, msg));
     },
     declineTaskGroup(msg) {
       dispatch(taskGroup.decline(msg));

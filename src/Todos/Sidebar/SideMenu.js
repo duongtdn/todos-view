@@ -15,6 +15,7 @@ class SideMenu extends Component {
     this.state = {
       userDisplayName : '',
       showNameInput : false,
+      taskGroups : []
     }
 
     this.openFriendsList = this.openFriendsList.bind(this);
@@ -28,10 +29,32 @@ class SideMenu extends Component {
     this.renderBottomToolbar = this.renderBottomToolbar.bind(this);
     this.createNewTaskGroup = this.createNewTaskGroup.bind(this);
     this.selectTaskGroup = this.selectTaskGroup.bind(this);
+    this._getTaskgroupFromProp = this._getTaskgroupFromProp.bind(this);
   }
 
   componentWillMount() {
-    this.setState({ userDisplayName : this.props.user.displayName});
+    const taskGroups = this._getTaskgroupFromProp(this.props);
+    this.setState({ userDisplayName : this.props.user.displayName, taskGroups});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const taskGroups = this._getTaskgroupFromProp(nextProps);
+    this.setState({ taskGroups });
+  }
+
+  _getTaskgroupFromProp(props) {
+    const groups = [];
+    groups.push({
+      id : '_0_',
+      name : 'All Todos',
+      color : 'grey',
+      role : 'owner'
+    });
+    for (let key in props.taskGroup) {
+      groups.push({...props.taskGroup[key]});
+    }
+    console.log(groups)
+    return groups;
   }
 
   renderBottomToolbar() {
@@ -52,7 +75,7 @@ class SideMenu extends Component {
   }
 
   render() {
-    const taskGroups = this.props.taskGroups;
+    const taskGroups = this.state.taskGroups;
     const badge = this.props.msgCount > 0 ? 
                     this.props.msgCount < 10 ?  
                       <label className = 'badge'> {this.props.msgCount} </label>:
@@ -131,11 +154,12 @@ class SideMenu extends Component {
           <div className = 'center' style = {{fontStyle : 'italic'}}> New Task group </div>
         </ListItem>
 
-        {taskGroups.map(task => {
+        {taskGroups.map(group => {
           return (
-            <ListItem modifier = 'nodivider' key = {task.id} onClick = {() => this.selectTaskGroup(task)} >
-              <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} > <Icon icon = 'md-label' /> </div>
-              <div className = 'center'> {task.name} </div>
+            <ListItem modifier = 'nodivider' key = {group.id} >
+              <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} onClick = {() => this.selectTaskGroup(group)} > <Icon icon = 'md-label' /> </div>
+              <div className = 'center' onClick = {() => this.selectTaskGroup(group)} > {group.name} </div>
+              <div className = 'right' style = {{color : 'rgba(38, 100, 171, 0.811765)'}}onClick = {() => this.editTaskGroup(group)} > <Icon icon = 'md-edit' /> </div>
             </ListItem>
           );
         })}
@@ -201,6 +225,10 @@ class SideMenu extends Component {
     this.props.pushPage('taskGroupEditor')
   }
 
+  editTaskGroup(group) {
+    this.props.pushPage('taskGroupEditor', {group});
+  }
+
   selectTaskGroup(group) {
     this.props.selectTaskGroup(group);
     this.close();
@@ -210,19 +238,10 @@ class SideMenu extends Component {
 
 /* Container */
 
-const mapStateToProps = state => {  
-  const groups = [];
-  groups.push({
-    id : '_0_',
-    name : 'All Todos',
-    role : 'owner'
-  });
-  for (let key in state.user.groups) {
-    groups.push({id : key, ...state.user.groups[key]});
-  }
+const mapStateToProps = state => {
   return { 
     user : state.user.auth,
-    taskGroups : groups,
+    taskGroup : state.taskGroup,
   };
 
 };
