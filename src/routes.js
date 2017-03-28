@@ -14,6 +14,7 @@ import ResetPSWView from './Password/ResetView'
 import Messages from './Messages/Messages'
 import FriendEditorView from './Friends/FriendEditor'
 import TaskGroupEditor from './TaskGroup/TaskGroupEditor'
+import TaskGroupList from './TaskGroup/TaskGroupList'
 
 export default {
   todos : { name : 'todos', view : <TodosView /> },
@@ -29,4 +30,5 @@ export default {
   messages : { name : 'messages', view : <Messages />},
   friendEditor : { name : 'friendEditor', view : <FriendEditorView />},
   taskGroupEditor : { name : 'taskGroupEditor', view : <TaskGroupEditor />},
+  taskGroupList : { name : 'taskGroupList', view : <TaskGroupList/>},
 }

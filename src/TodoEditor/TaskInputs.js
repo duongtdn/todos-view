@@ -96,6 +96,13 @@ export default class TaskInputs extends Component {
             </label>
           </ListItem>
 
+          <ListItem modifier = 'nodivider' >
+            <label> Task group </label> 
+            <label className = 'right' > 
+              <label onClick = {() => this.props.pushPage('taskGroupList')} > None </label>
+            </label>
+          </ListItem>
+
           <ListItem modifier = 'nodivider'>
             <label className = 'center todo-editor-urgent-label' > 
               Is it Urgent? 
