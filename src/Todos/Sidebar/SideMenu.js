@@ -53,7 +53,6 @@ class SideMenu extends Component {
     for (let key in props.taskGroup) {
       groups.push({...props.taskGroup[key]});
     }
-    console.log(groups)
     return groups;
   }
 
@@ -155,11 +154,18 @@ class SideMenu extends Component {
         </ListItem>
 
         {taskGroups.map(group => {
+          const rightBtn = group.id === '_0_' ? 
+                            null :
+                            <div className = 'right' 
+                                 style = {{color : 'rgba(38, 100, 171, 0.811765)'}}
+                                 onClick = {() => this.editTaskGroup(group)} > 
+                                  <Icon icon = 'md-edit' /> 
+                            </div>
           return (
             <ListItem modifier = 'nodivider' key = {group.id} >
               <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} onClick = {() => this.selectTaskGroup(group)} > <Icon icon = 'md-label' /> </div>
               <div className = 'center' onClick = {() => this.selectTaskGroup(group)} > {group.name} </div>
-              <div className = 'right' style = {{color : 'rgba(38, 100, 171, 0.811765)'}}onClick = {() => this.editTaskGroup(group)} > <Icon icon = 'md-edit' /> </div>
+              {rightBtn}
             </ListItem>
           );
         })}
