@@ -70,6 +70,7 @@ export default class TaskInputs extends Component {
     const urgent = this.props.data.urgent;
     const share = this.state.share;
     const selectedDate = this.props.data.dueDate || null;
+    const taskGroup = this.props.data.group? this.props.taskGroup[this.props.data.group].name : 'None';
     return (
       <Page>
         <List>
@@ -99,7 +100,9 @@ export default class TaskInputs extends Component {
           <ListItem modifier = 'nodivider' >
             <label> Task group </label> 
             <label className = 'right' > 
-              <label onClick = {() => this.props.pushPage('taskGroupList')} > None </label>
+              <label onClick = {() => this.props.pushPage('taskGroupList', {get: this.props.getTaskGroup})} > 
+                {taskGroup} <Icon icon = 'fa-caret-down' />
+              </label>
             </label>
           </ListItem>
 

@@ -18,13 +18,14 @@ class View extends Component {
 
     this._findTaskGroupOwner = this._findTaskGroupOwner.bind(this);
     this._findOwnerName = this._findOwnerName.bind(this);
+    this.renderToolbar = this.renderToolbar.bind(this);
   }
 
   renderToolbar() {
     return (
        <Toolbar>
         <div className = 'left'>
-          <BackButton> 
+          <BackButton onClick = {() => this.done()}> 
             Back
           </BackButton  >
         </div>
@@ -83,6 +84,13 @@ class View extends Component {
 
   handleSelectionChange(group) {
     this.setState({ selectedTaskGroup : group});
+  }
+
+  done() {
+    if (this.props.data.get) {
+      this.props.data.get(this.state.selectedTaskGroup);
+    }
+    this.props.popPage();
   }
 
   _findTaskGroupOwner(group) {

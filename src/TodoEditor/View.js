@@ -28,6 +28,7 @@ class TodoEditor extends Component {
     this.unshare = this.unshare.bind(this);
     this.hideToolbar = this.hideToolbar.bind(this);
     this.showToolbar = this.showToolbar.bind(this);
+    this.getTaskGroup = this.getTaskGroup.bind(this);
   }
 
   renderToolbar() {
@@ -89,6 +90,8 @@ class TodoEditor extends Component {
                     inviteFriends = {this.inviteFriends}
                     unshare = {this.unshare}
                     hideToolbar = {this.hideToolbar}
+                    getTaskGroup = {this.getTaskGroup}
+                    taskGroup = {this.props.taskGroup}
                     />
         <div style={{padding: '16px'}}>
           {btn}
@@ -110,6 +113,18 @@ class TodoEditor extends Component {
       this.todo.dueDate = date.timestamp;
     }
     this.showToolbar();
+  }
+
+  getTaskGroup(group) {
+    if (!group) { 
+      return; 
+    }
+    if (group.id === '_0_') {
+      this.todo.group = null;
+    } else {
+      this.todo.group = group.id;
+    }
+    this.props.updateCurrentTodo(this.todo);
   }
 
   addTodo() {
@@ -185,7 +200,8 @@ const mapStateToProps = state => {
   return { 
     auth : state.user.auth,
     friends : state.user.friends,
-    currentTodo : state.currentTodo 
+    currentTodo : state.currentTodo,
+    taskGroup: state.taskGroup,
   };
 };
 
