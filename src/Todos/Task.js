@@ -27,8 +27,14 @@ export default class extends Component {
 
   render() {    
     const data = this.props.data;
-    const numberOfShare = Object.keys(data.share).length; 
-    const type = numberOfShare > 1 ? `${numberOfShare} shared` : 'private';
+    let type;
+    if (data.group) {
+      type = `Group: ${this.props.taskGroup[data.group].name}`;
+    } else {
+      const numberOfShare = Object.keys(data.share).length; 
+      type = numberOfShare > 1 ? `Members : ${numberOfShare}` : 'Private';
+    }
+
     const urgentStyle = data.urgent ? 'todos-urgent' : '';
     let dueDate = '';
     if (data.dueDate.length !== 0) {

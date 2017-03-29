@@ -49,7 +49,11 @@ const mapStateToProps = state => {
     return sortByUrgent(a, b);
     
   });
-  return { todos, filter : state.filter };
+  return { 
+    todos, 
+    filter : state.filter,
+    taskGroup : state.taskGroup
+  };
 };
 
 const mapDispatchToProps = dispatch => {

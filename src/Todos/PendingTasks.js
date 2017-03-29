@@ -30,6 +30,7 @@ export default class extends Component {
             openSharePage = {this.openSharePage}
             completeTodo = {this.props.completeTodo}
             deleteTodo = {this.props.deleteTodo}
+            taskGroup = {this.props.taskGroup}
       />
     );
   }
