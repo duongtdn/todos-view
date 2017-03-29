@@ -72,7 +72,6 @@ export default class TaskInputs extends Component {
     const selectedDate = this.props.data.dueDate || null;
 
     let taskGroup = 'None';
-    console.log(this.props.data.group)
     if (this.props.data.group && this.props.data.group.updated) {
       if (this.props.data.group.updated !== '_0_') {
         taskGroup = this.props.taskGroup[this.props.data.group.updated].name;

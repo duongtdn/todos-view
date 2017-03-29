@@ -51,7 +51,7 @@ class TodoEditor extends Component {
   }
 
   getTodoFromProps(props) {
-    if (props.currentTodo) {
+    if (props.currentTodo && Object.keys(props.currentTodo).length > 0) {
       // deep copy currentTodo into internal todo */
       const share = {...props.currentTodo.share};
       this.todo = {...props.currentTodo};
