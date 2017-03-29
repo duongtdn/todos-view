@@ -119,11 +119,10 @@ class TodoEditor extends Component {
     if (!group) { 
       return; 
     }
-    if (group.id === '_0_') {
-      this.todo.group = null;
-    } else {
-      this.todo.group = group.id;
+    if (!this.todo.group) {
+      this.todo.group = {};
     }
+    this.todo.group.updated = group.id;
     this.props.updateCurrentTodo(this.todo);
   }
 
@@ -197,10 +196,19 @@ class TodoEditor extends Component {
 /* Container */
 
 const mapStateToProps = state => {  
+  // special process for group
+  // if currentTodo is initial loaded, store the origin group as we need it to
+  // further process such as remove todo from group...
+  // with initial loadfed, group should be a string, I will format it to an 
+  // object with original group
+  const currentTodo = {...state.currentTodo};
+  if (currentTodo.group && typeof currentTodo.group === 'string') {
+    currentTodo.group = { origin : currentTodo.group };
+  }
   return { 
     auth : state.user.auth,
     friends : state.user.friends,
-    currentTodo : state.currentTodo,
+    currentTodo,
     taskGroup: state.taskGroup,
   };
 };

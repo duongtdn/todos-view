@@ -70,7 +70,17 @@ export default class TaskInputs extends Component {
     const urgent = this.props.data.urgent;
     const share = this.state.share;
     const selectedDate = this.props.data.dueDate || null;
-    const taskGroup = this.props.data.group? this.props.taskGroup[this.props.data.group].name : 'None';
+
+    let taskGroup = 'None';
+    console.log(this.props.data.group)
+    if (this.props.data.group && this.props.data.group.updated) {
+      if (this.props.data.group.updated !== '_0_') {
+        taskGroup = this.props.taskGroup[this.props.data.group.updated].name;
+      }    
+    } else if (this.props.data.group && this.props.data.group.origin) {
+      taskGroup = this.props.taskGroup[this.props.data.group.origin].name;
+    }
+
     return (
       <Page>
         <List>
