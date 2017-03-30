@@ -31,7 +31,6 @@ class View extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.data)
     if (this.props.data && this.props.data.group) {
       const group = this.props.data.group;
       const members = {...this.props.taskGroup[group.id].members};
