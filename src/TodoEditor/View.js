@@ -64,11 +64,30 @@ class TodoEditor extends Component {
         role: 'owner',
         status: 'accepted'
       };
+      const group = { updated : '_0_' };
+
+      if (this.props.filter && 
+          Object.keys(this.props.filter).length > 0 &&
+          this.props.filter.id !== '_0_') {
+
+        const groupId = this.props.filter.id;
+        const members = this.props.taskGroup[groupId].members
+        for (let id in members) {
+          if (share[id]) { continue }
+          share[id] = {...members[id]};
+          share[id].status = 'invited';
+        }
+        group.updated = groupId;
+
+      }
+
       this.todo = {
         text    : '',
         urgent  : false,
         share,
+        group,
       };
+      
     }
   }
 
@@ -140,7 +159,6 @@ class TodoEditor extends Component {
       share[id] = {...this.props.taskGroup[group.id].members[id]};
       share[id].status = 'invited';
     }
-    console.log(share)
     this.todo.share = share;
     this.props.updateCurrentTodo(this.todo);
   }
@@ -229,6 +247,7 @@ const mapStateToProps = state => {
     friends : state.user.friends,
     currentTodo,
     taskGroup: state.taskGroup,
+    filter : state.filter,
   };
 };
 
