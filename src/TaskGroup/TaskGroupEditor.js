@@ -31,6 +31,7 @@ class View extends Component {
   }
 
   componentWillMount() {
+    console.log(this.props.data)
     if (this.props.data && this.props.data.group) {
       const group = this.props.data.group;
       const members = {...this.props.taskGroup[group.id].members};
@@ -39,6 +40,15 @@ class View extends Component {
         members
       });
       this.groupId = group.id;
+    } else {
+      const members = {};
+      members[this.props.auth.uid] = {
+        id: this.props.auth.uid,
+        name: this.props.auth.email,
+        role: 'owner',
+        status: 'accepted'
+      };
+      this.setState({ members });
     }
   }
 
@@ -103,15 +113,9 @@ class View extends Component {
   }
 
   createNewTaskGroup() {
-    const members = [];
-    for (let uid in this.state.members) {
-      if (this.state.members[uid]) {
-        members.push(uid);
-      }
-    }
     this.props.createTaskGroup({ 
       name : this.state.name, 
-      members : members,
+      members : this.state.members,
       color : 'grey'
     });
     this.props.popPage();
@@ -169,7 +173,11 @@ class View extends Component {
   }
 
   unshare(id) {
-    const members = {...this.state.members};
+    // deep copy members List
+    const members = {};
+    for (let uid in this.state.members) {
+      members[uid] = {...this.state.members[uid]};
+    }
     if (members[id]) {
       if (members[id].role === 'owner') { return; }
       if ((/invited/i).test(members[id].status)) {
