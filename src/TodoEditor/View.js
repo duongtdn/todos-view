@@ -57,10 +57,17 @@ class TodoEditor extends Component {
       this.todo = {...props.currentTodo};
       this.todo.share = share;
     } else {
+      const share = {};
+      share[this.props.auth.uid] = {
+        id: this.props.auth.uid,
+        name : this.props.auth.email,
+        role: 'owner',
+        status: 'accepted'
+      };
       this.todo = {
         text    : '',
         urgent  : false,
-        share   : {}
+        share,
       };
     }
   }
@@ -123,6 +130,18 @@ class TodoEditor extends Component {
       this.todo.group = {};
     }
     this.todo.group.updated = group.id;
+    // load members in the group and merge with current list
+    const share = {};
+    for (let id in this.todo.share) {
+      share[id] = {...this.todo.share[id]}
+    }
+    for (let id in this.props.taskGroup[group.id].members) {
+      if (share[id]) { continue }
+      share[id] = {...this.props.taskGroup[group.id].members[id]};
+      share[id].status = 'invited';
+    }
+    console.log(share)
+    this.todo.share = share;
     this.props.updateCurrentTodo(this.todo);
   }
 
