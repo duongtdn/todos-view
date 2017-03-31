@@ -28,7 +28,13 @@ export default class extends Component {
   render() {    
     const data = this.props.data;
     let type;
-    if (data.group) {
+    if (data.group && this.props.taskGroup[data.group]) {
+      /* issue: user may accept a task which he is not member of its group
+         so we cannot get group name
+         this.props.taskGroup[data.group] will be undefined
+         solution: in this case, we are not showing task group, so I add one
+         more condition to the if statement
+      */
       type = `Group: ${this.props.taskGroup[data.group].name}`;
     } else {
       const numberOfShare = Object.keys(data.share).length; 
