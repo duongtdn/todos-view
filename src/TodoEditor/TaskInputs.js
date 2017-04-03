@@ -16,6 +16,7 @@ export default class TaskInputs extends Component {
     this.state = { share : [] };
 
     this.getShareListFromProps = this.getShareListFromProps.bind(this);
+    this.openTaskGroupList = this.openTaskGroupList.bind(this);
   }
 
   componentWillMount() {
@@ -109,7 +110,7 @@ export default class TaskInputs extends Component {
           <ListItem modifier = 'nodivider' >
             <label> Task group </label> 
             <label className = 'right' > 
-              <label onClick = {() => this.props.pushPage('taskGroupList', {get: this.props.getTaskGroup})} > 
+              <label onClick = {this.openTaskGroupList} > 
                 {taskGroup} <Icon icon = 'fa-caret-down' />
               </label>
             </label>
@@ -151,7 +152,14 @@ export default class TaskInputs extends Component {
     );
   }
 
-    handleKeyUp(code) {
+  openTaskGroupList() {
+    this.props.pushPage('taskGroupList', {
+      get: this.props.getTaskGroup,
+      selected: this.props.data.group,
+    });
+  }
+
+  handleKeyUp(code) {
     if (code === 13) { // enter key
       // blur from input box by focus to a dummy element
       document.getElementById('dummy').focus();

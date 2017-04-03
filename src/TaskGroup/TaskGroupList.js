@@ -19,6 +19,23 @@ class View extends Component {
     this._findTaskGroupOwner = this._findTaskGroupOwner.bind(this);
     this._findOwnerName = this._findOwnerName.bind(this);
     this.renderToolbar = this.renderToolbar.bind(this);
+    this.getSelectedTaskGroup = this.getSelectedTaskGroup.bind(this);
+  }
+
+  componentWillMount() {
+    this.getSelectedTaskGroup(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    
+  }
+
+  getSelectedTaskGroup(props) {
+    if (this.props.data && this.props.data.selected) {
+      const selectedTaskGroup = {...this.props.data.selected};
+      selectedTaskGroup.id = selectedTaskGroup.updated || selectedTaskGroup.origin;
+      this.setState({ selectedTaskGroup });
+    }
   }
 
   renderToolbar() {
@@ -60,15 +77,16 @@ class View extends Component {
             }
 
             if (group.id === '_0_') {
-              if (this.props.data && this.props.data.get) {
-                /* only show None in selection mode */
-                detail = (
-                  <label className = 'center' htmlFor={`radio-${group.id}`}>
-                    <div className = 'todo-editor-collaborate-name' > None </div>
-                    <div className = 'todo-editor-collaborate-relationship'> Don't assign to any Task group' </div>
-                  </label>
-                );   
-              }   
+              if (!this.props.data || !this.props.data.get) {
+                return;
+              }
+              /* only show None in selection mode */
+              detail = (
+                <label className = 'center' htmlFor={`radio-${group.id}`}>
+                  <div className = 'todo-editor-collaborate-name' > None </div>
+                  <div className = 'todo-editor-collaborate-relationship'> Don't assign to any Task group' </div>
+                </label>
+              );   
             } else {
               const owner = this._findTaskGroupOwner(group);
               detail = (
