@@ -152,10 +152,13 @@ class TodoEditor extends Component {
     this.todo.group.updated = group.id;
 
     // load members in the group and merge with current list if group is not none
+    // merge only if member is already invited or accepted
     if (group.id && group.id !== '_0_') {
       const share = {};
       for (let id in this.todo.share) {
-        share[id] = {...this.todo.share[id]}
+        if (/(accepted)|(invited.)/.test(this.todo.share[id].status)) {
+          share[id] = {...this.todo.share[id]}
+        }      
       }
       for (let id in this.props.taskGroup[group.id].members) {
         if (share[id]) { continue }
