@@ -46,13 +46,29 @@ class View extends Component {
 
           {taskGroups.map(group => {
             let detail = null;
-            if (group.id === '_0_') {
-              detail = (
-                <label className = 'center' htmlFor={`radio-${group.id}`}>
-                  <div className = 'todo-editor-collaborate-name' > None </div>
-                  <div className = 'todo-editor-collaborate-relationship'> Don't assign to any Task group' </div>
+            let selectBtn = null;
+
+            if (this.props.data && this.props.data.get) {
+              /* List is open to select a task group */
+              selectBtn = (
+                <label className = 'left' >
+                  <Input type = 'radio' inputId = {`radio-${group.id}`} 
+                         checked = {group.id === this.state.selectedTaskGroup.id}
+                         onChange={this.handleSelectionChange.bind(this, group)} /> 
                 </label>
-              );      
+              );
+            }
+
+            if (group.id === '_0_') {
+              if (this.props.data && this.props.data.get) {
+                /* only show None in selection mode */
+                detail = (
+                  <label className = 'center' htmlFor={`radio-${group.id}`}>
+                    <div className = 'todo-editor-collaborate-name' > None </div>
+                    <div className = 'todo-editor-collaborate-relationship'> Don't assign to any Task group' </div>
+                  </label>
+                );   
+              }   
             } else {
               const owner = this._findTaskGroupOwner(group);
               detail = (
@@ -66,11 +82,7 @@ class View extends Component {
                 
             return (
               <ListItem key = {group.id} >
-                <label className = 'left' >
-                  <Input type = 'radio' inputId = {`radio-${group.id}`} 
-                         checked = {group.id === this.state.selectedTaskGroup.id}
-                         onChange={this.handleSelectionChange.bind(this, group)} /> 
-                </label>
+                {selectBtn}
                 {detail}
               </ListItem>
             )   
@@ -87,7 +99,7 @@ class View extends Component {
   }
 
   done() {
-    if (this.props.data.get) {
+    if (this.props.data && this.props.data.get) {
       this.props.data.get(this.state.selectedTaskGroup);
     }
     this.props.popPage();
