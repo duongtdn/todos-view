@@ -145,21 +145,26 @@ class TodoEditor extends Component {
     if (!group) { 
       return; 
     }
+
     if (!this.todo.group) {
       this.todo.group = {};
     }
     this.todo.group.updated = group.id;
-    // load members in the group and merge with current list
-    const share = {};
-    for (let id in this.todo.share) {
-      share[id] = {...this.todo.share[id]}
+
+    // load members in the group and merge with current list if group is not none
+    if (group.id && group.id !== '_0_') {
+      const share = {};
+      for (let id in this.todo.share) {
+        share[id] = {...this.todo.share[id]}
+      }
+      for (let id in this.props.taskGroup[group.id].members) {
+        if (share[id]) { continue }
+        share[id] = {...this.props.taskGroup[group.id].members[id]};
+        share[id].status = 'invited';
+      }
+      this.todo.share = share;
     }
-    for (let id in this.props.taskGroup[group.id].members) {
-      if (share[id]) { continue }
-      share[id] = {...this.props.taskGroup[group.id].members[id]};
-      share[id].status = 'invited';
-    }
-    this.todo.share = share;
+    
     this.props.updateCurrentTodo(this.todo);
   }
 
