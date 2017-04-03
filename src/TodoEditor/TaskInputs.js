@@ -43,7 +43,12 @@ export default class TaskInputs extends Component {
             relationship : sharedUser.role === 'owner' ? 'Task owner' : sharedUser.role
           });
         } else {
-          const label = (/invited/i).test(sharedUser.status) ? ', Inviting' : '';
+          let label = '';
+          if (/invited./i.test(sharedUser.status)) {
+            label = ', Invited';
+          } else if (/invited/i.test(sharedUser.status)) {
+            label = ', Inviting'
+          }
           if (props.friends && props.friends[uid]) {
             share.push({
               id : uid,
