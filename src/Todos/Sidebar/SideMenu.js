@@ -19,6 +19,7 @@ class SideMenu extends Component {
     }
 
     this.openFriendsList = this.openFriendsList.bind(this);
+    this.openTaskGroupList = this.openTaskGroupList.bind(this);
     this.changeName = this.changeName.bind(this);
     this.handleNameInput = this.handleNameInput.bind(this);
     this.showNameEditor = this.showNameEditor.bind(this);
@@ -148,6 +149,17 @@ class SideMenu extends Component {
           Task group
         </ListHeader>
 
+         <a href = '#' style = {{textDecoration : 'none'}} onClick = {this.openTaskGroupList} >
+          <ListItem modifier = 'longdivider chevron' >
+            <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} >
+              <Icon icon = 'fa-external-link' />
+            </div> 
+            <div className = 'center' >
+              Task Groups List
+            </div>
+          </ListItem>
+        </a>
+
         <ListItem modifier = 'nodivider' onClick = {this.createNewTaskGroup}>
           <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} > <Icon icon = 'md-plus' /> </div>
           <div className = 'center' style = {{fontStyle : 'italic'}}> New Task group </div>
@@ -179,6 +191,11 @@ class SideMenu extends Component {
   openFriendsList() {
     this.close();
     this.props.pushPage('friends');
+  }
+
+  openTaskGroupList() {
+    this.close();
+    this.props.pushPage('taskGroupList');
   }
 
   openMessagesPage() {
