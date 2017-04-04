@@ -35,7 +35,7 @@ export default class extends Component {
     return (
       <ListHeader> 
         <Row>
-          <Col> All completed todos </Col>
+          <Col> Completed todos </Col>
           {/*<Col style = {{textAlign : 'right', color: 'orange'}}> 
             <Icon icon = 'md-delete'  /> Delete All 
           </Col>*/}

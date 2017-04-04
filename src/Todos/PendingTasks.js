@@ -36,7 +36,8 @@ export default class extends Component {
   }
 
   renderHeader() {
-    const title = this.props.filter.name ? this.props.filter.name : 'All Todos';
+    const title = this.props.filter.id && this.props.taskGroup[this.props.filter.id] ? 
+                    this.props.taskGroup[this.props.filter.id].name : 'All Todos';
     return (
       <ListHeader> {title} </ListHeader>
     )

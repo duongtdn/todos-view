@@ -11,6 +11,10 @@ const mapStateToProps = state => {
   if (state.filter.id && state.filter.id !== '_0_') {
     filterGroup = state.filter.id;
   }
+  // if group is not in the list (maybe because of deleted), apply no filter
+  if (!state.taskGroup[filterGroup]) {
+    filterGroup = '';
+  }
   for (let todoId in state.todos) {
     if ( filterGroup.length === 0 || 
          ( state.todos[todoId].group && 
