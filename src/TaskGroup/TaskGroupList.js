@@ -4,7 +4,7 @@ import React , { Component } from 'react'
 import { Page, List, ListHeader, ListItem, Icon, Input,
          Toolbar, ToolbarButton, BackButton,
          Col, Row, Button } from 'react-onsenui'
-
+import ons from 'onsenui'
 import { connect } from 'react-redux'
 import { taskGroup } from 'todos-data'
 
@@ -63,15 +63,22 @@ class View extends Component {
 
           {taskGroups.map(group => {
             let detail = null;
-            let selectBtn = null;
+            let deleteBtn = null;
 
-            if (this.props.data && this.props.data.get) {
-              /* List is open to select a task group */
-              selectBtn = (
-                <label className = 'left' >
-                  <Input type = 'radio' inputId = {`radio-${group.id}`} 
-                         checked = {group.id === this.state.selectedTaskGroup.id}
-                         onChange={this.handleSelectionChange.bind(this, group)} /> 
+            const selectBtn = (
+              <label className = 'left' >
+                <Input type = 'radio' inputId = {`radio-${group.id}`} 
+                        checked = {group.id === this.state.selectedTaskGroup.id}
+                        onChange={this.handleSelectionChange.bind(this, group)} /> 
+              </label>
+            );
+
+            if (!this.props.data || !this.props.data.get) {
+              deleteBtn = (
+                <label className = 'right'>
+                  <Button modifier = 'quiet' onClick = {() => this.showAlertDialog(group)} > 
+                    <Icon icon = 'md-delete' size = {24} style={{color: 'grey'}}/> 
+                  </Button>
                 </label>
               );
             }
@@ -102,6 +109,7 @@ class View extends Component {
               <ListItem key = {group.id} >
                 {selectBtn}
                 {detail}
+                {deleteBtn}
               </ListItem>
             )   
           })}
@@ -121,6 +129,20 @@ class View extends Component {
       this.props.data.get(this.state.selectedTaskGroup);
     }
     this.props.popPage();
+  }
+
+  showAlertDialog(group) {
+    ons.notification.confirm({
+      message: `Do you want to remove Task group ${group.name} from your list?`,
+      callback : ans => { 
+        if (ans === 1) { 
+          console.log(group)
+          this.props.delete(group)
+          .then(() => console.log('success'))
+          .catch(err => console.log(err));
+        }
+      }
+    });
   }
 
   _findTaskGroupOwner(group) {
@@ -161,7 +183,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    
+    delete(group) {
+      return dispatch(taskGroup.delete(group));
+    }
   }
 };
 
