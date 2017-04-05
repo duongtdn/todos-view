@@ -15,6 +15,7 @@ import Messages from './Messages/Messages'
 import FriendEditorView from './Friends/FriendEditor'
 import TaskGroupEditor from './TaskGroup/TaskGroupEditor'
 import TaskGroupList from './TaskGroup/TaskGroupList'
+import DatePicker from './Components/DatePicker'
 
 export default {
   todos : { name : 'todos', view : <TodosView /> },
@@ -31,4 +32,5 @@ export default {
   friendEditor : { name : 'friendEditor', view : <FriendEditorView />},
   taskGroupEditor : { name : 'taskGroupEditor', view : <TaskGroupEditor />},
   taskGroupList : { name : 'taskGroupList', view : <TaskGroupList/>},
+  datePicker : { name : 'datePicker', view : <DatePicker />}
 }

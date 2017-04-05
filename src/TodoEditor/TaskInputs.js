@@ -8,15 +8,17 @@ import { DatePicker } from 'react-onsenui-datepicker'
 import AutofocusInput from '../Components/AutofocusInput'
 
 import CollaboratorList from './CollaboratorList'
-
+import DateBox from '../Components/DateBox'
 
 export default class TaskInputs extends Component {
   constructor(props) {
     super(props);
-    this.state = { share : [] };
+    this.state = { share : [], selectedDate : null };
 
     this.getShareListFromProps = this.getShareListFromProps.bind(this);
     this.openTaskGroupList = this.openTaskGroupList.bind(this);
+    this.openDatePicker = this.openDatePicker.bind(this);
+    this.getDueDate = this.getDueDate.bind(this);
   }
 
   componentWillMount() {
@@ -75,7 +77,6 @@ export default class TaskInputs extends Component {
     const text = this.props.data.text;
     const urgent = this.props.data.urgent;
     const share = this.state.share;
-    const selectedDate = this.props.data.dueDate || null;
 
     let taskGroup = 'None';
     if (this.props.data.group && this.props.data.group.updated) {
@@ -106,9 +107,8 @@ export default class TaskInputs extends Component {
           <ListItem modifier = 'nodivider' >
             <label> Due date </label> 
             <label className = 'right' > 
-              <DatePicker preOpenCalendar = {this.props.hideToolbar} 
-                          onSelectDate = {this.props.getDueDate} 
-                          selectedDate = {selectedDate} /> 
+              <DateBox selectedDate = {this.state.selectedDate}
+                       onClick ={this.openDatePicker} />
             </label>
           </ListItem>
 
@@ -169,6 +169,18 @@ export default class TaskInputs extends Component {
       // blur from input box by focus to a dummy element
       document.getElementById('dummy').focus();
     }
+  }
+
+  getDueDate(date) {
+    this.setState({ selectedDate : date });
+    this.props.getDueDate(date);
+  }
+
+  openDatePicker() {
+    this.props.pushPage('datePicker', {
+      get: this.getDueDate,
+      selectedDate : this.props.data.dueDate || null
+    })
   }
 
 }
