@@ -124,7 +124,17 @@ function mapMonth (month, format = 'long') {
 
 export function formatDate(date) {
   if (date) {
-    return `${date.day} ${mapMonth(date.month,'short')} ${date.year}`;
+    if (typeof date !== 'object') {
+      const d = new Date(date);
+      const dd = {
+        day : d.getDate(),
+        month : d.getMonth(),
+        year : d.getFullYear()
+      }
+      return `${dd.day} ${mapMonth(dd.month,'short')} ${dd.year}`;
+    } else {
+      return `${date.day} ${mapMonth(date.month,'short')} ${date.year}`;
+    }   
   } else {
     return '';
   }

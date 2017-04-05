@@ -23,6 +23,9 @@ export default class TaskInputs extends Component {
 
   componentWillMount() {
     this.getShareListFromProps(this.props);
+    if (this.props.data.dueDate) {
+      this.setState({ selectedDate : this.props.data.dueDate });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
