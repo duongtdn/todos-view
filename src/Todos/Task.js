@@ -3,7 +3,7 @@
 import React , { Component } from 'react'
 import {ListItem, Icon, Input, Col, Row, Button} from 'react-onsenui'
 
-import { calendar } from 'react-onsenui-datepicker'
+import calendar from '../Components/calendar'
 
 export default class extends Component {
 

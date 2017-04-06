@@ -3,8 +3,6 @@
 import React , { Component } from 'react'
 import { Page, List, ListItem, ListHeader, Switch, Button, Icon} from 'react-onsenui'
 
-import { DatePicker } from 'react-onsenui-datepicker'
-
 import AutofocusInput from '../Components/AutofocusInput'
 
 import CollaboratorList from './CollaboratorList'

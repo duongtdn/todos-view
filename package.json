@@ -15,7 +15,6 @@
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-onsenui": "^1.0.3",
-    "react-onsenui-datepicker": "^1.0.5",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0"
   },
