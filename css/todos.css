@@ -245,7 +245,8 @@ ons-list-item > .center {
 
 /* TODO EDITOR */
 
-.todo-editor-text-input {
+.todo-editor-text-input,
+.todo-editor-text-input input {
   width : 100%
 }
 
@@ -300,7 +301,7 @@ ons-toolbar ons-input[type=search] span {
 
 /* search input inside navigation bar for material design */
 
-ons-toolbar.navigation-bar--material ons-input[type=search] {
+ons-toolbar.toolbar--material ons-input[type=search] {
     margin-top: 16px;
     width: 100%;
     line-height: 16px;
@@ -310,17 +311,17 @@ ons-toolbar.navigation-bar--material ons-input[type=search] {
     background-image: none; 
 }
 
-ons-toolbar.navigation-bar--material ons-input[type=search] input {
+ons-toolbar.toolbar--material ons-input[type=search] input {
     color : white;
     padding-bottom: 2px;
     padding-left: 0px;
 }
 
-ons-toolbar.navigation-bar--material ons-input[type=search] input:focus {
+ons-toolbar.toolbar--material ons-input[type=search] input:focus {
     background-image: linear-gradient(white, white), linear-gradient(to top, transparent 1px, #afafaf 1px);
 }
 
-ons-toolbar.navigation-bar--material ons-input[type=search] span {
+ons-toolbar.toolbar--material ons-input[type=search] span {
     padding-left: 0px;
 }
 
@@ -348,7 +349,11 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
 }
 
 .login-form ons-input[type=text],
-.login-form ons-input[type=password] {
+.login-form ons-input[type=text] input,
+.login-form ons-input[type=email],
+.login-form ons-input[type=email] input,
+.login-form ons-input[type=password],
+.login-form ons-input[type=password] input {
   width : 100%;
 }
 
@@ -400,6 +405,7 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
 .sidemenu-username input {
   font-size: 24px;
   font-style: bold;
+  width: 95%;
 }
 
 .sidemenu-email {
@@ -509,6 +515,10 @@ ons-toolbar.navigation-bar--material ons-input[type=search] span {
 .fe-input {
   width: 100%;
   margin-bottom: 6px;
+}
+
+.fe-input input {
+  width: 100%;
 }
 
 .toolbar-button--material {
