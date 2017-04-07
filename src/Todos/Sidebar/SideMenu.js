@@ -35,6 +35,7 @@ class SideMenu extends Component {
 
   componentWillMount() {
     const taskGroups = this._getTaskgroupFromProp(this.props);
+    this.userInputName = this.props.user.displayName;
     this.setState({ userDisplayName : this.props.user.displayName, taskGroups});
   }
 
