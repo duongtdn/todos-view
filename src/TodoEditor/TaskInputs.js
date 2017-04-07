@@ -162,6 +162,8 @@ export default class TaskInputs extends Component {
     this.props.pushPage('taskGroupList', {
       get: this.props.getTaskGroup,
       selected: this.props.data.group,
+    }, {
+      animation : 'lift'
     });
   }
 
