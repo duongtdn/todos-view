@@ -65,7 +65,6 @@ export default class extends Component {
           </div>
 
           <div className = 'login-break' >
-            <hr />
           </div>
 
           <div className = 'login-action' >
