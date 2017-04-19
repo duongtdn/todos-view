@@ -524,3 +524,7 @@ ons-toolbar.toolbar--material ons-input[type=search] span {
 .toolbar-button--material {
   font-size: 20px;
 }
+
+.delete-all {
+  padding: 4px;
+}

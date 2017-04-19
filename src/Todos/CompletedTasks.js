@@ -1,7 +1,7 @@
 "use strict"
 
 import React , { Component } from 'react'
-import { Page, List, ListHeader, Row, Col, Icon } from 'react-onsenui'
+import { Page, List, ListHeader, Row, Col, Icon, BottomToolbar, Button } from 'react-onsenui'
 
 import CompletedTask from './CompletedTask'
 
@@ -44,9 +44,19 @@ export default class extends Component {
     )
   }
 
+  renderBottomToolbar() {
+    return (
+      <BottomToolbar>
+        <div className = 'delete-all' > 
+          <Button modifier = 'quiet' > Delete All </Button> 
+        </div>
+      </BottomToolbar>
+    );       
+  }
+
   render() {
     return (
-      <Page>
+      <Page renderBottomToolbar = {this.renderBottomToolbar}>
         <List
           dataSource = {this.props.todos}
           renderRow = {this.renderRow}
