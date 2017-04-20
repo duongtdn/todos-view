@@ -15,6 +15,8 @@ export default class extends Component {
 
     this.renderRow = this.renderRow.bind(this);
     this.renderHeader  = this.renderHeader.bind(this);
+    this.renderBottomToolbar = this.renderBottomToolbar.bind(this);
+    this.deleteAll = this.deleteAll.bind(this);
   }
 
   renderRow(row, index) {
@@ -48,7 +50,7 @@ export default class extends Component {
     return (
       <BottomToolbar>
         <div className = 'delete-all' > 
-          <Button modifier = 'quiet' > Delete All </Button> 
+          <Button modifier = 'quiet' onClick = {this.deleteAll} > Delete All </Button> 
         </div>
       </BottomToolbar>
     );       
@@ -65,6 +67,10 @@ export default class extends Component {
         <div style = {{paddingBottom : '80px'}} />
       </Page>
     );
+  }
+
+  deleteAll() {
+    this.props.deleteAll(this.props.todos);
   }
 
 }
