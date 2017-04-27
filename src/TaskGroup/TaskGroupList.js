@@ -6,7 +6,7 @@ import { Page, List, ListHeader, ListItem, Icon, Input,
          Col, Row, Button } from 'react-onsenui'
 import ons from 'onsenui'
 import { connect } from 'react-redux'
-import { taskGroup } from 'todos-data'
+import { taskGroup, filter } from 'todos-data'
 
 class View extends Component {
   constructor(props) {
@@ -136,9 +136,13 @@ class View extends Component {
       message: `Do you want to remove Task group ${group.name} from your list?`,
       callback : ans => { 
         if (ans === 1) { 
-          console.log(group)
           this.props.delete(group)
-          .then(() => console.log('success'))
+          .then(() => this.props.applyGroupFilter({
+            id : '_0_',
+            name : 'All Todos',
+            color : 'grey',
+            role : 'owner'
+          }))
           .catch(err => console.log(err));
         }
       }
@@ -185,6 +189,9 @@ const mapDispatchToProps = dispatch => {
   return {
     delete(group) {
       return dispatch(taskGroup.delete(group));
+    },
+    applyGroupFilter(group) {
+      return dispatch(filter.apply(group));
     }
   }
 };
