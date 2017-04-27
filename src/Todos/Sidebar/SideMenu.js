@@ -146,11 +146,7 @@ class SideMenu extends Component {
           </ListItem>
         </a>
 
-        <ListHeader modifier = 'nodivider'>
-          Task group
-        </ListHeader>
-
-         <a href = '#' style = {{textDecoration : 'none'}} onClick = {this.openTaskGroupList} >
+        <a href = '#' style = {{textDecoration : 'none'}} onClick = {this.openTaskGroupList} >
           <ListItem modifier = 'longdivider chevron' >
             <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} >
               <Icon icon = 'fa-external-link' />
@@ -160,6 +156,10 @@ class SideMenu extends Component {
             </div>
           </ListItem>
         </a>
+
+        <ListHeader modifier = 'nodivider'>
+          Task group
+        </ListHeader>         
 
         <ListItem modifier = 'nodivider' onClick = {this.createNewTaskGroup}>
           <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} > <Icon icon = 'md-plus' /> </div>
