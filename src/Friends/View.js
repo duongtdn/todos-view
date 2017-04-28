@@ -18,7 +18,8 @@ class FriendsView extends Component {
       searchingDatabase : false,
       matchedSearch : true,
       friends : [],
-      selectedFriends : {}
+      selectedFriends : {},
+      context: 'friend-select'
     };
 
     this.searchInput = '';
@@ -31,6 +32,8 @@ class FriendsView extends Component {
     this.handleSearchInput = this.handleSearchInput.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.addAndSelectFriend = this.addAndSelectFriend.bind(this);
+    this.onFocusSearchBox = this.onFocusSearchBox.bind(this);
+
   }
 
   componentWillMount() {
@@ -80,7 +83,8 @@ class FriendsView extends Component {
                handleSearchInput = {this.handleSearchInput} 
                handleKeyUp = {this.handleKeyUp}
                addToShareList = {this.addToShareList}
-               popPage = {this.props.popPage} />
+               popPage = {this.props.popPage}
+               onFocusSearchBox = {this.onFocusSearchBox} />
     );
   }
 
@@ -114,6 +118,7 @@ class FriendsView extends Component {
     return (
       <Page renderToolbar = {this.renderToolbar}
             renderBottomToolbar = {this.renderBottomToolbar}
+            onClick = {() => this.setState({ context: 'friend-select' })}
       >
         <FriendsList category = 'Friends' 
                      searchingDatabase = {this.state.searchingDatabase}
@@ -179,18 +184,27 @@ class FriendsView extends Component {
   }
 
   addToShareList() {
-    if (this.props.data) {
-      if (this.props.data.get) {
-        this.props.data.get(this.state.selectedFriends);
-      } else {
-        // remain current todo as I should not touch to already worked solution
-        // but it should replaced by a callback like above
-        const currentTodo = {...this.props.data};
-        currentTodo.share = this.state.selectedFriends;
-        this.props.updateCurrentTodo(currentTodo);
+    if (this.state.context === 'friend-select') {
+      if (this.props.data) {
+        if (this.props.data.get) {
+          this.props.data.get(this.state.selectedFriends);
+        } else {
+          // remain current todo as I should not touch to already worked solution
+          // but it should replaced by a callback like above
+          const currentTodo = {...this.props.data};
+          currentTodo.share = this.state.selectedFriends;
+          this.props.updateCurrentTodo(currentTodo);
+        }
+      }
+      this.props.popPage();
+    } else if (this.state.context === 'search-input') {
+      const result = this.state.result;
+      if (result.length === 0) { // not found from local, search DB
+        this.props.searchByEmail(this.searchInput.toLowerCase().replace(/ +/g,''));
+        this.setState({ searchingDatabase : true});      
       }
     }
-    this.props.popPage();
+    
   }
 
   handleSearchInput(text) {
@@ -212,6 +226,7 @@ class FriendsView extends Component {
   handleKeyUp(code, text) {
     this.searchInput = text; 
     if (code === 13) { // enter key
+      this.setState({ context: 'friend-select' });
       if (text === '') {
         // blur from input box by focus to a dummy element
         document.getElementById('dummy').focus();
@@ -221,7 +236,7 @@ class FriendsView extends Component {
                                                    // since this event is invoked before react update state.result from handleSearchInput
       if (result.length === 0) { // not found from local, search DB
         this.props.searchByEmail(this.searchInput.toLowerCase().replace(/ +/g,''));
-        this.setState({ searchingDatabase : true});        
+        this.setState({ searchingDatabase : true});      
       }
       // blur from input box by focus to a dummy element
       document.getElementById('dummy').focus();
@@ -248,6 +263,10 @@ class FriendsView extends Component {
     } else {
       this.setState({ result });  
     }
+  }
+
+  onFocusSearchBox() {
+    this.setState({ context: 'search-input' });
   }
 
 }
