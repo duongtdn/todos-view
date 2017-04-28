@@ -77,7 +77,7 @@ class ResetPassword extends Component {
     this.setState({isBusy : true});
     this.props.sendPasswordResetEmail(this.state.email)
         .then(() => this.setState({success : true, message : 'Email Sent', isBusy : false }))
-        .catch(err =>  {this.setState({success : false, message : 'Invalid Email', isBusy : false}); console.log(err) });
+        .catch(err =>  {this.setState({success : false, message : 'Invalid Email or Email does not exist', isBusy : false}); console.log(err) });
   }
 
 }
