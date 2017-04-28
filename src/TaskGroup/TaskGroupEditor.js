@@ -112,11 +112,13 @@ class View extends Component {
   }
 
   createNewTaskGroup() {
-    this.props.createTaskGroup({ 
-      name : this.state.name, 
-      members : this.state.members,
-      color : 'grey'
-    });
+    if (this.state.name.length !== 0) {
+      this.props.createTaskGroup({ 
+        name : this.state.name, 
+        members : this.state.members,
+        color : 'grey'
+      });
+    }   
     this.props.popPage();
   }
 
