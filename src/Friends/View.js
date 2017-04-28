@@ -104,7 +104,7 @@ class FriendsView extends Component {
               <Button modifier = 'quiet' 
                       style = {{textAlign: 'center', width: '100%'}}
                       onClick = {this.addToShareList} > 
-                Done
+                {this.state.context === 'friend-select' ? 'Done' : 'Search'}
               </Button> 
             </Col>
           </Row>
