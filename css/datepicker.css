@@ -20,7 +20,7 @@
 
 .daybox {  
   margin: auto;
-  border : 1px solid rgba(255,255,255,.5);;
+  border : 1px solid rgba(255,255,255,.5);
   width: 26px;
   height: 26px;
   border-radius: 50%;  
@@ -37,10 +37,8 @@
 
 .day-selected {
   border : 1px solid deepskyblue;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;  
-  padding : 4px;
+  background: #4cd2ff;
+  color : white !important;
 }
 
 .day-inactive {
@@ -48,9 +46,7 @@
 }
 
 .today {
-  border : 1px solid deepskyblue;
-  background: #4cd2ff;
-  color : white;
+  color : #4cd2ff;
 }
 
 .datebox {

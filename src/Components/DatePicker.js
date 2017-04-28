@@ -160,7 +160,7 @@ class Calendar extends Component {
             <Icon icon = 'md-arrow-back' /> Cancel 
           </Button>   
           <Button onClick = {this.props.done} > 
-            Select 
+            OK 
           </Button> 
         </div>
         
