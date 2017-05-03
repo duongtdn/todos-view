@@ -5,6 +5,8 @@ import { Page, List, ListHeader, ListItem, Icon, Input,
          Toolbar, ToolbarButton, BackButton,
          Col, Row, Button } from 'react-onsenui'
 
+import ons from 'onsenui'
+
 import { connect } from 'react-redux'
 import { taskGroup } from 'todos-data'
 
@@ -114,13 +116,15 @@ class View extends Component {
   }
 
   createNewTaskGroup() {
-    if (this.state.name.length !== 0) {
-      this.props.createTaskGroup({ 
-        name : this.state.name, 
-        members : this.state.members,
-        color : 'grey'
-      });
-    }   
+    if (this.state.name.length === 0) {
+      ons.notification.alert('Oops! You missed the name of your list');
+      return;
+    }
+    this.props.createTaskGroup({ 
+      name : this.state.name, 
+      members : this.state.members,
+      color : 'grey'
+    });  
     this.props.popPage();
   }
 

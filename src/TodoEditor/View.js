@@ -3,6 +3,8 @@
 import React , { Component } from 'react'
 import { Page, Button, Icon} from 'react-onsenui'
 
+import ons from 'onsenui'
+
 import { connect } from 'react-redux'
 import { todos, currentTodo } from 'todos-data'
 
@@ -169,7 +171,7 @@ class TodoEditor extends Component {
   addTodo() {
     
     if (this.todo.text.length === 0) { 
-      this.props.popPage();
+      ons.notification.alert('Please fill in todo text');
       return;
     }
 
@@ -188,7 +190,7 @@ class TodoEditor extends Component {
   saveTodo() {
 
     if (this.todo.text.length === 0) { 
-      this.props.popPage();
+      ons.notification.alert('Please fill in todo text');
       return;
     }
 
