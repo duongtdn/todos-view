@@ -26,6 +26,7 @@ ons-list-item > .center {
   width : 100%;
   z-index: 2;
   background-color: white;
+  line-height: 150%;
 }
 
 .todos-urgent {
@@ -539,5 +540,5 @@ ons-toolbar.toolbar--material ons-input[type=search] span {
   text-align: center !important;
   border-radius: 4px;
   color: #fff;
-margin-right: 8px;
+  margin-right: 8px;
 }

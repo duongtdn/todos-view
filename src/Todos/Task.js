@@ -68,7 +68,7 @@ export default class extends Component {
             {/*<Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>*/}
           </div>
           <div className = 'todos-text' >
-            {data.text} {tag}
+            {tag} {data.text}
           </div>
           <div className = 'todos-ext'>
             <Row>
