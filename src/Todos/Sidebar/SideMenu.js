@@ -31,6 +31,7 @@ class SideMenu extends Component {
     this.createNewTaskGroup = this.createNewTaskGroup.bind(this);
     this.selectTaskGroup = this.selectTaskGroup.bind(this);
     this._getTaskgroupFromProp = this._getTaskgroupFromProp.bind(this);
+    this._selectFilterTaskgroup = this._selectFilterTaskgroup.bind(this);
   }
 
   componentWillMount() {
@@ -41,6 +42,7 @@ class SideMenu extends Component {
 
   componentWillReceiveProps(nextProps) {
     const taskGroups = this._getTaskgroupFromProp(nextProps);
+    this._selectFilterTaskgroup(taskGroups);
     this.setState({ taskGroups });
   }
 
@@ -56,6 +58,21 @@ class SideMenu extends Component {
       groups.push({...props.taskGroup[key]});
     }
     return groups;
+  }
+
+  _selectFilterTaskgroup(list) {
+    if (this.props.filter && this.props.filter.id && this.props.filter.id !== '_0_' ) {
+      if (list[this.props.filter.id]) {
+        this.props.selectTaskGroup(list[this.props.filter.id]);
+      } else {
+        this.props.selectTaskGroup({
+          id : '_0_',
+          name : 'All Todos',
+          color : 'grey',
+          role : 'owner'
+        });
+      }      
+    }
   }
 
   renderBottomToolbar() {
@@ -266,6 +283,7 @@ const mapStateToProps = state => {
   return { 
     user : state.user.auth,
     taskGroup : state.taskGroup,
+    filter: state.filter
   };
 
 };
