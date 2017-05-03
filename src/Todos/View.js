@@ -77,7 +77,9 @@ class Todos extends Component {
 
   newTodo() {
     this.props.updateCurrentTodo(null);
-    this.props.pushPage('editor', null);
+    this.props.pushPage('editor', null, {
+      animation : 'none'
+    });
   }
 
   showSidebar() {
