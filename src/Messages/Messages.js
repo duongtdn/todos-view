@@ -13,12 +13,13 @@ import { user, todos, taskGroup } from 'todos-data'
 
 class AlertMessage extends Component {
   render() {
-    const msg = this.props.msg;;
+    const msg = this.props.msg;
+    const target = msg.todo.length > 0 ? 'todo item' : 'todo list';
     return (
       <ListItem className = 'msgbox' >
         <Col>
           <Row> <label style = {{fontSize : '14px', fontStyle : 'italic', color : 'grey', marginBottom : '3px'}} > 
-            <label style = {{color : '#1E90FF'}} > {msg.from.name} </label> has removed you from the shared list of 
+            <label style = {{color : '#1E90FF'}} > {msg.from.name} </label> has removed you from {target} 
           </label> </Row>
           <Row >
             <div> {msg.content} </div>
@@ -40,7 +41,7 @@ class AlertMessage extends Component {
 class ConfirmMessage extends Component {
   render() {
     const msg = this.props.msg;
-    const target = msg.todo.length > 0 ? 'todo item' : 'task group';
+    const target = msg.todo.length > 0 ? 'todo item' : 'todo list';
     return (
       <ListItem className = 'msgbox' >
         <Col>

@@ -152,18 +152,18 @@ class SideMenu extends Component {
               <Icon icon = 'fa-external-link' />
             </div> 
             <div className = 'center' >
-              Task Groups List
+              Manage Lists
             </div>
           </ListItem>
         </a>
 
         <ListHeader modifier = 'nodivider'>
-          Task group
+          Lists
         </ListHeader>         
 
         <ListItem modifier = 'nodivider' onClick = {this.createNewTaskGroup}>
           <div className = 'left' style = {{color : 'grey', minWidth: '30px'}} > <Icon icon = 'md-plus' /> </div>
-          <div className = 'center' style = {{fontStyle : 'italic'}}> New Task group </div>
+          <div className = 'center' style = {{fontStyle : 'italic'}}> Create New List </div>
         </ListItem>
 
         {taskGroups.map(group => {
