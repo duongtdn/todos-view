@@ -10,7 +10,6 @@ export default class FriendsList extends Component {
 
     this.state = { 
       user : {},
-      editMenu : {},
     };
 
     this.renderRow = this.renderRow.bind(this);
@@ -22,19 +21,9 @@ export default class FriendsList extends Component {
   }
 
   componentWillMount() {
-    const editMenu = this._prepareEditMenu(this.props);
-    this.setState({ editMenu });
   }
 
   componentWillReceiveProps(nextProps) {
-    const editMenu = this._prepareEditMenu(nextProps);
-    this.setState({ editMenu });
-  }
-
-  _prepareEditMenu(props) {
-    const editMenu = {};
-    props.data.forEach(item => editMenu[item.id] = `todos-action-${props.platform} hide`);
-    return editMenu;
   }
 
   renderRow(row) {
@@ -70,10 +59,7 @@ export default class FriendsList extends Component {
         <label className = 'left'> 
           {selectBtn}
         </label>
-        <label className = 'center' onClick = {() => this.toggleEditMenu(row)} >
-          <div className = {this.state.editMenu[row.id]}>
-            <Button modifier='quiet' onClick = {() => this.openFriendEditor(row)}>  Edit <Icon icon = 'md-edit' /> </Button>
-          </div>
+        <label className = 'center'  >
           <div className = 'todos-text' >
             <Col>
               <Row className = 'todo-editor-collaborate-name'> {row.name} </Row>
@@ -114,7 +100,7 @@ export default class FriendsList extends Component {
   }
 
   selectFriend(usr, evt) {
-    const checked = evt.target.checked;
+    const checked = !this.isSelected(usr.id);
     this.props.selectFriend(usr, checked);
   }
 
@@ -156,43 +142,6 @@ export default class FriendsList extends Component {
       rel : user.relationship || null,
       save : this.addAndSelectFriend
     });
-  }
-
-  toggleEditMenu(row) {
-
-    if (row.id === this.props.auth.uid  || !row.connected) {
-      return;
-    }
-
-    const editMenu = this._prepareEditMenu(this.props);
-
-    const patt = /\shide/g;
-    if (patt.test(this.state.editMenu[row.id])) {
-      // this item is currently hidden
-      editMenu[row.id] = `todos-action-${this.props.platform} animation-show-up`;
-    } else {
-      editMenu[row.id] = `todos-action-${this.props.platform} animation-hide`
-    }    
-    this.setState({ editMenu });
-
-    setTimeout(() => {
-      this._cleanAnimationClass(row.id);      
-    }, 250);
-  }
-
-  _cleanAnimationClass(id) {
-    const editMenu = this._prepareEditMenu(this.props);
-
-    const patt2 = /\sanimation-show-up/g;
-    const _class = this.state.editMenu[id];
-
-    if (patt2.test(_class)) {
-      // this item need to be show up
-      editMenu[id] = `todos-action-${this.props.platform}`
-    }   
-    
-    this.setState({ editMenu });
-
   }
 
 }
