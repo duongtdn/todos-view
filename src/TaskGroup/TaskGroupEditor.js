@@ -8,6 +8,7 @@ import { Page, List, ListHeader, ListItem, Icon, Input,
 import { connect } from 'react-redux'
 import { taskGroup } from 'todos-data'
 
+import AutofocusInput from '../Components/AutofocusInput'
 import CollaboratorList from '../TodoEditor/CollaboratorList'
 
 class View extends Component {
@@ -87,9 +88,10 @@ class View extends Component {
 
           <ListItem modifier = 'nodivider'>
             <div className = 'fe-title'> Name </div>
-            <Input className = 'fe-input' 
+            <AutofocusInput className = 'fe-input' 
                    value ={this.state.name} 
-                   onChange = {e => this.getName(e.target.value)} />
+                   onChange = {e => this.getName(e.target.value)}
+                   modifier = 'underbar' />
           </ListItem>
 
           <ListHeader> Members </ListHeader>

@@ -101,6 +101,7 @@ export default class TaskInputs extends Component {
                     value = {text}
                     onChange = {e => this.props.getTodoText(e.target.value)} 
                     onKeyUp = {e => this.handleKeyUp(e.keyCode)}
+                    modifier = 'underbar'
                     float />
             </div>
           </ListItem>
