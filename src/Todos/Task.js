@@ -55,6 +55,7 @@ export default class extends Component {
         overdueStyle = 'todos-highlight todos-urgent';
       }
     }
+    const tag = data.urgent ? <label className = 'tag'> urgent </label> : null;
     return (
       <ListItem className = {`${this.state.animation} ${urgentStyle} ${overdueStyle}`} key = {data.id} >
         <div className = 'left todos-check'> 
@@ -67,7 +68,7 @@ export default class extends Component {
             {/*<Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>*/}
           </div>
           <div className = 'todos-text' >
-            {data.text}
+            {tag} {data.text}
           </div>
           <div className = 'todos-ext'>
             <Row>
