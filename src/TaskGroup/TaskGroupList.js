@@ -59,7 +59,7 @@ class View extends Component {
       <Page renderToolbar = {this.renderToolbar} >
 
         <List>
-          <ListHeader> Your Task Groups </ListHeader>
+          <ListHeader> Your Lists </ListHeader>
 
           {taskGroups.map(group => {
             let detail = null;
