@@ -60,11 +60,17 @@ class SideMenu extends Component {
     return groups;
   }
 
-  _selectFilterTaskgroup(list) {
+  _selectFilterTaskgroup(lists) {
     if (this.props.filter && this.props.filter.id && this.props.filter.id !== '_0_' ) {
-      if (list[this.props.filter.id]) {
-        this.props.selectTaskGroup(list[this.props.filter.id]);
-      } else {
+      let found = false;
+      lists.forEach(list => {
+        if (this.props.filter.id === list.id) {
+          found = true;
+          return;
+        }
+      });
+
+      if (!found) {
         this.props.selectTaskGroup({
           id : '_0_',
           name : 'All Todos',
