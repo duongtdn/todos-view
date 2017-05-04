@@ -42,6 +42,14 @@ export default class FriendsList extends Component {
                  checked = {this.isSelected(row.id)} /> :
       null;
 
+    const editBtn = <Button modifier = 'quiet' 
+                            style = {{color: '#f44336', paddingLeft: '0'}}
+                            onClick = {() => this.openFriendEditor(row)} >
+                      Edit
+                    </Button>
+
+    const leftBtn = this.props.editable ? editBtn : selectBtn;
+
     const thirdLbl = row.id === this.props.auth.uid ? 
         <Row className = 'todo-editor-collaborate-relationship'> 
            This is Me 
@@ -57,7 +65,7 @@ export default class FriendsList extends Component {
     return (
       <ListItem key = {row.id} modifier = 'nodivider' >
         <label className = 'left'> 
-          {selectBtn}
+          {leftBtn}
         </label>
         <label className = 'center'  >
           <div className = 'todos-text' >

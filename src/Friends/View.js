@@ -115,6 +115,7 @@ class FriendsView extends Component {
 
   render() {
     const data = this.searchInput.length > 0 ? this.state.result : this.state.friends;
+    const editable = this.props.data === undefined;
     return (
       <Page renderToolbar = {this.renderToolbar}
             renderBottomToolbar = {this.renderBottomToolbar}
@@ -130,7 +131,8 @@ class FriendsView extends Component {
                      unfriend = {this.props.unfriend}
                      platform = {this.props.platform}
                      auth = {this.props.auth}
-                     pushPage = {this.props.pushPage} />
+                     pushPage = {this.props.pushPage}
+                     editable = {editable} />
         
         <div className = 'dummy-btn' >
           <button id = 'dummy' />
