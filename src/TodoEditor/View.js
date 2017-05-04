@@ -160,6 +160,7 @@ class TodoEditor extends Component {
           if (share[id]) { continue }
           share[id] = {...this.props.taskGroup[group.id].members[id]};
           share[id].status = 'invited';
+          share[id].role = 'collaborator';
         }
       }     
       this.todo.share = share;
