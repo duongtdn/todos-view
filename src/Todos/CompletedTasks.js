@@ -34,15 +34,10 @@ export default class extends Component {
   }
 
   renderHeader() {
+    const title = this.props.filter.id && this.props.taskGroup[this.props.filter.id] ? 
+                    `${this.props.taskGroup[this.props.filter.id].name} (Completed)` : 'All Todos (Completed)';
     return (
-      <ListHeader> 
-        <Row>
-          <Col> Completed todos </Col>
-          {/*<Col style = {{textAlign : 'right', color: 'orange'}}> 
-            <Icon icon = 'md-delete'  /> Delete All 
-          </Col>*/}
-        </Row>
-      </ListHeader>
+      <ListHeader> {title} </ListHeader>
     )
   }
 

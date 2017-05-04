@@ -26,7 +26,11 @@ const mapStateToProps = state => {
   }
   const friends = state.user.friends;
   const auth = state.user.auth;
-  return { todos, friends, auth };
+  return { 
+    todos, friends, auth, 
+    filter : state.filter, 
+    taskGroup : state.taskGroup 
+  };
 };
 
 const mapDispatchToProps = dispatch => {
