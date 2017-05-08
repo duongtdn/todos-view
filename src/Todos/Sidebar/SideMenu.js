@@ -23,6 +23,7 @@ class SideMenu extends Component {
     this.changeName = this.changeName.bind(this);
     this.handleNameInput = this.handleNameInput.bind(this);
     this.showNameEditor = this.showNameEditor.bind(this);
+    this.cancelChangingName = this.cancelChangingName.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.close = this.close.bind(this);
     this.openChangePSW = this.openChangePSW.bind(this);
@@ -106,6 +107,16 @@ class SideMenu extends Component {
                       <label className = 'badge'> 9+ </label>
                     :
                     null;
+    const nameEditBtn = this.state.showNameInput ?
+      <label onClick = {this.cancelChangingName} > 
+        <Icon size = {18} icon = 'md-close' />
+      </label>
+      :
+      <label onClick = {this.showNameEditor} > 
+        <Icon size = {18} icon = 'md-edit' />
+      </label>
+      
+      
     return (
       <Page renderBottomToolbar = {this.renderBottomToolbar} >
         <List>
@@ -126,9 +137,7 @@ class SideMenu extends Component {
                      onKeyUp = {e => this.handleKeyUp(e.keyCode, e.target.value)} />
             </div>
             <div className = 'right' style = {{textAlign : 'right', color : 'rgba(38, 100, 171, 0.811765)'}}>
-              <label onClick = {this.showNameEditor} > 
-                <Icon size = {18} icon = {this.state.showNameInput ? null : 'md-edit'} />
-              </label>
+             {nameEditBtn}
             </div>
           </ListItem>
 
@@ -229,7 +238,13 @@ class SideMenu extends Component {
 
   showNameEditor() {
     this.setState({ 
-      showNameInput : true
+      showNameInput: true
+    });
+  }
+
+  cancelChangingName() {
+    this.setState({
+      showNameInput: false
     });
   }
 
