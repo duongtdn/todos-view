@@ -51,7 +51,7 @@ class SideMenu extends Component {
     const groups = [];
     groups.push({
       id : '_0_',
-      name : 'All Todos',
+      name : 'All To-dos',
       color : 'grey',
       role : 'owner'
     });
@@ -74,7 +74,7 @@ class SideMenu extends Component {
       if (!found) {
         this.props.selectTaskGroup({
           id : '_0_',
-          name : 'All Todos',
+          name : 'All To-dos',
           color : 'grey',
           role : 'owner'
         });

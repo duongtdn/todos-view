@@ -26,7 +26,7 @@ export default class extends Component {
             <Icon icon = 'md-menu' /> &nbsp; {badge}
           </ToolbarButton>
         </div>
-        <div className = 'center'> Todos </div>
+        <div className = 'center'> To-Do </div>
         <div className = 'right'>
           {newBtn}
         </div>
