@@ -9,7 +9,8 @@ export default {
 
   showBanner() {
     const state = store.getState();
-    if (state.user && state.user.account && state.user.account === 'premium') {
+    /* for user with props no ad */
+    if (state.user && state.user.account && state.user.account.props.noAd) {
       return;
     }
     if (app && app.plugin('ad')) {
@@ -25,7 +26,8 @@ export default {
     } 
 
     const state = store.getState();
-    if (state.user && state.user.account && state.user.account === 'premium') {
+    /* for user with props no ad */
+    if (state.user && state.user.account && state.user.account.props.noAd) {
       return;
     }
 
