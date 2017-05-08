@@ -84,12 +84,12 @@ class SideMenu extends Component {
   renderBottomToolbar() {
     return (
       <BottomToolbar>
-        <List>
+        <List style = {{marginTop: '1px'}} >
           <ListItem modifier = 'nodivider' >
             <div className = 'left'  >
-              <Icon icon = 'fa-sign-out' />
+              {/*<label className = 'sidemenu-btn' onClick = {this.props.signOut} > Feedback </label>*/}
             </div> 
-            <div className = 'center' >
+            <div className = 'right' >
               <label className = 'sidemenu-btn' onClick = {this.props.signOut} > Logout </label>
             </div>
           </ListItem>
