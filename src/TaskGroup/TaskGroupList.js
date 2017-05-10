@@ -162,7 +162,7 @@ class View extends Component {
     if (uid === this.props.auth.uid) {
       return 'Me';
     } else {
-      return (this.props.friends[uid] && this.props.friends[uid].name) || 'Unknown';
+      return (this.props.friends && this.props.friends[uid] && this.props.friends[uid].name) || 'Unknown';
     }
   }
 
