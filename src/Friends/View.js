@@ -246,7 +246,6 @@ class FriendsView extends Component {
   }
 
   addAndSelectFriend(usr) {
-    console.log(usr)
     // add this user to friend list
     this.props.addToFriendList(usr);
     // then, select this user and add to todo share list if there's a todo, i.e.

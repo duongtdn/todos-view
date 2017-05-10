@@ -6,7 +6,7 @@ import { Page, Button, Icon,
          Col, Row,
          Toolbar, BackButton } from 'react-onsenui'
 
-// import ons from 'onsenui'
+import ons from 'onsenui'
 
 import { connect } from 'react-redux'
 import { user, todos, taskGroup } from 'todos-data'
@@ -71,6 +71,7 @@ class Message extends Component {
     this.renderMessage = this.renderMessage.bind(this);
     this.ok = this.ok.bind(this);
     this.cancel = this.cancel.bind(this);
+    this.getFriendFromMsg = this.getFriendFromMsg.bind(this);
   }
 
   renderMessage(msg) {
@@ -90,12 +91,9 @@ class Message extends Component {
     if (msg.todo.length > 0) {
       this.props.acceptTodo(msg);
     } else if (msg.taskGroup.length > 0) {
-      // ons.notification.prompt('Name this Task Group as:', {
-      //   defaultValue: msg.content
-      // }).then( result => this.props.acceptTaskGroup(result, msg) );
       this.props.acceptTaskGroup('grey', msg)
     }
-    
+    this.getFriendFromMsg(msg);
   }
 
   cancel(msg) {
@@ -103,7 +101,51 @@ class Message extends Component {
       this.props.ignoreTodo(msg);
     } else if (msg.taskGroup.length > 0) {
       this.props.declineTaskGroup(msg);
+    }    
+    this.getFriendFromMsg(msg);
+  }
+
+  getFriendFromMsg(msg) {
+    const self = this;
+    if (msg.from && msg.from.id) {
+      const id = msg.from.id;
+      const name = msg.from.name;
+      const email = msg.from.email;
+      const friends = this.props.friends;
+      if (friends && friends[id]) {
+        // this friend has been saved into contact book
+        return;
+      }
+      /* invoke a dialog asking for saving this friend into contact book */
+      ons.notification.confirm({
+        messageHTML: `Do you want to save ${this.styleName(name)} to your Contact Book`,
+        callback : ans => { 
+          if (ans === 1) { 
+            this.props.pushPage('friendEditor', { 
+              name : name,
+              email : email,
+              rel : null,
+              save : addToContact
+            });
+          }
+        }
+      });
     }
+
+    function addToContact(name, rel) {
+      const user = {
+        id: msg.from.id,
+        email: msg.from.email,
+        name: name,
+        lowerCaseName: name.toLowerCase(),
+        relationship: rel,        
+      };
+      self.props.addToFriendList(user);
+    }
+  }
+
+  styleName(name) {
+    return `<label style = 'color: #2196f3'> ${name} </label>`;
   }
 
 }
@@ -149,7 +191,9 @@ class Messages extends Component {
                 ignoreTodo = {this.props.ignoreTodo}
                 deleteMessage = {this.props.deleteMessage}
                 acceptTaskGroup = {this.props.acceptTaskGroup}
-                declineTaskGroup = {this.props.declineTaskGroup} />
+                declineTaskGroup = {this.props.declineTaskGroup}
+                pushPage = {this.props.pushPage}
+                addToFriendList = {this.props.addToFriendList} />
       </div>
     );
   }
@@ -183,7 +227,8 @@ const mapStateToProps = state => {
     messages.push(msg);
   }
   return { 
-    messages
+    messages,
+    friends : state.user.friends,
   };
 };
 
@@ -203,6 +248,11 @@ const mapDispatchToProps = dispatch => {
     },
     declineTaskGroup(msg) {
       dispatch(taskGroup.decline(msg));
+    },
+    addToFriendList(usr) {
+      const friend = {...usr};
+      friend.connected = null;
+      dispatch(user.friends.add([friend]));
     },
   }
 };
