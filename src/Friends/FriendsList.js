@@ -135,13 +135,17 @@ export default class FriendsList extends Component {
 
   showAlertDialog(user) {
     ons.notification.confirm({
-      message: `Do you want to remove ${user.name} from your connected list?`,
+      messageHTML: `Do you want to remove ${this.styleName(user.name)} from your connected list?`,
       callback : ans => { 
         if (ans === 1) { 
           this.props.unfriend(user.id);
         }
       }
     });
+  }
+
+  styleName(name) {
+    return `<label style = 'color: #2196f3'> ${name} </label>`;
   }
 
   openFriendEditor(user) {
