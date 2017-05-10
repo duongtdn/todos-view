@@ -61,7 +61,7 @@ export default class extends Component {
               </ListItem>
 
               <ListItem modifier = 'noborder'>
-                <Input type = 'password' placeholder = 'Repeat your password'
+                <Input type = 'password' placeholder = 'Confirm your password'
                        onChange = {e => this.getUserRepeatPassword(e.target.value)} />
               </ListItem>
 

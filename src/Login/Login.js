@@ -45,7 +45,7 @@ export default class extends Component {
             <List modifier = 'noborder' >
 
               <ListItem modifier = 'noborder' >
-                <Input type = 'text' placeholder = 'Enter your email'
+                <Input type = 'email' placeholder = 'Enter your email'
                        onChange = {e => this.getUserEmail(e.target.value)}
                        onKeyUp = {e => this.handleKeyUp(e.keyCode)} />
               </ListItem>
