@@ -42,11 +42,13 @@ export default class FriendsList extends Component {
                  checked = {this.isSelected(row.id)} /> :
       null;
 
-    const editBtn = <Button modifier = 'quiet' 
-                            style = {{color: '#f44336', paddingLeft: '0'}}
-                            onClick = {() => this.openFriendEditor(row)} >
-                      Edit
-                    </Button>
+    const editBtn = row.id === this.props.auth.uid ? null : row.connected ?
+        <Button modifier = 'quiet' 
+                  style = {{color: '#f44336', paddingLeft: '0'}}
+                  onClick = {() => this.openFriendEditor(row)} >
+            Edit
+          </Button> :
+          null;
 
     const leftBtn = this.props.editable ? editBtn : selectBtn;
 
