@@ -16,7 +16,7 @@ export default class extends Component {
           </BackButton>
         </div>
         <div className = 'center'>  
-          <Input type = 'email' placeholder = 'search by email' 
+          <Input type = 'search' placeholder = 'search by email' 
                           onClick = {e => e.stopPropagation()}
                           onFocus = {this.props.onFocusSearchBox}
                           onChange = {e => this.props.handleSearchInput(e.target.value)} 
