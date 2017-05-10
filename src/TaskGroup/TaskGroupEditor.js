@@ -71,7 +71,7 @@ class View extends Component {
           </BackButton  >
         </div>
         <div className = 'center'>
-          Task Group
+          To-Do List Editor
         </div>
         <div className = 'right'>
           {actionBtn}
@@ -82,11 +82,12 @@ class View extends Component {
 
   render() {
     const share = this._getMembers(this.state.members);
+    const title = this.props.data && this.props.data.group ? 'Edit List' : 'New List';
     return (
       <Page renderToolbar = {this.renderToolbar} >
         <List >
           
-          <ListHeader modifier = 'nodivider'> New Task Group </ListHeader>
+          <ListHeader modifier = 'nodivider'> {title} </ListHeader>
 
           <ListItem modifier = 'nodivider'>
             <div className = 'fe-title'> Name </div>

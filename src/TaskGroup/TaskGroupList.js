@@ -47,7 +47,7 @@ class View extends Component {
           </BackButton  >
         </div>
         <div className = 'center'>
-          Task Groups
+          To-Do List
         </div>
       </Toolbar>
     );
