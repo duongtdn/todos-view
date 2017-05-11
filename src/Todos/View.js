@@ -9,6 +9,7 @@ import { user, currentTodo, taskGroup } from 'todos-data'
 import Toolbar from './Toolbar'
 import Tabbar from './Tabbar'
 import SideMenu from './Sidebar/SideMenu'
+import Debug from '../Components/Debug'
 
 class Todos extends Component {
 
@@ -67,7 +68,8 @@ class Todos extends Component {
           <Page renderToolbar = {this.renderToolbar}
                 renderFixed = {this.renderFixed}
           >
-            <Tabbar platform = {this.props.platform} pushPage = {this.props.pushPage} />
+            {/*<Tabbar platform = {this.props.platform} pushPage = {this.props.pushPage} />*/}
+            <Debug />
           </Page>
           </SplitterContent>
 

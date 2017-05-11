@@ -15,11 +15,11 @@ const events = [
       'onAdLoaded', 'onAdFailedToLoad', 'onAdOpened', 'onAdClosed', 'onAdLeftApplication',
     ];
 
-class Debug extends Components {
+export default class Debug extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = { ad : ''};
     events.forEach( event => this.state[event] = 0 );
    
     events.forEach(method => {
@@ -43,19 +43,25 @@ class Debug extends Components {
     document.addEventListener('resume', this.onAppResume, false);
     /* Ad events */
     const ad = app.plugin('ad');
-    ['onAdLoaded', 'onAdFailedToLoad', 'onAdOpened', 'onAdClosed', 'onAdLeftApplication'].forEach( event => {
-      document.addEventListener(ad.events[event], this[event], false);
-    });
+    if (ad) {
+      this.setState({ ad: `admob`});
+      ['onAdLoaded', 'onAdFailedToLoad', 'onAdOpened', 'onAdClosed', 'onAdLeftApplication'].forEach( event => {
+        document.addEventListener(ad.getEvents()[event], this[event], false);
+      });
+    } else {
+      this.setState({ ad: 'no ad plugin '});
+    }
   }
 
   render() {
     return (
       <div style = {style} >
-        <p> app goes in background : `${this.state.onAppPause}` </p>
-        <p> app goes in foreground : `${this.state.onAppResume}` </p>
-        <p> ad loaded : `${this.state.onAdLoaded}` </p>
-        <p> ad opened : `${this.state.onAdOpened}` </p>
-        <p> ad closed : `${this.state.onAdClosed}` </p>
+        <p> app goes in background : {`${this.state.onAppPause}`} </p>
+        <p> app goes in foreground : {`${this.state.onAppResume}`} </p>
+        <p> ad : {`${this.state.ad}`} </p>
+        <p> ad loaded : {`${this.state.onAdLoaded}`} </p>
+        <p> ad opened : {`${this.state.onAdOpened}`} </p>
+        <p> ad closed : {`${this.state.onAdClosed}`} </p>
       </div>
     );
   }
