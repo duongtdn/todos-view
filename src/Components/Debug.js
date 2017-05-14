@@ -15,11 +15,12 @@ const events = [
       'onAdLoaded', 'onAdFailedToLoad', 'onAdOpened', 'onAdClosed', 'onAdLeftApplication',
     ];
 
+
 export default class Debug extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { ad : ''};
+    this.state = { ad: '', ts: 0, conn: ''};
     events.forEach( event => this.state[event] = 0 );
    
     events.forEach(method => {
@@ -29,11 +30,35 @@ export default class Debug extends Component {
         const state  = {};
         state[method] = this.state[method] + 1;
         this.setState(state);
+        // time counter for ad loaded
+        if (method === 'onAdLoaded') {
+          this.setState({ts: 0});
+        }
       }
 
       /* binding scope */
       this[method] = this[method].bind(this);
     });
+
+  }
+
+  componentWillMount() {
+    function alertConn(networkState) {
+      const states = {};
+      states[Connection.UNKNOWN]  = 'Unknown connection';
+      states[Connection.ETHERNET] = 'Ethernet connection';
+      states[Connection.WIFI]     = 'WiFi connection';
+      states[Connection.CELL_2G]  = 'Cell 2G connection';
+      states[Connection.CELL_3G]  = 'Cell 3G connection';
+      states[Connection.CELL_4G]  = 'Cell 4G connection';
+      states[Connection.CELL]     = 'Cell generic connection';
+      states[Connection.NONE]     = 'No network connection';
+      this.setState({conn : 'Connection type: ' + states[networkState]});
+    }
+
+    setInterval(() => {
+      this.setState({ ts: this.state.ts +1 });
+    }, 1000);
 
   }
 
@@ -56,6 +81,7 @@ export default class Debug extends Component {
   render() {
     return (
       <div style = {style} >
+        <p> Time : {this.state.ts} </p>
         <p> app goes in background : {`${this.state.onAppPause}`} </p>
         <p> app goes in foreground : {`${this.state.onAppResume}`} </p>
         <p> ad : {`${this.state.ad}`} </p>
