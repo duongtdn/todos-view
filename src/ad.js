@@ -14,7 +14,7 @@ export default {
       return;
     }
     if (app && app.plugin('ad')) {
-      app.plugin('ad').showBottomBanner();
+      app.plugin('ad').initAdmob().showBottomBanner();
     }
   },
 
