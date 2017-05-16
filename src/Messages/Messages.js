@@ -193,7 +193,8 @@ class Messages extends Component {
                 acceptTaskGroup = {this.props.acceptTaskGroup}
                 declineTaskGroup = {this.props.declineTaskGroup}
                 pushPage = {this.props.pushPage}
-                addToFriendList = {this.props.addToFriendList} />
+                addToFriendList = {this.props.addToFriendList}
+                friends = {this.props.friends} />
       </div>
     );
   }
