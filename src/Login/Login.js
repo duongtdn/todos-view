@@ -54,7 +54,7 @@ export default class extends Component {
                 <Input type = 'password' placeholder = 'Password'
                        onChange = {e => this.getUserPassword(e.target.value)}
                        onKeyUp = {e => this.handleKeyUp(e.keyCode)} />
-                <div className = 'forgot-pwd' onClick = {this.openResetPasswordPage} > <a href = '#'>Forgot your password </a> </div>
+                <div className = 'forgot-pwd' > <a href = '#' onClick = {this.openResetPasswordPage} >Forgot your password </a> </div>
               </ListItem>
 
             </List>
