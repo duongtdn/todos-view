@@ -14,12 +14,18 @@ import { user, todos, taskGroup } from 'todos-data'
 class AlertMessage extends Component {
   render() {
     const msg = this.props.msg;
-    const target = msg.todo.length > 0 ? 'todo item' : 'todo list';
+    const target = msg.todo.length > 0 ? 'todo item' : 'list';
+    let content = '';
+    if (msg.subject === 'unshare') {
+      content = `has remove you from this ${target}: `;
+    } else if (msg.subject === 'left') {
+      content = `has left this ${target}: `;
+    }
     return (
       <ListItem className = 'msgbox' >
         <Col>
           <Row> <label style = {{fontSize : '14px', fontStyle : 'italic', color : 'grey', marginBottom : '3px'}} > 
-            <label style = {{color : '#1E90FF'}} > {msg.from.name} </label> has removed you from {target} 
+            <label style = {{color : '#1E90FF'}} > {msg.from.name} </label> {content} 
           </label> </Row>
           <Row >
             <div> {msg.content} </div>
