@@ -133,7 +133,7 @@ class View extends Component {
 
   showAlertDialog(group) {
     ons.notification.confirm({
-      message: `Do you want to remove Task group ${group.name} from your list?`,
+      messageHTML: `Remove ${this.styleName(group.name)}  will delete all To-dos under that list?`,
       callback : ans => { 
         if (ans === 1) { 
           this.props.delete(group)
@@ -147,6 +147,10 @@ class View extends Component {
         }
       }
     });
+  }
+
+  styleName(name) {
+    return `<label style = 'color: #2196f3'> ${name} </label>`;
   }
 
   _findTaskGroupOwner(group) {
