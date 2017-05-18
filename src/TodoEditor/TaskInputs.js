@@ -119,7 +119,7 @@ export default class TaskInputs extends Component {
           </ListItem>
 
           <ListItem modifier = 'nodivider' >
-            <label> Task group </label> 
+            <label> To-Do List </label> 
             <label className = 'right' > 
               <label onClick = {this.openTaskGroupList} > 
                 {taskGroup} <Icon icon = 'fa-caret-down' />
