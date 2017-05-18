@@ -36,10 +36,15 @@ export default class FriendsList extends Component {
         <Icon icon = 'md-plus' size = {24} style={{color: 'grey'}}/> 
       </Button>;
 
+    const disabledCheck =  (this.props.selectedFriends && 
+        this.props.selectedFriends[row.id] &&
+        this.props.selectedFriends[row.id].role == 'owner') ? true : false;
+
     const selectBtn = row.id === this.props.auth.uid ? null : row.connected ?
       <Input type = 'checkbox' inputId = {`checkbox-${row.id}`} 
                  onChange = {evt => this.selectFriend(row, evt)}
-                 checked = {this.isSelected(row.id)} /> :
+                 checked = {this.isSelected(row.id)}
+                 disabled = {disabledCheck} /> :
       null;
 
     const editBtn = row.id === this.props.auth.uid ? null : row.connected ?

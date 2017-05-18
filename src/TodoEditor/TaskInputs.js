@@ -78,7 +78,7 @@ export default class TaskInputs extends Component {
   }
 
   render() {
-    const title = this.props.data.text.length > 0 ? 'Modify your Todo' : 'Add a new Todo';
+    const title = this.props.data.text.length > 0 ? 'Modify your To-do' : 'Add a new To-do';
     const text = this.props.data.text;
     const urgent = this.props.data.urgent;
     const share = this.state.share;
