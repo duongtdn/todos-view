@@ -35,7 +35,7 @@ export default class extends Component {
          solution: in this case, we are not showing task group, so I add one
          more condition to the if statement
       */
-      type = `Group: ${this.props.taskGroup[data.group].name}`;
+      type = `List: ${this.props.taskGroup[data.group].name}`;
     } else {
       const numberOfShare = Object.keys(data.share).length; 
       type = numberOfShare > 1 ? `Members : ${numberOfShare}` : 'Private';
