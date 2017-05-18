@@ -20,7 +20,7 @@ class AlertMessage extends Component {
     if (msg.subject === 'unshare') {
       content = `has remove you from this ${target}: `;
     } else if (msg.subject === 'left') {
-      content = `has left this ${target}: `;
+      content = `has self-removed from this ${target}: `;
     } else if (msg.subject === 'todo.deleted') {
       content = `has removed this ${target}: `;
     }
