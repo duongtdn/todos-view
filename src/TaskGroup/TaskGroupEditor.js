@@ -205,11 +205,16 @@ class View extends Component {
   }
 
   updateTaskGroup() {
+    let todos = {};
+    if (this.props.data && this.props.data.group && this.props.data.group.todos) {
+      todos = this.props.data.group.todos;
+    }
     this.props.updateTaskGroup({
       id: this.groupId,
       name : this.state.name, 
       members : this.state.members,
-      color : 'grey'
+      color : 'grey',
+      todos: todos,
     });
     this.props.popPage();
   }
