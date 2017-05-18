@@ -53,11 +53,15 @@ export default class TaskInputs extends Component {
             label = ', Inviting'
           }
           if (props.friends && props.friends[uid]) {
+            let rel = `${props.friends[uid].relationship}${label}`;
+            if (sharedUser.role === 'owner') {
+              rel = `Task owner, ${rel}`;
+            }
             share.push({
               id : uid,
               name : props.friends[uid].name,
               role : sharedUser.role,
-              relationship : `${props.friends[uid].relationship}${label}`
+              relationship : rel,
             });
           } else {
             share.push({
