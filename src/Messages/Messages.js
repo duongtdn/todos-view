@@ -18,11 +18,11 @@ class AlertMessage extends Component {
     // process message content based on subject
     let content = '';
     if (msg.subject === 'unshare') {
-      content = `has remove you from this ${target}: `;
+      content = `has remove you from a ${target} `;
     } else if (msg.subject === 'left') {
-      content = `has self-removed from this ${target}: `;
-    } else if (msg.subject === 'todo.deleted') {
-      content = `has removed this ${target}: `;
+      content = `has self-removed from this ${target} `;
+    } else if (msg.subject === 'todo.deleted' || msg.subject === 'taskGroup.deleted') {
+      content = `has removed a ${target} `;
     }
     return (
       <ListItem className = 'msgbox' >
