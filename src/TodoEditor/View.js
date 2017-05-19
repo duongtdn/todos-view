@@ -44,6 +44,19 @@ class TodoEditor extends Component {
     this.getTodoFromProps(this.props);
   }
 
+  componentDidMount() {
+    /* record the origin group to resolve later */
+    if (this.props.currentTodo && this.props.currentTodo.group) {
+      const id = this.props.currentTodo.group.origin;
+      const share = {};
+      for (let userId in this.props.currentTodo.share) {
+        const member = {...this.props.currentTodo.share[userId]};
+        share[userId] = member;
+      }
+      this.originGroup = {id, share};
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     this.getTodoFromProps(nextProps);
   }
@@ -148,22 +161,40 @@ class TodoEditor extends Component {
 
     // load members in the group and merge with current list if group is not none
     // merge only if member is already invited or accepted
+    // change: replace all members of old group by the new one. if no group, 
+    // simply empty share list
+
+    /* solution
+       record an original share list (when component did mount)
+       when change to new group, simple load members based on new group
+       we resolve the share list later when save action take place
+    */
     if (group.id) {
-      const share = {};
-      for (let id in this.todo.share) {
-        if (/(accepted)|(invited.)/.test(this.todo.share[id].status)) {
-          share[id] = {...this.todo.share[id]}
-        }      
+
+      /* reload share members if old group is selected */
+      if (this.originGroup && group.id === this.originGroup.id) {
+        this.todo.share = this.originGroup.share;
+      } else {
+        const share = {};
+        // init share list with owner
+        share[this.props.auth.uid] = {
+          id: this.props.auth.uid,
+          name : this.props.auth.email,
+          role: 'owner',
+          status: 'accepted'
+        }; 
+        // add all members of the group into share list
+        if (group.id !== '_0_') {        
+          for (let id in this.props.taskGroup[group.id].members) {
+            if (id === this.props.auth.uid) { continue }
+            const member = this.props.taskGroup[group.id].members[id];                    
+            share[id] = {...member};
+            share[id].role = 'collaborator';
+          }
+        }     
+        this.todo.share = share;
       }
-      if (group.id !== '_0_') {
-        for (let id in this.props.taskGroup[group.id].members) {
-          if (share[id]) { continue }
-          share[id] = {...this.props.taskGroup[group.id].members[id]};
-          share[id].status = 'invited';
-          share[id].role = 'collaborator';
-        }
-      }     
-      this.todo.share = share;
+
     }
     
     this.props.updateCurrentTodo(this.todo);
@@ -195,6 +226,66 @@ class TodoEditor extends Component {
       return;
     }
 
+    /* need to resole the origin group with the new group here */
+    if (this.originGroup && this.todo.group) {
+      if (this.todo.group.updated && this.todo.group.updated !== this.originGroup.id) {
+        /* resolve 
+           for each member in origin list
+              accept        -> unshared
+              invited.msgId -> recall.msgId
+              invited       -> null
+           for each member is new list, if conflic 
+              new status - old status   : resolve
+              ------------------------------------
+              accepted   - unshared     : accepted              
+              accepted   - recall.msgId : accepted*recall.msgId
+              invited    - unshare      : invited*unshare (unshare to send message, invited to keep member in share list )
+              invited    - recall.msgId : invited*recall.msgId
+          if no conflic
+              unshared
+              recall.msgId
+        */
+        const share = {};
+
+        for (let id in this.originGroup.share) {
+          const member = {...this.originGroup.share[id]};
+          if (id !== this.props.auth.uid) {
+            if (/accepted/.test(member.status)) {
+              member.status = 'unshared';
+            }
+            if (/invited/.test(member.status)) {
+              const {status, msgId} = member.status.split('.');
+              if (msgId) {
+                member.status = `recall.${msgId}`;
+              } else {
+                member.status = null;
+              }
+            }
+          }
+          if (member.status !== null) {
+            share[id] = member;
+          }
+          
+        }
+
+        for (let id in this.todo.share) {
+          if (id === this.props.auth.uid) { continue }
+          const member = {...this.todo.share[id]};
+          if (share[id]) {
+            if (/accepted/.test(member.status) && /recall/.test(share[id].status)) {
+              member.status = `accepted*${share[id].status}`;
+            }
+            if (/invited/.test(member.status)) {
+              member.status = `invited*${share[id].status}`;
+            }
+          }
+          member.role = 'collaborator';
+          share[id] = member;
+        }
+        this.todo.share = share;
+      }
+    }
+console.log(this.todo.share)    
     this.props.editTodo(this.todo);
     this.props.popPage();
   }
