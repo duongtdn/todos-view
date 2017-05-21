@@ -153,7 +153,7 @@ export default class TaskInputs extends Component {
               </Button>
             </div>
             <div style = {{width : '100%'}} >
-              <CollaboratorList data = {share} unshare = {this.props.unshare} />
+              <CollaboratorList data = {share} unshare = {this.props.unshare} disabled = {disableInvite} />
             </div>
           </ListItem>
 

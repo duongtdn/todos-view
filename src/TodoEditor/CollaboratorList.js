@@ -10,10 +10,11 @@ export default class CollaboratorList extends Component {
   }
 
   renderRow(row, index) {
-    const unshareBtn = row.role === 'owner' ? null :
+    const unshareBtn = row.role === 'owner' ? null : this.props.disabled ? null :
           <Button modifier = 'quiet' onClick = {() => this.unshare(row.id)} > 
-                <Icon icon = 'md-close' size = {24} style={{color: 'grey'}}/> 
+            <Icon icon = 'md-close' size = {24} style={{color: '#f44336'}}/> 
           </Button>
+
     return (
       <ListItem key = {index} modifier = 'nodivider' >
         <div className = 'center'>
