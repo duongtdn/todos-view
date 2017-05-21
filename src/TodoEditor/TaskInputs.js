@@ -84,12 +84,15 @@ export default class TaskInputs extends Component {
     const share = this.state.share;
 
     let taskGroup = 'None';
+    let disableInvite = false;
     if (this.props.data.group && this.props.data.group.updated) {
       if (this.props.data.group.updated !== '_0_') {
         taskGroup = this.props.taskGroup[this.props.data.group.updated].name;
+        disableInvite = true;
       }    
     } else if (this.props.data.group && this.props.data.group.origin) {
       taskGroup = this.props.taskGroup[this.props.data.group.origin].name;
+      disableInvite = true;
     }
 
     return (
@@ -144,6 +147,7 @@ export default class TaskInputs extends Component {
             <div style = {{width : '100%'}}>
               <Button modifier = 'quiet' 
                       onClick = {() => this.props.inviteFriends()}
+                      disabled = {disableInvite}
               > 
                 <Icon icon = 'fa-user-plus' /> Invite People 
               </Button>

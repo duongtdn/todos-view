@@ -46,8 +46,8 @@ class TodoEditor extends Component {
 
   componentDidMount() {
     /* record the origin group to resolve later */
-    if (this.props.currentTodo && this.props.currentTodo.group) {
-      const id = this.props.currentTodo.group.origin;
+    if (this.props.currentTodo) {
+      const id =  this.props.currentTodo.group? this.props.currentTodo.group.origin : '_0_';
       const share = {};
       for (let userId in this.props.currentTodo.share) {
         const member = {...this.props.currentTodo.share[userId]};
@@ -254,7 +254,7 @@ class TodoEditor extends Component {
               member.status = 'unshared';
             }
             if (/invited/.test(member.status)) {
-              const {status, msgId} = member.status.split('.');
+              const [status, msgId] = member.status.split('.');
               if (msgId) {
                 member.status = `recall.${msgId}`;
               } else {
@@ -265,7 +265,7 @@ class TodoEditor extends Component {
           if (member.status !== null) {
             share[id] = member;
           }
-          
+       
         }
 
         for (let id in this.todo.share) {
@@ -285,7 +285,7 @@ class TodoEditor extends Component {
         this.todo.share = share;
       }
     }
-console.log(this.todo.share)    
+ 
     this.props.editTodo(this.todo);
     this.props.popPage();
   }
