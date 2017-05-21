@@ -3,6 +3,8 @@
 import React , { Component } from 'react'
 import { Page, List, ListItem, ListHeader, Switch, Button, Icon} from 'react-onsenui'
 
+import ons from 'onsenui'
+
 import AutofocusInput from '../Components/AutofocusInput'
 
 import CollaboratorList from './CollaboratorList'
@@ -17,6 +19,7 @@ export default class TaskInputs extends Component {
     this.openTaskGroupList = this.openTaskGroupList.bind(this);
     this.openDatePicker = this.openDatePicker.bind(this);
     this.getDueDate = this.getDueDate.bind(this);
+    this.isOwner = this.isOwner.bind(this);
   }
 
   componentWillMount() {
@@ -95,6 +98,8 @@ export default class TaskInputs extends Component {
       disableInvite = true;
     }
 
+    const owner = this.isOwner();
+
     return (
       <Page>
         <List>
@@ -124,7 +129,7 @@ export default class TaskInputs extends Component {
           <ListItem modifier = 'nodivider' >
             <label> To-Do List </label> 
             <label className = 'right' > 
-              <label onClick = {this.openTaskGroupList} > 
+              <label onClick = {this.openTaskGroupList} style = {{color: `${owner? 'black':'grey'}`}} > 
                 {taskGroup} <Icon icon = 'fa-caret-down' />
               </label>
             </label>
@@ -167,7 +172,22 @@ export default class TaskInputs extends Component {
     );
   }
 
+  isOwner() {
+    let owner = false;
+    this.state.share.forEach(user => {
+      if (user.id !== this.props.auth.uid) { return }
+      if (user.role === 'owner') {
+        owner = true;
+      }
+    });
+    return owner;
+  }
+
   openTaskGroupList() {
+    if (!this.isOwner()) {
+      ons.notification.alert('Only Owner who created this to-do can change the to-do list');
+      return;
+    }
     this.props.pushPage('taskGroupList', {
       get: this.props.getTaskGroup,
       selected: this.props.data.group,
