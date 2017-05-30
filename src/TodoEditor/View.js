@@ -46,7 +46,7 @@ class TodoEditor extends Component {
 
   componentDidMount() {
     /* record the origin group to resolve later */
-    if (this.props.currentTodo) {
+    if (this.props.currentTodo & Object.keys(this.props.currentTodo).length > 0) {    
       const id =  this.props.currentTodo.group? this.props.currentTodo.group.origin : '_0_';
       const share = {};
       for (let userId in this.props.currentTodo.share) {
@@ -66,8 +66,9 @@ class TodoEditor extends Component {
       // deep copy currentTodo into internal todo */
       const share = {...props.currentTodo.share};
       this.todo = {...props.currentTodo};
-      this.todo.share = share;
+      this.todo.share = share;  
     } else {
+     
       const share = {};
       share[this.props.auth.uid] = {
         id: this.props.auth.uid,
@@ -75,7 +76,7 @@ class TodoEditor extends Component {
         role: 'owner',
         status: 'accepted'
       };
-      const group = { updated : '_0_' };
+      const group = { origin: '_0_', updated : '_0_' };
 
       if (this.props.filter && 
           Object.keys(this.props.filter).length > 0 &&
@@ -157,7 +158,7 @@ class TodoEditor extends Component {
     if (!this.todo.group) {
       this.todo.group = {};
     }
-    this.todo.group.updated = group.id;
+    
 
     // load members in the group and merge with current list if group is not none
     // merge only if member is already invited or accepted
@@ -170,11 +171,10 @@ class TodoEditor extends Component {
        we resolve the share list later when save action take place
     */
     if (group.id) {
-
       /* reload share members if old group is selected */
-      if (this.originGroup && group.id === this.originGroup.id) {
+      if (this.originGroup && group.id === this.originGroup.id) {      
         this.todo.share = this.originGroup.share;
-      } else {
+      } else {     
         const share = {};
         // init share list with owner
         share[this.props.auth.uid] = {
@@ -191,12 +191,19 @@ class TodoEditor extends Component {
             share[id] = {...member};
             share[id].role = 'collaborator';
           }
-        }     
-        this.todo.share = share;
+          this.todo.share = share;
+        } else {
+          if (this.todo.group.updated & this.todo.group.updated !== '_0_' ) {
+            this.todo.share = share;
+          }
+        }    
+        
       }
 
     }
     
+    this.todo.group.updated = group.id;
+
     this.props.updateCurrentTodo(this.todo);
   }
 
