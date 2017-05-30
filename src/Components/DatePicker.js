@@ -68,14 +68,14 @@ class Calendar extends Component {
     return date.month === this.props.month;
   }
 
-  onSelectDate(date) {
-    if (date) {
+  onSelectDate(date) { 
+    if (date && date.timestamp !== this.state.selectedDate) {
       this.setState({ selectedDate : date.timestamp });
+      this.props.onSelectDate(date);
     } else {
       this.setState({ selectedDate : null });
-    }
-    
-    this.props.onSelectDate(date);
+      this.props.onSelectDate(null);
+    }     
   }
 
   renderRow(row, index) {
@@ -148,12 +148,6 @@ class Calendar extends Component {
         <List dataSource = {this.props.calendar}
               renderRow = {this.renderRow}
               renderHeader = {this.renderHeader} />
-
-        <div className = 'calendar-actionbar' >
-          <Button modifier = 'quiet' onClick = {() => this.onSelectDate(null)} > 
-            <Icon icon = 'md-close' />  Remove Selected Date 
-          </Button>   
-        </div>
 
         <div className = 'calendar-actionbar' >
           <Button modifier = 'quiet' onClick = {this.props.cancel} > 
