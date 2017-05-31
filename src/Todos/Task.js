@@ -62,11 +62,11 @@ export default class extends Component {
           <Input type = 'checkbox'  onChange = {() => this.completeTodo(data) } />
         </div>
 
-        <div className = 'center' onClick = {() => this.toggleEditMenu()}>
-          <div className = {this.state.editMenu}>
+        <div className = 'center' onClick = {() => this.openEditPage(data)}>
+          {/*<div className = {this.state.editMenu}>
             <Button modifier='quiet' onClick = {() => this.openEditPage(data)}>  Edit <Icon icon = 'md-edit' /> </Button>
-            {/*<Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>*/}
-          </div>
+            <Button modifier='quiet' onClick = {this.openSharePage}> Share <Icon icon = 'md-share' /> </Button>
+          </div>*/}
           <div className = 'todos-text' >
             {tag} {data.text}
           </div>
